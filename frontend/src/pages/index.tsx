@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Geist, Geist_Mono } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import styled from "styled-components";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
+
   return (
     <>
       <Head>
@@ -26,7 +26,6 @@ export default function Home() {
         className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
       >
         <main className={styles.main}>
-          <CustomTitle>Hello, World!</CustomTitle>
         </main>
         <footer className={styles.footer}>
         </footer>
@@ -34,7 +33,3 @@ export default function Home() {
     </>
   );
 }
-
-const CustomTitle = styled.h1`
-  color: blue;
-`;
