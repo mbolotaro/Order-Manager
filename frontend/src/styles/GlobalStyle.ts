@@ -1,7 +1,10 @@
 import { styleExecutionContextProps } from "@/models/style-types/style-execution-context-props.type";
 import { createGlobalStyle } from "styled-components";
+import { fonts } from "./fonts";
 
 export default createGlobalStyle`
+
+${fonts}
 
 html,
 body {
@@ -10,7 +13,7 @@ body {
   background: ${(props: styleExecutionContextProps) => props.theme.colors?.background};
   color: ${(props: styleExecutionContextProps) => props.theme.colors?.text};
   font-family: ${(props: styleExecutionContextProps) => props.theme.fonts?.body};
-  font-size: ${(props: styleExecutionContextProps) => props.theme.fontSizes?.normal}
+  font-size: ${(props: styleExecutionContextProps) => props.theme.fontSizes?.normal};
 }
 
 * {

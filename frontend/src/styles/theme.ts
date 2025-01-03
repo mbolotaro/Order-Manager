@@ -3,8 +3,8 @@ import { StyleTheme } from "@/models/style-types/style-theme.class";
 export const theme = new StyleTheme({
   base: {
     fonts: {
-      body: "'Arial'",
-      heading: "Arial",
+      body: "'OpenSans'",
+      heading: "'OpenSans'",
     },
     fontSizes: {
       small: "clamp(12px, 2vw, 16px)",
