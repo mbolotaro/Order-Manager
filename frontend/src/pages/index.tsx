@@ -1,6 +1,11 @@
+import Loading from "@/assets/icons/Loading";
+import Button from "@/components/Atoms/Button";
+import Input from "@/components/Atoms/Input";
 import Head from "next/head";
+import { useState } from "react";
 
 export default function Home() {
+  const [ name, setName ] = useState<string>()
 
   return (
     <>
@@ -13,6 +18,18 @@ export default function Home() {
       <div
       >
         <main>
+          <Input
+            id="input-name"
+            value={name}
+            onChange={setName}
+            trim
+            icon={<Loading/>}
+          />
+          <Button 
+            text="Confirmar" 
+            type="default"
+            onClick={() => console.log('opaa')}
+          />
         </main>
         <footer>
         </footer>

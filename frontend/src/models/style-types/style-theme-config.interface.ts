@@ -5,7 +5,8 @@ export interface IStyleThemeConfig {
     background: string;
     card: string;
     text: string;
-    error: string;
+    danger: string;
+    grey: string;
   };
   fonts?: {
     body: string;
