@@ -1,13 +1,15 @@
-import { styleExecutionContextProps } from "@/styles/helpers/style-execution-context-props.type";
 import styled, { css } from "styled-components";
 import { IInputStyleProps } from "./helpers/input-style-props.interface";
 
 export const InputStyle =
   styled.input<IInputStyleProps>`
+    background: transparent;
     border-radius: 6px;
-    border-width: 1px;
+    border-width: 2px;
+    border-style: solid;
     border-color: ${(props) => props.theme.colors.text};
     padding: 6px;
+    color: ${props => props.theme.colors.text};
     outline: 0;
     width: 100%;
     font-size: ${(props) => props.theme.fontSizes.normal};
@@ -20,14 +22,14 @@ export const InputStyle =
       props.disabled &&
       css`
         opacity: 30%;
-        background-color: ${(props: styleExecutionContextProps) =>
+        background-color: ${(props) =>
           props.theme.colors?.grey};
       `}
 
     ${(props) =>
       props.error &&
       css`
-        border-color: ${(props: styleExecutionContextProps) =>
+        border-color: ${(props) =>
           props.theme.colors?.danger};
       `}
 `;

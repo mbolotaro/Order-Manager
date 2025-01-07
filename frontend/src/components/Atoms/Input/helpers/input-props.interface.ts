@@ -5,7 +5,6 @@ export interface InputProps{
   type?: HTMLInputTypeAttribute;
   disabled?: boolean;
   trim?: boolean;
-  loading?: boolean;
   error?: boolean;
   value: string | undefined;
   icon?: ReactElement;
