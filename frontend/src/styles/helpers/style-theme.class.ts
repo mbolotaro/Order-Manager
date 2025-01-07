@@ -13,6 +13,6 @@ export class StyleTheme implements IStyleTheme {
     readonly dark
 
     getTheme(themeName: 'light' | 'dark'): IStyleThemeConfig {
-        return {...this.base, ...this[themeName]}
+        return {...this.base, ...this[themeName]} as IStyleThemeConfig
     }
 }

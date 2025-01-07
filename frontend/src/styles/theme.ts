@@ -12,6 +12,8 @@ export const theme = new StyleTheme({
       large: "clamp(14px, 3vw, 20px)",
       extraLarge: "clamp(24px, 4vw, 32px)",
     },
+  },
+  light: {
     colors: {
       primary: "#736CED",
       secondary: "#B7B5B3",
@@ -22,7 +24,6 @@ export const theme = new StyleTheme({
       grey: "#A7B6CC",
     },
   },
-  light: {},
   dark: {
     colors: {
       primary: "#736CED",

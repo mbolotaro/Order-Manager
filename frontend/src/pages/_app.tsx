@@ -1,15 +1,21 @@
 import type { AppProps } from "next/app";
-import { ThemeProvider } from "styled-components";
+import { ThemeContext, ThemeProvider } from "styled-components";
 import GlobalStyle from '../styles/GlobalStyle'
 import { theme } from "@/styles/theme";
 import { useUserTheme } from "@/hooks/use-user-theme";
+import { useMemo } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const userTheme = useUserTheme()
+
+  const currentTheme = useMemo(() => theme.getTheme(userTheme.theme || 'dark'), [userTheme])
+
   return (
-  <ThemeProvider theme={theme.getTheme(userTheme?.theme ?? 'light')}>
-    <GlobalStyle/>
-    <Component {...pageProps} />
-  </ThemeProvider>
-  );
+    <ThemeContext.Provider value={{theme: userTheme.theme, toggleTheme: userTheme.setUserPreferedTheme}}>
+    <ThemeProvider theme={currentTheme}>
+      <GlobalStyle/>
+      <Component {...pageProps} />
+    </ThemeProvider>
+    </ThemeContext.Provider>
+  )
 }

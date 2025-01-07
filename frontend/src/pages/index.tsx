@@ -1,8 +1,9 @@
-import TextField from "@/components/Molecules/TextField";
+import Input from "@/components/Atoms/Input";
 import Head from "next/head";
+import { useState } from "react";
 
 export default function Home() {
-
+  const [value, setValue] = useState<string | undefined>(undefined)
   return (
     <>
       <Head>
@@ -14,8 +15,10 @@ export default function Home() {
       <div
       >
         <main>
-          <TextField label="Nome do Cliente: " id="client-name"/>
-
+          {/* <TextField  label="Nome do Cliente: " id="client-name"/> */}
+          <Input value={value} onChange={value => setValue(value)} />
+          <div style={{display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
+          </div>
         </main>
         <footer>
         </footer>

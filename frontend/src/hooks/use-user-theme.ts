@@ -24,7 +24,7 @@ export function useUserTheme() {
 
 
 
-    function getUserPreferedTheme() : styleThemeNames {
+    function getUserPreferedTheme() : styleThemeNames | undefined {
         if(typeof window !== 'undefined') {
             const savedTheme = localStorage.getItem(USER_THEME_STORAGE)
             if(savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
@@ -34,11 +34,11 @@ export function useUserTheme() {
               window.matchMedia("(prefers-color-scheme: dark)").matches
             ) {
                 localStorage.setItem(USER_THEME_STORAGE, 'dark')
-                return 'dark';
+                return 'light';
             }
             localStorage.setItem(USER_THEME_STORAGE, 'light')
-            return 'light';
-        } else return 'light'
+            return 'light'
+        }
     }
 
     function setUserPreferedTheme(newTheme: 'light' | 'dark') {

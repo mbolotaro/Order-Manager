@@ -13,7 +13,7 @@ export const InputStyle =
     outline: 0;
     width: 100%;
     font-size: ${(props) => props.theme.fontSizes.normal};
-    transition: border-color 0.5s;
+    transition: border-color .2s;
     &:focus {
         border-color: ${(props) => props.theme.colors.primary};
     }
