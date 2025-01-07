@@ -1,4 +1,4 @@
-import { StyleTheme } from "@/models/style-types/style-theme.class";
+import { StyleTheme } from "@/styles/helpers/style-theme.class";
 
 export const theme = new StyleTheme({
   base: {
@@ -7,13 +7,11 @@ export const theme = new StyleTheme({
       heading: "'OpenSans'",
     },
     fontSizes: {
-      small: "clamp(12px, 1.5vw, 16px)",
-      normal: "clamp(12px, 2vw, 20px)",
-      large: "clamp(18px, 3vw, 24px)",
+      small: "clamp(10px, 1.5vw, 12px)",
+      normal: "clamp(12px, 2vw, 14px)",
+      large: "clamp(14px, 3vw, 20px)",
       extraLarge: "clamp(24px, 4vw, 32px)",
     },
-  },
-  light: {
     colors: {
       primary: "#736CED",
       secondary: "#B7B5B3",
@@ -24,6 +22,7 @@ export const theme = new StyleTheme({
       grey: "#A7B6CC",
     },
   },
+  light: {},
   dark: {
     colors: {
       primary: "#736CED",
@@ -32,7 +31,7 @@ export const theme = new StyleTheme({
       card: "#0F1319",
       text: "#E5E7E6",
       danger: "#E84855",
-      grey: "A7B6CC",
+      grey: "#A7B6CC",
     },
   },
 });

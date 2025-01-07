@@ -1,8 +1,8 @@
 import { styleColorTypes } from "@/styles/helpers/style-color-types";
 
-export interface ILoadingProps {
+export interface ICloseProps {
     styleType?: styleColorTypes;
     color?: string
-    duration?: number;
-    size?: number;
+    size: number;
+    onClick?: () => void
 }

@@ -1,4 +1,4 @@
-import { styleExecutionContextProps } from "@/models/style-types/style-execution-context-props.type";
+import { styleExecutionContextProps } from "@/styles/helpers/style-execution-context-props.type";
 import styled, { css } from "styled-components";
 import { IInputStyleProps } from "./helpers/input-style-props.interface";
 

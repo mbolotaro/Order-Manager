@@ -1,13 +1,8 @@
+import { styleColorTypes } from "./style-color-types";
+
 export interface IStyleThemeConfig {
-  colors?: {
-    primary: string;
-    secondary: string;
-    background: string;
-    card: string;
-    text: string;
-    danger: string;
-    grey: string;
-  };
+  
+  colors: Record<styleColorTypes, string>;
   fonts?: {
     body: string;
     heading: string;

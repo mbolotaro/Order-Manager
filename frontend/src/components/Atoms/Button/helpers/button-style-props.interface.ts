@@ -1,8 +1,8 @@
-import { ButtonModel, ButtonStyleType } from "./button-props.interface";
+import { ButtonModel } from "./button-props.interface";
 
 export interface IButtonStyleProps {
   model: ButtonModel;
-  type: ButtonStyleType;
+  color: string;
   disabled: boolean;
   loading: boolean;
 }

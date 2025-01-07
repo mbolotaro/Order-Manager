@@ -1,0 +1,1 @@
+export type styleColorTypes = 'primary' | 'secondary' | 'danger' | 'text' | 'background' | 'grey' | 'card';

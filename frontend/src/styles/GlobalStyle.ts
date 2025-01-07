@@ -1,4 +1,4 @@
-import { styleExecutionContextProps } from "@/models/style-types/style-execution-context-props.type";
+import { styleExecutionContextProps } from "@/styles/helpers/style-execution-context-props.type";
 import { createGlobalStyle } from "styled-components";
 import { fonts } from "./fonts";
 
@@ -8,18 +8,22 @@ ${fonts}
 
 html,
 body {
-  max-width: 100vw;
+  width: 100vw;
   overflow-x: hidden;
   background: ${(props: styleExecutionContextProps) => props.theme.colors?.background};
   color: ${(props: styleExecutionContextProps) => props.theme.colors?.text};
   font-family: ${(props: styleExecutionContextProps) => props.theme.fonts?.body};
   font-size: ${(props: styleExecutionContextProps) => props.theme.fontSizes?.normal};
+  height: 100%;
+  min-height: 100vh;
+  position: relative !important;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: ${(props: styleExecutionContextProps) => props.theme.fonts?.body};
 }
 
 a {

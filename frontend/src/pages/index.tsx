@@ -1,11 +1,13 @@
 import Loading from "@/assets/icons/Loading";
 import Button from "@/components/Atoms/Button";
 import Input from "@/components/Atoms/Input";
+import Select from "@/components/Atoms/Select";
+import Modal from "@/components/Molecules/Modal";
 import Head from "next/head";
 import { useState } from "react";
 
 export default function Home() {
-  const [ name, setName ] = useState<string>()
+  const [openModal, setOpenModal] = useState(false)
 
   return (
     <>
@@ -18,18 +20,15 @@ export default function Home() {
       <div
       >
         <main>
-          <Input
-            id="input-name"
-            value={name}
-            onChange={setName}
-            trim
-            icon={<Loading/>}
-          />
-          <Button 
-            text="Confirmar" 
-            type="default"
-            onClick={() => console.log('opaa')}
-          />
+          <Button text="Abrir modal" onClick={() => setOpenModal(true)}/>
+          <Modal
+            opened={openModal}
+            close={() => setOpenModal(false)}
+            title="Cadastrar Chamado" 
+            width="50%" 
+          >
+            <div>adsas</div>
+          </Modal>
         </main>
         <footer>
         </footer>

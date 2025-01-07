@@ -1,3 +1,4 @@
+import { IStyleThemeConfig } from "./style-theme-config.interface";
 import { IStyleTheme } from "./style-theme.interface";
 
 export class StyleTheme implements IStyleTheme {
@@ -11,7 +12,7 @@ export class StyleTheme implements IStyleTheme {
     readonly light
     readonly dark
 
-    getTheme(themeName: 'light' | 'dark') {
+    getTheme(themeName: 'light' | 'dark'): IStyleThemeConfig {
         return {...this.base, ...this[themeName]}
     }
 }

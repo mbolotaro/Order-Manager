@@ -1,8 +1,9 @@
+import { styleColorTypes } from "@/styles/helpers/style-color-types";
 import { Component } from "react"
 
 export interface ButtonProps {
     model?: ButtonModel
-    type?: ButtonStyleType;
+    type?: styleColorTypes;
     icon?: Component;
     text: string;
     loading?: boolean;

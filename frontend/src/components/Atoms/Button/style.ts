@@ -1,13 +1,5 @@
 import styled, { css } from "styled-components";
-import { ButtonStyleType } from "./helpers/button-props.interface";
 import { IButtonStyleProps } from "./helpers/button-style-props.interface";
-
-export function getColor(type: ButtonStyleType) {
-  switch(type) {
-    case 'danger': return 'danger';
-    default: return 'primary';
-  }
-}
 
 export const ButtonStyle = styled.button<IButtonStyleProps>`
   min-width: 100px;
@@ -34,7 +26,7 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
     if(props.loading) {
       return css<IButtonStyleProps>`
         background-color: transparent;
-        border-color: ${(props) => props.theme.colors[getColor(props.type)]};
+        border-color: ${(props) => props.color};
         padding: 0px;
         cursor: default;
       `;
@@ -49,37 +41,35 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
     else switch (props.model) {
       case "primary":
         return css<IButtonStyleProps>`
-          background-color: ${(props) =>
-            props.theme.colors[getColor(props.type)]};
+          background-color: ${(props) => props.color};
 
           &:hover {
             background-color: transparent;
-            color: ${(props) => props.theme.colors[getColor(props.type)]};
-            border-color: ${(props) =>
-              props.theme.colors[getColor(props.type)]};
+            color: ${(props) => props.color };
+            border-color: ${(props) => props.color };
           }
         `;
       case "secondary":
         return css<IButtonStyleProps>`
           background-color: transparent;
-          border-color: ${(props) => props.theme.colors.primary};
-          color: ${(props) => props.theme.colors[getColor(props.type)]};
+          border-color: ${(props) => props.color};
+          color: ${(props) => props.color };
           border-width: 2px;
           border-style: solid;
 
           &:hover {
-            background-color: ${props => props.theme.colors.primary};
+            background-color: ${props => props.color};
             color: white;
             border-color: ${(props) =>
-              props.theme.colors[getColor(props.type)]};
+              props.color };
           }
         `;
       case "terciary":
         return css<IButtonStyleProps>`
-          color: ${(props) => props.theme.colors[getColor(props.type)]};
+          color: ${(props) => props.color };
 
           &:hover {
-            color: ${props => props.theme.colors.text}
+            color: ${props => props.color }
           }
         `;
     }
