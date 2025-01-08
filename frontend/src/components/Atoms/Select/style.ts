@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const SelectStyle = styled.select`
   width: 100%;
@@ -7,7 +7,13 @@ export const SelectStyle = styled.select`
   border-width: 1px;
   outline: 0;
   appearance: none;
+  border-color: ${props => props.theme.colors.text};
+  background-color: transparent;
   cursor: pointer;
+
+  ${props => props.disabled && css`
+    border-color: ${props => props.theme.colors.grey}
+  `}
 `;
 
 export const OptionStyle = styled.option`

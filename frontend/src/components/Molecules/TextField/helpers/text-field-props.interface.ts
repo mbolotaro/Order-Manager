@@ -3,6 +3,7 @@ export interface ITextFieldProps {
     id: string;
     errorMessage?: string;
     disabled?: boolean;
-    value: boolean;
+    value: string;
+    onChange?: (value: string) => void;
     
 }

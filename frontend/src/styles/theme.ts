@@ -22,6 +22,8 @@ export const theme = new StyleTheme({
       text: "#0F1319",
       danger: "#E84855",
       grey: "#A7B6CC",
+      dark: "#0F1319",
+      light: "#E5E7E6",
     },
   },
   dark: {
@@ -33,6 +35,8 @@ export const theme = new StyleTheme({
       text: "#E5E7E6",
       danger: "#E84855",
       grey: "#A7B6CC",
+      dark: "#0F1319",
+      light: "#E5E7E6",
     },
   },
 });

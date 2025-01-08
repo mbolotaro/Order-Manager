@@ -37,7 +37,8 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
     }
 
     return <SelectContainerStyle>
-        <SelectStyle 
+        <SelectStyle
+        disabled={props.disabled}
             onClick={() => setOpened(!opened)}
             onBlur={() => setOpened(false)}
             onChange={(event) => handleChange(event)}
@@ -46,7 +47,7 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
                 props.items.length > 0 ? 
                 
                 <>
-                    <option disabled selected>{props.customNotSelectMessage ?? 'Escolha uma opção'}</option>
+                    <option disabled selected>{props.customNotSelectedMessage ?? 'Escolha uma opção'}</option>
                     {
                         props.items.map((item, index) => 
                             <OptionStyle key={index} value={String(getOptionValue(item))}>
@@ -64,7 +65,7 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
                 props.loading && 
                 <Loading/>
             }
-            <Arrow direction={opened ? 'top' : 'bottom'} size={20}/>
+            <Arrow direction={opened ? 'top' : 'bottom'} size={20} styleType="text"/>
         </SelectIconStyle>
     </SelectContainerStyle>
 }

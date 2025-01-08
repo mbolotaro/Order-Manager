@@ -5,7 +5,7 @@ export const InputStyle =
   styled.input<IInputStyleProps>`
     background: transparent;
     border-radius: 6px;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
     border-color: ${(props) => props.theme.colors.text};
     padding: 6px;
@@ -22,7 +22,7 @@ export const InputStyle =
       props.disabled &&
       css`
         opacity: 30%;
-        background-color: ${(props) =>
+        border-color: ${(props) =>
           props.theme.colors?.grey};
       `}
 
