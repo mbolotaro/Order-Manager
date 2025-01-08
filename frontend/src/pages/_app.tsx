@@ -8,7 +8,7 @@ import { useMemo } from "react";
 export default function App({ Component, pageProps }: AppProps) {
   const userTheme = useUserTheme()
 
-  const currentTheme = useMemo(() => theme.getTheme('light'), [userTheme])
+  const currentTheme = useMemo(() => theme.getTheme('dark'), [userTheme])
 
   return (
     <ThemeContext.Provider value={{theme: userTheme.theme, toggleTheme: userTheme.setUserPreferedTheme}}>

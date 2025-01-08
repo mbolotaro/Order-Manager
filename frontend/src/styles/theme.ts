@@ -30,7 +30,7 @@ export const theme = new StyleTheme({
     colors: {
       primary: "#736CED",
       secondary: "#B7B5B3",
-      background: "#101828",
+      background: "#191C29",
       card: "#0F1319",
       text: "#E5E7E6",
       danger: "#E84855",
