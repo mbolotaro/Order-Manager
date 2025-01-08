@@ -5,8 +5,16 @@ export const LateralMenuStyle = styled.nav`
   height: 100vh;
   position: fixed;
   top: 8vh;
-  width: 78px;
+  width: 10vh;
+  max-width: 200px;
+  transition: .2s;
+  background-color: ${(props) => props.theme.colors.card};
+
   li {
     list-style: none;
+  }
+
+  &:hover {
+    width: 24vw;
   }
 `;
