@@ -9,6 +9,7 @@ export const MenuItemStyle = styled(Link)<IMenuItemStyleProps>`
   font-weight: 600;
   transition: 0.2s;
   gap: 4px;
+  margin-left: -6px;
   padding-top: 8px;
   padding-bottom: 8px;
   overflow: hidden;

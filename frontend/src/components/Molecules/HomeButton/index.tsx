@@ -6,7 +6,7 @@ export default function HomeButton() {
     return <HomeButtonStyle>
         <Link href="/">
             <Image src="/logo.png" width={50} height={50} alt="Ip logo"/>
-            Ticket Manager
+            Manager
         </Link>
     </HomeButtonStyle>
 }

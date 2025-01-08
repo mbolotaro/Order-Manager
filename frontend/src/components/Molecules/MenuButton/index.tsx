@@ -1,5 +1,8 @@
 import MenuIcon from "@/assets/icons/MenuIcon";
+import { MenuButtonStyle } from "./style";
 
 export default function MenuButton() {
-    return <MenuIcon size={40} styleType="text"/>
+    return <MenuButtonStyle>
+        <MenuIcon size={40} styleType="text"/>
+    </MenuButtonStyle> 
 }
