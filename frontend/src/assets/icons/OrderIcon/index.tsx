@@ -1,8 +1,8 @@
 import { useTheme } from "styled-components";
-import { ITicketProps } from "./helpers/ticket-icon.props";
+import { IOrderProps } from "./helpers/order-icon.props";
 import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config.interface";
 
-export default function TicketIcon(props: ITicketProps) {
+export default function OrderIcon(props: IOrderProps) {
     const theme = useTheme() as IStyleThemeConfig
     
     let color;

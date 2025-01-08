@@ -3,18 +3,18 @@ import Modal from "@/components/Molecules/Modal";
 import SelectField from "@/components/Molecules/SelectField";
 import TextField from "@/components/Molecules/TextField";
 import { useEffect, useState } from "react";
-import { CRUDTicketModalTypes, ICRUDTicketModalProps } from "./helpers/crud-ticket-modal-props.interface";
+import { CRUDOrderModalTypes, ICRUDOrderModalProps } from "./helpers/crud-order-modal-props.interface";
 import { useForm } from 'react-hook-form' 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { CRUDTicketFormActionsStyle, CRUDTicketFormStyle } from "./style";
-import { useTicket } from "@/hooks/use-ticket";
+import { CRUDOrderFormActionsStyle, CRUDOrderFormStyle } from "./style";
+import { useOrder } from "@/hooks/use-order";
 import { useAttendant } from "@/hooks/use-attendant";
 
-export default function CreateTicketModal(props: ICRUDTicketModalProps) {
+export default function CreateOrderModal(props: ICRUDOrderModalProps) {
     const {
         schema,
         loading
-    } = useTicket()
+    } = useOrder()
 
     const {
         getAll : getAllAttendants,
@@ -38,12 +38,12 @@ export default function CreateTicketModal(props: ICRUDTicketModalProps) {
         }
     }, [alreadyAttendantsLoaded, getAllAttendants])
 
-    const titles: Record<CRUDTicketModalTypes, string> = {
-        'create': 'Criar Chamado',
-        'update': 'Editar Chamado'
+    const titles: Record<CRUDOrderModalTypes, string> = {
+        'create': 'Criar Pedido',
+        'update': 'Editar Pedido'
     }
 
-    const actions: Record<CRUDTicketModalTypes, string> = {
+    const actions: Record<CRUDOrderModalTypes, string> = {
         'create': 'Criar',
         'update': 'Editar'
     }
@@ -52,14 +52,14 @@ export default function CreateTicketModal(props: ICRUDTicketModalProps) {
     }
 
     return <Modal opened={opened} title={titles[props.action]} width="50%" close={() => setOpened(false)}>
-        <CRUDTicketFormStyle onSubmit={handleSubmit(onSubmit)}>
-            <TextField id="ticket-name" label="Nome" errorMessage={errors.name?.message} register={register('name')}/>
-            <SelectField id="ticket-status" items={[]} label="Status" errorMessage={errors.status?.message}/>
-            <SelectField id="ticket-attendant" items={[]} label="Atendente " errorMessage={errors.attendant?.message} loading={attendantsLoading}/>
-            <CRUDTicketFormActionsStyle>
+        <CRUDOrderFormStyle onSubmit={handleSubmit(onSubmit)}>
+            <TextField id="order-name" label="Nome" errorMessage={errors.name?.message} register={register('name')}/>
+            <SelectField id="order-status" items={[]} label="Status" errorMessage={errors.status?.message}/>
+            <SelectField id="order-attendant" items={[]} label="Atendente " errorMessage={errors.attendant?.message} loading={attendantsLoading}/>
+            <CRUDOrderFormActionsStyle>
                 <Button text="Cancelar" model="secondary" loading={loading}/>
                 <Button text={actions[props.action]} type="submit" loading={loading}/>
-            </CRUDTicketFormActionsStyle>
-        </CRUDTicketFormStyle>
+            </CRUDOrderFormActionsStyle>
+        </CRUDOrderFormStyle>
     </Modal>
 }

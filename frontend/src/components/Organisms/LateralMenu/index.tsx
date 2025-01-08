@@ -1,4 +1,4 @@
-import TicketIcon from "@/assets/icons/TicketIcon";
+import OrderIcon from "@/assets/icons/OrderIcon";
 import MenuItem from "@/components/Molecules/MenuItem";
 import { LateralMenuStyle } from "./style";
 import { useRouter } from "next/router";
@@ -10,10 +10,10 @@ export default function LateralMenu() {
             <li>
                 <MenuItem
                     isSelected={pathname === '/'}
-                    name="Tickets" 
+                    name="Pedidos" 
                     path="/" 
                     icon={
-                        <TicketIcon size={30} styleType={pathname === '/' ? 'light' : 'text'}/>
+                        <OrderIcon size={30} styleType={pathname === '/' ? 'light' : 'text'}/>
                     }
                 />    
             </li>

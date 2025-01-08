@@ -1,4 +1,4 @@
-import CreateTicketModal from "@/components/Organisms/CRUDTicketModal";
+import CreateOrderModal from "@/components/Organisms/CRUDOrderModal";
 import DefaultLayout from "@/layouts/DefaultLayout";
 import Head from "next/head";
 
@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
       <DefaultLayout>
         
-        <CreateTicketModal action="update"/>
+        <CreateOrderModal action="update"/>
       </DefaultLayout>
     </>
   );

@@ -1,4 +1,4 @@
-import { CreateTicketModel } from "@/models/ticket.interface"
+import { CreateOrderModel } from "@/models/order.interface"
 import { useState } from "react";
 import * as yup from 'yup'
 
@@ -15,13 +15,13 @@ export const schema = yup.object().shape({
   attendant: yup.number(),
 });
 
-export function useTicket() {
+export function useOrder() {
     const [loading, setLoading] = useState(false)
     const [alreadyLoaded, setAlreadyLoaded] = useState(false)
     const [listLoading, setListLoading] = useState(false)
     const [alreadyListLoaded, setAlreadyListLoaded] = useState(false)
 
-    async function create(createTicketModel: CreateTicketModel) {
+    async function create(createOrderModel: CreateOrderModel) {
         setLoading(true)
     }
 
