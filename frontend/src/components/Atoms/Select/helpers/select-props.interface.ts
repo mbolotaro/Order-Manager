@@ -9,6 +9,7 @@ export interface ISelectProps<T extends selectPropTypes> {
   onChange?: (value: T[keyof T] | T | undefined) => void;
   loading?: boolean;
   disabled?: boolean;
+  error?: boolean;
 }
 
 export type selectPropTypes = string | number | object

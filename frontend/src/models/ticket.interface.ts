@@ -1,10 +1,11 @@
-import { Attendant } from "./attendant.interface";
 import { TicketStatus } from "./enums/ticket-status.enum";
 
 export interface ITicket {
     id: number;
     createdAt: Date;
     name: string;
-    attendant?: Attendant;
+    attendantId?: number;
     status: TicketStatus;
 }
+
+export type CreateTicketModel = Omit<ITicket, 'id' | 'createdAt'>

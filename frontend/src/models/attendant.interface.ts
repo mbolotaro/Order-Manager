@@ -1,4 +1,4 @@
-export interface Attendant {
+export interface IAttendant {
     id: number;
     name: string;
 }

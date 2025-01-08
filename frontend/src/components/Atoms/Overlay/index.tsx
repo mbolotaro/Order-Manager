@@ -14,6 +14,7 @@ export default function Overlay(props: IOverlayProps) {
             setActive(true)
         } else {
             if(active) {
+                setActive(false)
                 setAnimateEnd(true)
                 setTimeout(() => {
                     setActive(false)

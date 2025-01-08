@@ -1,3 +1,4 @@
+import CreateTicketModal from "@/components/Organisms/CRUDTicketModal";
 import DefaultLayout from "@/layouts/DefaultLayout";
 import Head from "next/head";
 
@@ -11,6 +12,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <DefaultLayout>
+        
+        <CreateTicketModal action="update"/>
       </DefaultLayout>
     </>
   );

@@ -26,7 +26,7 @@ export default function Arrow(props: IArrowProps) {
 
     return (
         <svg width={props.size ?? 20} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"  transform={`rotate(${rotate})`}>
-            <path d="M17 9.5L12 14.5L7 9.5" stroke={color} stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 9.5L12 14.5L7 9.5" stroke={color} strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
     )
 }

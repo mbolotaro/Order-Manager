@@ -38,10 +38,13 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
 
     return <SelectContainerStyle>
         <SelectStyle
-        disabled={props.disabled}
+            disabled={props.disabled}
             onClick={() => setOpened(!opened)}
+            onFocus={() => setOpened(true)}
             onBlur={() => setOpened(false)}
             onChange={(event) => handleChange(event)}
+            id={props.id}
+            error={props.error ?? false}
         >
             {
                 props.items.length > 0 ? 

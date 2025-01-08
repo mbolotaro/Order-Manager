@@ -17,10 +17,11 @@ export default function Input(props: InputProps) {
             <InputStyle
                 id={props.id} 
                 type={props.type ?? 'text'}
-                onChange={handleChange}
+                onChange={!props.register? handleChange : undefined}
                 disabled={props.disabled ?? false}
+                value={!props.register ? props.value : undefined}
                 error={props.error ?? false}
-                value={props.value}
+                {...props.register}
             />
             <InputIconStyle>
                 { props.icon }

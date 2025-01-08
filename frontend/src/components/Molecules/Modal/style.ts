@@ -2,15 +2,18 @@ import styled from "styled-components";
 import { IModalStyleProps } from "./helpers/modal-style-props.interface";
 import { expandAnimation } from "@/styles/utils/animations/expand-animation";
 import { shrinkAnimation } from "@/styles/utils/animations/shrink-animation";
+import { IModalContainerStyleProps } from "./helpers/modal-container-style-props.interface";
 
-export const ModalContainerStyle = styled.div`
+export const ModalContainerStyle = styled.div<IModalContainerStyleProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100vw;
   height: 100vh;
   position: fixed;
-`
+  z-index: 110;
+  pointer-events: ${props => props.opened? 'all' : 'none'};
+`;
 
 export const ModalStyle = styled.dialog<IModalStyleProps>`
   padding: 16px;
@@ -21,14 +24,14 @@ export const ModalStyle = styled.dialog<IModalStyleProps>`
   box-shadow: 6px 9px 32px -8px rgba(15, 19, 25, 1);
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  background-color: ${(props) => props.theme.colors.card};
+  background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text};
   border-radius: 6px;
   animation: ${(props) => (props.open ? (props.animateEnd ? shrinkAnimation() : expandAnimation()) : 'none')} ${props => props.duration}s ease-in-out;
   white-space: nowrap;
   overflow: hidden;
-  z-index: 99;
   pointer-events: all;
+  font-weight: 600;
 `;
 
 export const ModalHeaderStyle = styled.div`
@@ -44,3 +47,7 @@ export const ModalHeaderStyle = styled.div`
     font-size: ${(props) => props.theme.fontSizes.large};
   }
 `;
+
+export const CloseIconStyle = styled.div`
+  cursor: pointer;
+`

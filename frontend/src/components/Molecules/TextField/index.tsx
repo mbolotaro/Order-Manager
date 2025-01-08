@@ -20,7 +20,8 @@ export default function TextField(props: ITextFieldProps) {
             error={!!props.errorMessage}
             disabled={props.disabled}
             trim
+            register={props.register}
         />
-        {props.errorMessage && <InputAlert message="Nome deve ser tal do tal"/>}
+        {props.errorMessage && <InputAlert message={props.errorMessage}/>}
     </TextFieldStyle>
 }

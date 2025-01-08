@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom'
-import { ModalContainerStyle, ModalHeaderStyle, ModalStyle } from './style'
+import { CloseIconStyle, ModalContainerStyle, ModalHeaderStyle, ModalStyle } from './style'
 import React, { useEffect, useState } from 'react';
 import Overlay from '@/components/Atoms/Overlay';
 import { IModalProps } from './helpers/modal-props.interface';
@@ -40,9 +40,10 @@ export default function Modal(props: IModalProps) {
         {
             ReactDOM.createPortal(
         <>
-            {<Overlay active={props.opened}/> }
-            <ModalContainerStyle>
+            <Overlay active={props.opened}/>
+            <ModalContainerStyle opened={props.opened} onClick={props.close}>
                 <ModalStyle
+                    onClick={(event) => event.stopPropagation()}
                     open={opened}
                     duration={duration}
                     width={props.width ?? '50%'} 
@@ -51,11 +52,13 @@ export default function Modal(props: IModalProps) {
                     >
                     <ModalHeaderStyle>
                         <span>{props.title}</span>
-                        <Close
-                            styleType="text" 
-                            size={32}
-                            onClick={props.close}
-                        />
+                        <CloseIconStyle>
+                            <Close
+                                styleType="text" 
+                                size={32}
+                                onClick={props.close}
+                            />
+                        </CloseIconStyle>
                     </ModalHeaderStyle>
                     <div>
                         {props.children}
