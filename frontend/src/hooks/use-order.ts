@@ -1,4 +1,5 @@
 import { CreateOrderModel } from "@/models/order.interface"
+import { createOrder } from "@/services/orders";
 import { useState } from "react";
 import * as yup from 'yup'
 
@@ -23,6 +24,12 @@ export function useOrder() {
 
     async function create(createOrderModel: CreateOrderModel) {
         setLoading(true)
+
+        try {
+          await createOrder({...createOrderModel, id: undefined, createdAt: undefined})
+        } catch (error) {
+          throw error;
+        }
     }
 
     async function getAll() {

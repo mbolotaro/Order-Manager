@@ -11,7 +11,7 @@ export const HeaderStyle = styled.header`
   background-color :${props => props.theme.colors.card};
   padding-top: 4px;
   padding-bottom: 4px;
-  height: 9vh;
+  height: 80px;
   min-height: 50px;
   z-index: 2
 `;

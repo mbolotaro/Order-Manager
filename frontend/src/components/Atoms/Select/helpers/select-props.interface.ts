@@ -10,6 +10,7 @@ export interface ISelectProps<T extends selectPropTypes> {
   loading?: boolean;
   disabled?: boolean;
   error?: boolean;
+  clearable?: boolean;
 }
 
 export type selectPropTypes = string | number | object

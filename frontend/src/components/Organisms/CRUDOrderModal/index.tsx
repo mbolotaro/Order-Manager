@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { CRUDOrderFormActionsStyle, CRUDOrderFormStyle } from "./style";
 import { useOrder } from "@/hooks/use-order";
 import { useAttendant } from "@/hooks/use-attendant";
+import { statusValues } from "@/models/status.values";
 
 export default function CreateOrderModal(props: ICRUDOrderModalProps) {
     const {
@@ -48,17 +49,47 @@ export default function CreateOrderModal(props: ICRUDOrderModalProps) {
         'update': 'Editar'
     }
 
-    function onSubmit() {
+    async function onSubmit() {
     }
 
     return <Modal opened={opened} title={titles[props.action]} width="50%" close={() => setOpened(false)}>
         <CRUDOrderFormStyle onSubmit={handleSubmit(onSubmit)}>
-            <TextField id="order-name" label="Nome" errorMessage={errors.name?.message} register={register('name')}/>
-            <SelectField id="order-status" items={[]} label="Status" errorMessage={errors.status?.message}/>
-            <SelectField id="order-attendant" items={[]} label="Atendente " errorMessage={errors.attendant?.message} loading={attendantsLoading}/>
+            <TextField 
+                id="order-name" 
+                label="Nome" 
+                errorMessage={errors.name?.message} 
+                register={register('name')}
+            />
+            <SelectField 
+                id="order-status" 
+                items={statusValues} 
+                itemTitle="name"
+                itemValue="value"
+                label="Status" 
+                errorMessage={errors.status?.message}
+            />
+            <SelectField 
+                id="order-attendant" 
+                items={attendants} 
+                itemTitle="name" 
+                itemValue="id" 
+                label="Atendente " 
+                clearable 
+                errorMessage={errors.attendant?.message} 
+                loading={attendantsLoading}
+            />
             <CRUDOrderFormActionsStyle>
-                <Button text="Cancelar" model="secondary" loading={loading}/>
-                <Button text={actions[props.action]} type="submit" loading={loading}/>
+                <Button 
+                    text="Cancelar" 
+                    onClick={() => setOpened(false)} 
+                    model="secondary" 
+                    loading={loading}
+                />
+                <Button 
+                    text={actions[props.action]} 
+                    type="submit" 
+                    loading={loading}
+                />
             </CRUDOrderFormActionsStyle>
         </CRUDOrderFormStyle>
     </Modal>

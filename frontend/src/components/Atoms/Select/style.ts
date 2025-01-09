@@ -17,22 +17,25 @@ export const SelectStyle = styled.select<ISelectStyleProps>`
     border-color: ${(props) => props.theme.colors.primary};
   }
 
+  
+
   ${(props) =>
     props.disabled &&
     css`
       border-color: ${(props) => props.theme.colors.grey};
     `}
-
   ${(props) =>
     props.error &&
     css`
       border-color: ${(props) => props.theme.colors?.danger};
-    `}
+    `};
 `;
 
 export const OptionStyle = styled.option`
+  background-color: ${props => props.theme.colors.background};
   outline: 0;
   color: ${props => props.theme.colors.text} !important;
+  
 `
 
 export const SelectIconStyle = styled.div`
@@ -45,9 +48,28 @@ export const SelectIconStyle = styled.div`
   align-items: center;
   height: 100%;
   cursor: pointer;
+  
 `;
+
+export const ClearIconStyle = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: ${props => props.theme.colors.text};
+  color: ${props => props.theme.colors.background};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .2s;
+  opacity: 0;
+  
+`
 
 export const SelectContainerStyle = styled.div`
   position: relative;
   width: 100%;
+
+  &:hover .clearable-icon {
+    opacity: 100 !important;
+  }
 `;

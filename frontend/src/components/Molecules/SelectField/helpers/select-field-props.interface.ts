@@ -13,4 +13,5 @@ export interface ISelectFieldProps<T extends selectPropTypes> {
     disabled?: boolean;
     label: string;
     errorMessage?: string;
+    clearable?: boolean;
 }

@@ -1,11 +1,9 @@
-import { OrderStatus } from "./enums/order-status.enum";
-
 export interface IOrder {
-    id: number;
-    createdAt: Date;
+    id?: number;
+    createdAt?: Date;
     name: string;
     attendantId?: number;
-    status: OrderStatus;
+    isOpened: boolean;
 }
 
 export type CreateOrderModel = Omit<IOrder, 'id' | 'createdAt'>

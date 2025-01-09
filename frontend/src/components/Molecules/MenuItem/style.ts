@@ -20,8 +20,8 @@ export const MenuItemStyle = styled(Link)<IMenuItemStyleProps>`
   }
 
   div {
-    padding-right: 22px;
-    padding-left: 22px;
+    padding-right: 32px;
+    padding-left: 32px;
     color: ${(props) => props.theme.colors.text} !important;
 
     svg {

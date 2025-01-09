@@ -1,1 +1,1 @@
-export const API_URL = 'https://example.com'
+export const BASE_URL = 'https://677ee15b94bde1c1252ddf45.mockapi.io/order-manager'

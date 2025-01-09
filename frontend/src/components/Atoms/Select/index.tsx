@@ -1,8 +1,9 @@
 import Arrow from "@/assets/icons/Arrow";
-import { OptionStyle, SelectContainerStyle, SelectIconStyle, SelectStyle } from "./style";
+import { ClearIconStyle, OptionStyle, SelectContainerStyle, SelectIconStyle, SelectStyle } from "./style";
 import { ChangeEvent, useState } from "react";
 import { ISelectProps, selectPropTypes } from "./helpers/select-props.interface";
 import Loading from "@/assets/icons/Loading";
+import Close from "@/assets/icons/Close";
 
 export default function Select<T extends selectPropTypes>(props: ISelectProps<T>) {
     const [opened, setOpened] = useState<boolean>(false)
@@ -50,7 +51,7 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
                 props.items.length > 0 ? 
                 
                 <>
-                    <option disabled selected>{props.customNotSelectedMessage ?? 'Escolha uma opção'}</option>
+                    <OptionStyle disabled selected>{props.customNotSelectedMessage ?? 'Escolha uma opção'}</OptionStyle>
                     {
                         props.items.map((item, index) => 
                             <OptionStyle key={index} value={String(getOptionValue(item))}>
@@ -65,6 +66,10 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
         </SelectStyle>
         <SelectIconStyle>
             {
+                props.clearable? 
+                <ClearIconStyle className="clearable-icon" onClick={() => props.onChange ? props.onChange(undefined) : undefined}>
+                    <Close size={40} styleType="background"/>
+                </ClearIconStyle> :
                 props.loading && 
                 <Loading/>
             }

@@ -19,6 +19,7 @@ export default function SelectField<T extends selectPropTypes>(props: ISelectFie
             onChange={(value) => props.onChange? props.onChange(value): undefined}
             value={props.value}
             error={!!props.errorMessage}
+            clearable={props.clearable}
         />
         { props.errorMessage && <InputAlert message={props.errorMessage}/>}
     </div>
