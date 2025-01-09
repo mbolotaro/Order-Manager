@@ -1,4 +1,5 @@
-import CreateOrderModal from "@/components/Organisms/CRUDOrderModal";
+
+import OrderCRUD from "@/components/Templates/OrderCRUD";
 import DefaultLayout from "@/layouts/DefaultLayout";
 import Head from "next/head";
 
@@ -12,8 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <DefaultLayout>
-        
-        <CreateOrderModal action="update"/>
+        <OrderCRUD/>
       </DefaultLayout>
     </>
   );

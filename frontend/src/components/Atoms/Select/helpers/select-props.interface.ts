@@ -1,3 +1,5 @@
+import { UseFormRegisterReturn } from "react-hook-form";
+
 export interface ISelectProps<T extends selectPropTypes> {
   id: string;
   items: T[];
@@ -11,6 +13,7 @@ export interface ISelectProps<T extends selectPropTypes> {
   disabled?: boolean;
   error?: boolean;
   clearable?: boolean;
+  register?: UseFormRegisterReturn;
 }
 
 export type selectPropTypes = string | number | object

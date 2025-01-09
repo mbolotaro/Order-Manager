@@ -4,9 +4,9 @@ import { BASE_URL } from "./api";
 export async function getAttendants() : Promise<IAttendant[]> {
   try {
     const response = await (fetch(`${BASE_URL}/attendants`))
-    const data: (IAttendant & {id: string})[] = await response.json()
+    const data: IAttendant[] = await response.json()
     
-    return data.map(item => ({...item, id: Number(item.id)}))
+    return data
   } catch (error) {
     throw error; 
   }

@@ -1,4 +1,4 @@
 export interface IAttendant {
-    id: number;
+    id: string;
     name: string;
 }

@@ -1,8 +1,8 @@
 export interface IOrder {
-    id?: number;
-    createdAt?: Date;
+    id?: string | null;
+    createdAt?: Date | null;
     name: string;
-    attendantId?: number;
+    attendantId?: string | null;
     isOpened: boolean;
 }
 

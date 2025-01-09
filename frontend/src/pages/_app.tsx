@@ -3,7 +3,7 @@ import { ThemeContext, ThemeProvider } from "styled-components";
 import GlobalStyle from '../styles/GlobalStyle'
 import { theme } from "@/styles/theme";
 import { useUserTheme } from "@/hooks/use-user-theme";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const userTheme = useUserTheme()

@@ -21,7 +21,7 @@ export const theme = new StyleTheme({
       card: "#E5E7E6",
       text: "#0F1319",
       danger: "#E84855",
-      grey: "#A7B6CC",
+      grey: "#57565C",
       dark: "#0F1319",
       light: "#E5E7E6",
     },

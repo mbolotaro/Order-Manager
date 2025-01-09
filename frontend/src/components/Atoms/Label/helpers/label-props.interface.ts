@@ -3,4 +3,5 @@ export interface ILabelProps {
     for: string
     error?: boolean
     disabled?: boolean
+    isOpcional?: boolean
 }

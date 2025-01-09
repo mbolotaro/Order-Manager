@@ -12,8 +12,8 @@ export const schema = yup.object().shape({
     .required("Nome deve ser definido!")
     .min(MIN_NAME_LENGTH, `Nome deve ter no mínimo ${MIN_NAME_LENGTH} carácteres!`)
     .max(MAX_NAME_LENGTH, `Nome deve ter no máximo ${MAX_NAME_LENGTH} carácteres!`),
-  status: yup.string().required("Status é obrigatório!"),
-  attendant: yup.number(),
+  isOpened: yup.boolean().required("Status é obrigatório!"),
+  attendantId: yup.string().defined(),
 });
 
 export function useOrder() {
@@ -26,9 +26,11 @@ export function useOrder() {
         setLoading(true)
 
         try {
-          await createOrder({...createOrderModel, id: undefined, createdAt: undefined})
+          await createOrder({...createOrderModel, id: null, createdAt: null})
         } catch (error) {
           throw error;
+        } finally {
+          setLoading(false)
         }
     }
 

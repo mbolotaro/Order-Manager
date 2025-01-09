@@ -5,7 +5,7 @@ import { IOverlayStyleProps } from "./helpers/overlay-style-props.interface";
 export const OverlayStyle = styled.div<IOverlayStyleProps>`
   width: 100vw;
   height: 100vh;
-  background-color: black;
+  background-color: ${props => props.theme.colors.grey};
   position: absolute;
   top: 0;
   left: 0;

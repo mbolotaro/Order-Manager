@@ -9,7 +9,8 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
     const [opened, setOpened] = useState<boolean>(false)
 
     function getOptionValue(item: T): T[keyof T] | T {
-        if(props.itemValue && typeof item === 'object' && item[props.itemValue]) {
+
+        if(props.itemValue && typeof item === 'object' && item[props.itemValue] !== null) {
             return item[props.itemValue]
         } else return item
     }
@@ -26,7 +27,7 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
         
         if(props.itemValue) {
             const selectedItem = props.items.find(
-                item => props.itemValue && !!item[props.itemValue] && item[props.itemValue] == data)
+                item => props.itemValue && item[props.itemValue] == data)
             
             if(selectedItem) {
                 props.onChange(selectedItem[props.itemValue])
@@ -39,6 +40,7 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
 
     return <SelectContainerStyle>
         <SelectStyle
+            value={typeof props.value !== 'object'? props.value?.toString() : props.itemValue && props.value ? (props.value as T)[props.itemValue] as string : undefined}
             disabled={props.disabled}
             onClick={() => setOpened(!opened)}
             onFocus={() => setOpened(true)}
@@ -46,6 +48,7 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
             onChange={(event) => handleChange(event)}
             id={props.id}
             error={props.error ?? false}
+            {...props.register}
         >
             {
                 props.items.length > 0 ? 
@@ -55,6 +58,7 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
                     {
                         props.items.map((item, index) => 
                             <OptionStyle key={index} value={String(getOptionValue(item))}>
+                                <Arrow size={40} direction="bottom"></Arrow>
                                 {getOptionTitle(item)}
                             </OptionStyle>
                         )

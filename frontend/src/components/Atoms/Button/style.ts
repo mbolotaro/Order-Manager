@@ -3,7 +3,7 @@ import { IButtonStyleProps } from "./helpers/button-style-props.interface";
 
 export const ButtonStyle = styled.button<IButtonStyleProps>`
   min-width: 100px;
-  padding: 6px;
+  padding: ${props => props.density === 'default' ? '6px' : '0px'};
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 6px;
@@ -18,7 +18,8 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
   vertical-align: middle;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  gap: 8px;
   cursor: pointer;
   border: 2px solid transparent;
 

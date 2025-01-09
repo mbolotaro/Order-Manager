@@ -19,11 +19,15 @@ export default function Button(props: IButtonProps) {
             disabled={props.disabled ?? false}
             onClick={handleClick}
             type={props.type ?? 'button' }
+            density={props.density ?? 'default'}
         >
             {
                 props.loading? 
                 <Loading size={30} styleType={props.styleType ?? 'primary'} /> :
-                props.text
+                <>
+                    {props.icon}
+                    {props.text}
+                </>
             }
         </ButtonStyle>
     )

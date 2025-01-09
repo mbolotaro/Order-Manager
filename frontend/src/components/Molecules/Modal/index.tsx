@@ -11,7 +11,7 @@ export default function Modal(props: IModalProps) {
     const [opened, setOpened] = useState(false)
     const [animateEnd, setAnimateEnd] = useState(false)
 
-    const duration = 0.5
+    const duration = 0.2
 
     useEffect(() => {
         setMounted(true);
