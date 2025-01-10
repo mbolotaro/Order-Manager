@@ -5,8 +5,8 @@ export const RealCheckbox = styled.input`
 `
 
 export const CustomCheckbox = styled.div`
-    width: 20px;
-    height: 20px;
+    width: 12px;
+    height: 12px;
     border: 1px solid ${props => props.theme.colors.text};
     border-radius: 2px;
     transition: .2s;

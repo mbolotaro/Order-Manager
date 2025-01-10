@@ -1,5 +1,5 @@
 import { ITableProps } from "./helpers/table-props.interface";
-import { TableStyle } from "./style";
+import { TableCellStyle, TableHeaderColumnStyle, TableStyle } from "./style";
 
 export default function Table<T extends object>(props: ITableProps<T>) {
     return <TableStyle {...props.tableInstance.getTableProps()}>
@@ -9,11 +9,11 @@ export default function Table<T extends object>(props: ITableProps<T>) {
                     <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
                         {
                             headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps()} key={column.id}>
+                                <TableHeaderColumnStyle width={column.width} minWidth={column.minWidth} maxWidth={column.maxWidth} {...column.getHeaderProps()} key={column.id}>
                                     {
                                         column.render('Header')
                                     }
-                                </th>
+                                </TableHeaderColumnStyle>
                             ))
                         }
                     </tr>
@@ -29,11 +29,11 @@ export default function Table<T extends object>(props: ITableProps<T>) {
                 {
                 row.cells.map(cell => {
                     return (
-                        <td {...cell.getCellProps()} key={cell.column.id}>
+                        <TableCellStyle width={cell.column.width} maxWidth={cell.column.maxWidth} minWidth={cell.column.minWidth} {...cell.getCellProps()} key={cell.column.id}>
                         {
                             cell.render('Cell')
                         }
-                        </td>
+                        </TableCellStyle>
                     )
                 }
                 )}

@@ -8,48 +8,56 @@ import { useMemo } from "react"
 import { Column, Row, useTable } from "react-table"
 import { ActionIcon } from "./style"
 import Table from "@/components/Molecules/Table"
+import { TableListItem } from "@/components/Molecules/Table/helpers/table-list"
+import { statusValues } from "@/models/status.values"
+import { HoverDetails } from "@/components/Molecules/HoverDetails"
 
 export default function OrderTable() {
+
     const columns = useMemo(() => [
         {
             Header: ' ',
-            Cell: ({row}: {row: Row<IOrder>}) => (
-                <div><Checkbox value={row.original.checked}/></div>
-            )
+            Cell: ({row}: {row: Row<TableListItem<IOrder>>}) => (
+                <div><Checkbox value={row.original.selected}/></div>
+            ),
+            width: 20
         },
         {
             Header: 'ID',
             accessor: 'id',
-            minWidth: 200, // largura mínima
-            maxWidth: 400, // largura máxima
+            width: 20,
         },
         {
             Header: 'Nome',
             accessor: 'name',
-            width: '23px'
+            width: 200
         },
         {
             Header: 'Status',
             accessor: 'isOpened',
-            width: '200px'
+            width: 200
         },
         {
             Header: 'Atendente',
             accessor: 'attendantId',
-            width: '200px'
+            width: 200
         },
         {
             Header: 'Data de Criação',
             accessor: 'createdAt',
+            width: 200
             
         },
         {
             Header: 'Ações',
+            width: 100,
             Cell: ({row}: {row: Row<IOrder>}) => (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', flexWrap: 'wrap'}}>
-                    <ActionIcon>
-                        <EyeIcon size={24}/>
-                    </ActionIcon>
+                    <HoverDetails details="opa">
+                        <ActionIcon>
+                            <EyeIcon size={24}/>
+                        </ActionIcon>
+                    </HoverDetails>
                     <ActionIcon>
                         <PenIcon size={24}/>
                     </ActionIcon>
@@ -66,7 +74,7 @@ export default function OrderTable() {
         {
             id: '1',
             name: 'Pedido 01',
-            isOpened: false,
+            isOpened: statusValues[0].name,
             attendantId: 'asdasd',
             createdAt: new Date().toLocaleDateString(),
             checked: false
@@ -74,7 +82,7 @@ export default function OrderTable() {
         {
             id: '2',
             name: 'Pedido 02',
-            isOpened: false,
+            isOpened: statusValues[1].name,
             attendantId: 'asdasd',
             createdAt: new Date().toLocaleDateString(),
             checked: false
