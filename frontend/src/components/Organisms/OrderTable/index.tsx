@@ -1,10 +1,13 @@
 
-import Button from "@/components/Atoms/Button"
+import EyeIcon from "@/assets/icons/EyeIcon"
+import PenIcon from "@/assets/icons/PenIcon"
+import TrashIcon from "@/assets/icons/TrashIcon"
 import Checkbox from "@/components/Atoms/Checkbox"
-import { OrderTableStyle } from "@/components/Templates/OrderCRUD/style"
 import { IOrder } from "@/models/order.interface"
 import { useMemo } from "react"
 import { Column, Row, useTable } from "react-table"
+import { ActionIcon } from "./style"
+import Table from "@/components/Molecules/Table"
 
 export default function OrderTable() {
     const columns = useMemo(() => [
@@ -16,29 +19,43 @@ export default function OrderTable() {
         },
         {
             Header: 'ID',
-            accessor: 'id'
+            accessor: 'id',
+            minWidth: 200, // largura mínima
+            maxWidth: 400, // largura máxima
         },
         {
             Header: 'Nome',
-            accessor: 'name'
+            accessor: 'name',
+            width: '23px'
         },
         {
             Header: 'Status',
-            accessor: 'isOpened'
+            accessor: 'isOpened',
+            width: '200px'
         },
         {
             Header: 'Atendente',
-            accessor: 'attendantId'
+            accessor: 'attendantId',
+            width: '200px'
         },
         {
             Header: 'Data de Criação',
-            accessor: 'createdAt'
+            accessor: 'createdAt',
+            
         },
         {
             Header: 'Ações',
             Cell: ({row}: {row: Row<IOrder>}) => (
-                <div>
-                    <Button text="Editar" onClick={() => console.log(row.original.id)}/>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', flexWrap: 'wrap'}}>
+                    <ActionIcon>
+                        <EyeIcon size={24}/>
+                    </ActionIcon>
+                    <ActionIcon>
+                        <PenIcon size={24}/>
+                    </ActionIcon>
+                    <ActionIcon>
+                        <TrashIcon size={24}/>
+                    </ActionIcon>
                 </div>
                 
             )
@@ -64,52 +81,12 @@ export default function OrderTable() {
         }
     ], [])
 
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    } = useTable({ columns, data })
+    const tableInstance = useTable({ columns, data,    defaultColumn: {
+      minWidth: 50, // largura mínima padrão para todas as colunas
+      width: 150, // largura padrão para todas as colunas
+      maxWidth: 400, // largura máxima padrão para todas as colunas
+    }, })
 
-    return <OrderTableStyle {...getTableProps()} >
-        <thead>
-       {// Loop over the header rows
 
-       headerGroups.map(headerGroup => (
-         <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-           {
-            headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()} key={column.id}>
-                {
-                    column.render('Header')}
-
-                </th>
-            ))
-           }
-         </tr>
-
-       ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-        {
-        rows.map(row => {
-            prepareRow(row)
-            return (
-            <tr {...row.getRowProps()} key={row.id}>
-                {
-                row.cells.map(cell => {
-                return (
-                    <td {...cell.getCellProps()} key={cell.column.id}>
-                    {
-                    cell.render('Cell')}
-                    </td>
-                )
-                }
-                )}
-            </tr>
-            )
-        })}
-        </tbody>
-    </OrderTableStyle>
+    return <Table tableInstance={tableInstance}/>
 }

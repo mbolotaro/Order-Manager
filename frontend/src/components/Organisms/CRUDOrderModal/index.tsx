@@ -2,7 +2,7 @@ import Button from "@/components/Atoms/Button";
 import Modal from "@/components/Molecules/Modal";
 import SelectField from "@/components/Molecules/SelectField";
 import TextField from "@/components/Molecules/TextField";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CRUDOrderModalTypes, ICRUDOrderModalProps } from "./helpers/crud-order-modal-props.interface";
 import { useForm } from 'react-hook-form' 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -97,7 +97,7 @@ export default function CreateOrderModal(props: ICRUDOrderModalProps) {
             <CRUDOrderFormActionsStyle>
                 <Button 
                     text="Cancelar" 
-                    onClick={() => setOpened(false)} 
+                    onClick={() => props.onClose()} 
                     model="secondary" 
                     loading={loading}
                 />
