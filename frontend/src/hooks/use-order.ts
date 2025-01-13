@@ -61,7 +61,7 @@ export function useOrder() {
     try {
       if(!listLoading) {
         await db.orders.clear()
-        await db.orders.bulkAdd((await getOrders()))
+        await db.orders.bulkPut((await getOrders() ?? []))
       }
     } catch (error) {
       throw error;        

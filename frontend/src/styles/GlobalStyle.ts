@@ -3,7 +3,6 @@ import { createGlobalStyle } from "styled-components";
 import { fonts } from "./fonts";
 
 export default createGlobalStyle`
-
 ${fonts}
 
 html,
@@ -22,8 +21,10 @@ body {
 * {
   box-sizing: border-box;
   padding: 0;
+  transition: 0.2s;
   margin: 0;
   font-family: ${(props: styleExecutionContextProps) => props.theme.fonts?.body};
+
 }
 
 a {

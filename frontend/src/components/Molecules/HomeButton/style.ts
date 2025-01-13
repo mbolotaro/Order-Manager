@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HomeButtonStyle = styled.div`
   display: flex;
   align-items: center;
-
+  flex: 1;
   a {
     display: flex;
     justify-content: center;

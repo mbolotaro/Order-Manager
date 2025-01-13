@@ -6,7 +6,7 @@ export const TablePaginationStyleContainer = styled.div`
   margin-top: 8px;
   display: flex;
   align-items: center;
-  justify-content: space-between
+  justify-content: space-between;
 
 `
 
@@ -30,6 +30,7 @@ export const OrderQuantCounter = styled.span`
 `
 
 export const SelectStyle = styled(Select)`
+
 `
 
 export const PaginationNavStyle = styled.div`

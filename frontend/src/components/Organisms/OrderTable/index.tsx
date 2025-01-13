@@ -5,7 +5,7 @@ import Checkbox from "@/components/Atoms/Checkbox"
 import { ViewOrderModel } from "@/models/order.interface"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { Column, Row, useFilters, useTable } from "react-table"
-import { ActionIcon, ActionContainer, CheckHeaderStyle, IDCellStyle, NameCellStyle, NameHeaderStyle, StatusCellStyle, EmptyInfoCellStyle } from "./style"
+import { ActionIcon, ActionContainer, CheckHeaderStyle, IDCellStyle, OnLeftCellStyle, OnLeftHeaderStyle, StatusCellStyle, EmptyInfoCellStyle } from "./style"
 import Table from "@/components/Molecules/Table"
 import { IOrderTableProps } from "./helpers/order-table-props.interface"
 
@@ -60,7 +60,7 @@ export default function OrderTable(props: IOrderTableProps) {
             Cell: ({row}: {row: Row<ViewOrderModel & {_order: ViewOrderModel}>}) => (
                 <div>
                     <Checkbox 
-                        value={checkboxes[row.original._order.id as number]} 
+                        value={checkboxes[row.original._order.id as string]} 
                         onChange={() => handleCheckboxChange(row.original._order.id as number)}
                     />
                 </div>
@@ -75,17 +75,17 @@ export default function OrderTable(props: IOrderTableProps) {
             
         },
         {
-            Header: <NameHeaderStyle>Nome</NameHeaderStyle>,
+            Header: <OnLeftHeaderStyle>Nome</OnLeftHeaderStyle>,
             accessor: 'name',
             width: '14.28%'
         },
         {
-            Header: 'Status',
+            Header: <OnLeftHeaderStyle>Status</OnLeftHeaderStyle>,
             accessor: 'isOpened',
             width: '14.28%'
         },
         {
-            Header: 'Atendente',
+            Header: <OnLeftHeaderStyle>Atendente</OnLeftHeaderStyle>,
             accessor: 'attendant',
             width: '14.28%',
 
@@ -122,9 +122,12 @@ export default function OrderTable(props: IOrderTableProps) {
             return props.orders?.map(
                 order => ({
                     id: <IDCellStyle>{order.id}</IDCellStyle>,
-                    name: <NameCellStyle>{order.name}</NameCellStyle>,
+                    name: <OnLeftCellStyle>{order.name}</OnLeftCellStyle>,
                     isOpened: <StatusCellStyle $opened={order.isOpened}>{order.isOpened ? 'Aberto' : 'Fechado'}</StatusCellStyle>,
-                    attendant: order.attendant?.name ?? <EmptyInfoCellStyle>Não informado</EmptyInfoCellStyle>,
+                    attendant: <OnLeftCellStyle>{
+                        order.attendant?.name ?? <EmptyInfoCellStyle>Não informado</EmptyInfoCellStyle>
+                    }</OnLeftCellStyle> 
+                    ,
                     createdAt: order.createdAt?.toLocaleDateString(),
                     _order: order
                 })

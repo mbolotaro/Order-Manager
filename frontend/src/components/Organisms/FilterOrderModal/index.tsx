@@ -3,13 +3,12 @@ import Modal from "@/components/Molecules/Modal";
 import SelectField from "@/components/Molecules/SelectField";
 import { useAttendant } from "@/hooks/use-attendant";
 import { statusValues } from "@/models/status.values";
+import { IFilterOrderModalProps } from "./helpers/filter-order-modal-props.interface";
 
-export default function FilterOrderModal() {
+export default function FilterOrderModal(props: IFilterOrderModalProps) {
 
     const {
-        getAll,
         listLoading,
-        alreadyListLoaded,
         attendants
     } = useAttendant()
 
@@ -19,7 +18,7 @@ export default function FilterOrderModal() {
         { name: 'Há 30 dias', value: '30'}
     ]
 
-    return <Modal opened title="Filtrar Lista de Pedidos" width="600px">
+    return <Modal opened={props.opened} close={props.close} title="Filtrar Lista de Pedidos" width="600px">
         <SelectField 
             id="order-status-filter" 
             label="Status" 

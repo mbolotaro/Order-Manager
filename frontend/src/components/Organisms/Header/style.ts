@@ -13,5 +13,6 @@ export const HeaderStyle = styled.header`
   padding-bottom: 4px;
   height: 60px;
   min-height: 50px;
-  z-index: 2
+  z-index: 2;
+  padding-right: 24px;
 `;

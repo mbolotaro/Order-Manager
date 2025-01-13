@@ -14,8 +14,7 @@ export function useAttendant() {
         setListLoading(true)
         try {
             if(!listLoading && !alreadyListLoaded) {
-                await db.attendants.clear()
-                await db.attendants.bulkAdd(await getAttendants() ?? [])
+                await db.attendants.bulkPut(await getAttendants() ?? [])
             }
             return attendants
         } catch (error) {
