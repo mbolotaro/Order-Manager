@@ -1,100 +1,141 @@
-
 import EyeIcon from "@/assets/icons/EyeIcon"
 import PenIcon from "@/assets/icons/PenIcon"
 import TrashIcon from "@/assets/icons/TrashIcon"
 import Checkbox from "@/components/Atoms/Checkbox"
-import { IOrder } from "@/models/order.interface"
-import { useMemo } from "react"
-import { Column, Row, useTable } from "react-table"
-import { ActionIcon } from "./style"
+import { ViewOrderModel } from "@/models/order.interface"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { Column, Row, useFilters, useTable } from "react-table"
+import { ActionIcon, ActionContainer, CheckHeaderStyle, IDCellStyle, NameCellStyle, NameHeaderStyle, StatusCellStyle, EmptyInfoCellStyle } from "./style"
 import Table from "@/components/Molecules/Table"
-import { TableListItem } from "@/components/Molecules/Table/helpers/table-list"
-import { statusValues } from "@/models/status.values"
-import { HoverDetails } from "@/components/Molecules/HoverDetails"
+import { IOrderTableProps } from "./helpers/order-table-props.interface"
 
-export default function OrderTable() {
+
+export default function OrderTable(props: IOrderTableProps) {
+
+    const [ checkboxes, setCheckboxes ] = useState<Record<number, boolean>>({})
+    const [ allSelected, setAllSelected ] = useState(false)
+
+    useEffect(() => {
+        const updatedCheckboxes = props.orders.reduce((acc, order) => {
+            if(typeof order.id === 'number') {
+                acc[order.id] = allSelected
+            }
+
+            return acc;
+        }, {} as Record<number, boolean>)
+
+        setCheckboxes(updatedCheckboxes)
+
+        if(props.onCheckChange) {
+            props.onCheckChange(updatedCheckboxes)
+        }
+
+
+    }, [allSelected, setCheckboxes])
+
+    const handleCheckboxChange = useCallback((id: number) => {
+        setCheckboxes((prev) => {
+            const updatedCheckboxes: Record<number, boolean> = {
+                ...prev,
+                [id]: !prev[id]
+            } 
+        
+            if(props.onCheckChange) {
+                props.onCheckChange(updatedCheckboxes)
+            }
+
+            return updatedCheckboxes;
+        })
+
+    }, [props])
+
+
 
     const columns = useMemo(() => [
         {
-            Header: ' ',
-            Cell: ({row}: {row: Row<TableListItem<IOrder>>}) => (
-                <div><Checkbox value={row.original.selected}/></div>
+            Header: <CheckHeaderStyle>
+                <Checkbox value={allSelected} onChange={(value) => setAllSelected(value)}/>
+            </CheckHeaderStyle>,
+            
+            Cell: ({row}: {row: Row<ViewOrderModel & {_order: ViewOrderModel}>}) => (
+                <div>
+                    <Checkbox 
+                        value={checkboxes[row.original._order.id as number]} 
+                        onChange={() => handleCheckboxChange(row.original._order.id as number)}
+                    />
+                </div>
             ),
-            width: 20
+            accessor: 'checkbox',
+            width: '3.57%',
         },
         {
             Header: 'ID',
             accessor: 'id',
-            width: 20,
+            width: '3.57%',
+            
         },
         {
-            Header: 'Nome',
+            Header: <NameHeaderStyle>Nome</NameHeaderStyle>,
             accessor: 'name',
-            width: 200
+            width: '14.28%'
         },
         {
             Header: 'Status',
             accessor: 'isOpened',
-            width: 200
+            width: '14.28%'
         },
         {
             Header: 'Atendente',
-            accessor: 'attendantId',
-            width: 200
+            accessor: 'attendant',
+            width: '14.28%',
+
         },
         {
             Header: 'Data de Criação',
             accessor: 'createdAt',
-            width: 200
+            width: '14.28%',
             
         },
+
         {
             Header: 'Ações',
-            width: 100,
-            Cell: ({row}: {row: Row<IOrder>}) => (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', flexWrap: 'wrap'}}>
-                    <HoverDetails details="opa">
-                        <ActionIcon>
-                            <EyeIcon size={24}/>
-                        </ActionIcon>
-                    </HoverDetails>
-                    <ActionIcon>
+            width: '7.14%',
+            Cell: ({row}: {row: Row<ViewOrderModel & {_order: ViewOrderModel}>}) => (
+                <ActionContainer>
+                    <ActionIcon onClick={() => props.onView(row.original._order)}>
+                        <EyeIcon size={24}/>
+                    </ActionIcon>
+                    <ActionIcon onClick={() => props.onUpdate(row.original._order)}>
                         <PenIcon size={24}/>
                     </ActionIcon>
-                    <ActionIcon>
+                    <ActionIcon onClick={() => props.onDelete(row.original._order)}>
                         <TrashIcon size={24}/>
                     </ActionIcon>
-                </div>
+                </ActionContainer>
                 
             )
         }
-    ] as Column[], [])
+    ] as Column[], [ checkboxes, props, allSelected, handleCheckboxChange ])
 
-    const data = useMemo(() => [
-        {
-            id: '1',
-            name: 'Pedido 01',
-            isOpened: statusValues[0].name,
-            attendantId: 'asdasd',
-            createdAt: new Date().toLocaleDateString(),
-            checked: false
-        },
-        {
-            id: '2',
-            name: 'Pedido 02',
-            isOpened: statusValues[1].name,
-            attendantId: 'asdasd',
-            createdAt: new Date().toLocaleDateString(),
-            checked: false
+    const data = useMemo(() => {
+        if(Array.isArray(props.orders)) {
+            return props.orders?.map(
+                order => ({
+                    id: <IDCellStyle>{order.id}</IDCellStyle>,
+                    name: <NameCellStyle>{order.name}</NameCellStyle>,
+                    isOpened: <StatusCellStyle $opened={order.isOpened}>{order.isOpened ? 'Aberto' : 'Fechado'}</StatusCellStyle>,
+                    attendant: order.attendant?.name ?? <EmptyInfoCellStyle>Não informado</EmptyInfoCellStyle>,
+                    createdAt: order.createdAt?.toLocaleDateString(),
+                    _order: order
+                })
+            )    
         }
-    ], [])
+        return []
+    }, [props.orders])
 
-    const tableInstance = useTable({ columns, data,    defaultColumn: {
-      minWidth: 50, // largura mínima padrão para todas as colunas
-      width: 150, // largura padrão para todas as colunas
-      maxWidth: 400, // largura máxima padrão para todas as colunas
-    }, })
+    const tableInstance = useTable({ columns, data }, useFilters)
 
-
-    return <Table tableInstance={tableInstance}/>
+    return  <>
+        { props.orders?.length > 0 && <Table tableInstance={tableInstance}/> }
+    </>
 }

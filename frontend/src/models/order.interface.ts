@@ -1,10 +1,10 @@
 import { IAttendant } from "./attendant.interface";
 
 export interface IOrder {
-    id?: string | null;
+    id?: number | null;
     createdAt?: Date | null;
     name: string;
-    attendantId?: string | null;
+    attendantId?: number | null;
     isOpened: boolean;
 }
 

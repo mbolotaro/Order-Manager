@@ -5,14 +5,22 @@ export default function Table<T extends object>(props: ITableProps<T>) {
     return <TableStyle {...props.tableInstance.getTableProps()}>
         <thead>
             {
-                props.tableInstance.headerGroups.map(headerGroup => (
-                    <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
+                props.tableInstance.headerGroups.map((headerGroup, index) => (
+                    <tr {...headerGroup.getHeaderGroupProps()} key={index}>
                         {
-                            headerGroup.headers.map(column => (
-                                <TableHeaderColumnStyle width={column.width} minWidth={column.minWidth} maxWidth={column.maxWidth} {...column.getHeaderProps()} key={column.id}>
+                            headerGroup.headers.map((column, index) => (
+                                <TableHeaderColumnStyle 
+                                    $width={column.width} 
+                                    $minWidth={column.minWidth} 
+                                    $maxWidth={column.maxWidth} 
+                                    {...column.getHeaderProps()} 
+                                    key={index}
+                                >
                                     {
                                         column.render('Header')
+                                        
                                     }
+                                    <div></div>
                                 </TableHeaderColumnStyle>
                             ))
                         }
@@ -22,14 +30,19 @@ export default function Table<T extends object>(props: ITableProps<T>) {
         </thead>
         <tbody {...props.tableInstance.getTableBodyProps()}>
         {
-        props.tableInstance.rows.map(row => {
+        props.tableInstance.rows.map((row, index) => {
             props.tableInstance.prepareRow(row)
             return (
-            <tr {...row.getRowProps()} key={row.id}>
+            <tr {...row.getRowProps()} key={index}>
                 {
-                row.cells.map(cell => {
+                row.cells.map((cell, index) => {
                     return (
-                        <TableCellStyle width={cell.column.width} maxWidth={cell.column.maxWidth} minWidth={cell.column.minWidth} {...cell.getCellProps()} key={cell.column.id}>
+                        <TableCellStyle 
+                            $width={cell.column.width} 
+                            $maxWidth={cell.column.maxWidth} 
+                            $minWidth={cell.column.minWidth} 
+                            {...cell.getCellProps()} 
+                            key={index}>
                         {
                             cell.render('Cell')
                         }

@@ -25,8 +25,8 @@ export default function Overlay(props: IOverlayProps) {
     }, [props.active, active])
 
     return <OverlayStyle 
-        active={active} 
-        duration={duration} 
-        animateEnd={animateEnd}
+        $active={active} 
+        $duration={duration} 
+        $animateEnd={animateEnd}
     />
 }

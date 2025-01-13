@@ -8,3 +8,4 @@ export type styleColorTypes =
     | 'grey'
     | 'dark'
     | 'light'
+    | 'opened'

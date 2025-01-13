@@ -9,6 +9,7 @@ export interface ISelectProps<T extends selectPropTypes> {
   itemValue?: keyof T;
   value?: T | T[keyof T];
   onChange?: (value: T[keyof T] | T | undefined) => void;
+  onClear?: () => void; 
   loading?: boolean;
   disabled?: boolean;
   error?: boolean;

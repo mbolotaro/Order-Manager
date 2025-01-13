@@ -1,3 +1,3 @@
 export interface IMenuItemStyleProps {
-    isSelected: boolean;
+    $isSelected: boolean;
 }

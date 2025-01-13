@@ -13,13 +13,13 @@ export default function Button(props: IButtonProps) {
     }
     return (
         <ButtonStyle 
-            model={props.model ?? 'primary'}
-            color={theme.colors[props.styleType ?? 'primary']}
-            loading={props.loading ?? false}
+            $model={props.model ?? 'primary'}
+            $color={theme.colors[props.styleType ?? 'primary']}
+            $loading={props.loading ?? false}
             disabled={props.disabled ?? false}
             onClick={handleClick}
             type={props.type ?? 'button' }
-            density={props.density ?? 'default'}
+            $density={props.density ?? 'default'}
         >
             {
                 props.loading? 

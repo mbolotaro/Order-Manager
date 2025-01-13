@@ -1,5 +1,5 @@
 export interface IOverlayStyleProps {
-    active: boolean;
-    duration: number;
-    animateEnd: boolean;
+    $active: boolean;
+    $duration: number;
+    $animateEnd: boolean;
 }

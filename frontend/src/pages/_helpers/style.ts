@@ -13,9 +13,3 @@ export const TableToolsStyle = styled.div`
     justify-content: space-between;
     padding-bottom: 16px;
 `
-
-export const ButtonContainerStyle = styled.div`
-  &:hover path {
-    stroke: ${props => props.theme.colors.primary}
-  }
-`

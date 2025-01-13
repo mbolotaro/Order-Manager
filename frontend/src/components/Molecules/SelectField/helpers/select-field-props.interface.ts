@@ -10,11 +10,12 @@ export interface ISelectFieldProps<T extends selectPropTypes> {
   itemValue?: keyof T;
   value?: T | T[keyof T];
   onChange?: (value: T[keyof T] | T | undefined) => void;
+  onClear?: () => void;
   loading?: boolean;
   disabled?: boolean;
   label: string;
   errorMessage?: string;
   clearable?: boolean;
   register?: UseFormRegisterReturn;
-  isOpcional?: boolean
+  isOptional?: boolean;
 }

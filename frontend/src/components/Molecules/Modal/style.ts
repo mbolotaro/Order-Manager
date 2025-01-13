@@ -12,7 +12,7 @@ export const ModalContainerStyle = styled.div<IModalContainerStyleProps>`
   height: 100vh;
   position: fixed;
   z-index: 110;
-  pointer-events: ${props => props.opened? 'all' : 'none'};
+  pointer-events: ${props => props.$opened? 'all' : 'none'};
 `;
 
 export const ModalStyle = styled.dialog<IModalStyleProps>`
@@ -27,7 +27,7 @@ export const ModalStyle = styled.dialog<IModalStyleProps>`
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text};
   border-radius: 6px;
-  animation: ${(props) => (props.open ? (props.animateEnd ? shrinkAnimation() : expandAnimation()) : 'none')} ${props => props.duration}s ease-in-out;
+  animation: ${(props) => (props.open ? (props.$animateEnd ? shrinkAnimation() : expandAnimation()) : 'none')} ${props => props.$duration}s ease-in-out;
   white-space: nowrap;
   overflow: hidden;
   pointer-events: all;

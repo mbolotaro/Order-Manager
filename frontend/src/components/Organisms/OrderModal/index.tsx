@@ -12,17 +12,17 @@ import { useAttendant } from "@/hooks/use-attendant";
 import { statusValues } from "@/models/status.values";
 import { CreateOrderModel } from "@/models/order.interface";
 
-export default function CreateOrderModal(props: ICRUDOrderModalProps) {
+export default function OrderModal(props: ICRUDOrderModalProps) {
     const {
         schema,
         loading,
-        create
+        create,
+        update
     } = useOrder()
 
     const {
         getAll : getAllAttendants,
         listLoading: attendantsLoading,
-        alreadyListLoaded: alreadyAttendantsLoaded,
         attendants
     } = useAttendant()
 
@@ -30,17 +30,29 @@ export default function CreateOrderModal(props: ICRUDOrderModalProps) {
         register,
         handleSubmit,
         watch,
-        formState: { errors }
-    } = useForm({ resolver: yupResolver(schema), defaultValues: {isOpened: true }})
+        formState: { errors },
+        setValue,
+    } = useForm({ resolver: yupResolver(schema), defaultValues: {isOpened: true, attendantId: undefined }})
 
-    const currentStatus = watch()
 
     useEffect(() => {
-
-        if(!alreadyAttendantsLoaded) {
-            getAllAttendants()
+        if(props.opened) {
+            const fetchData = async () => {
+                await getAllAttendants()
+            }
+            fetchData()
         }
-    }, [alreadyAttendantsLoaded, getAllAttendants])
+    })
+
+    const currentStatus = watch('isOpened') as string | boolean
+
+    useEffect(() => {
+        if(props.action === 'update' && props.order) {
+            setValue('name', props.order.name)
+            setValue('isOpened', props.order.isOpened)
+            setValue('attendantId', props.order.attendantId ?? undefined)
+        }
+    }, [props, setValue])
 
     const titles: Record<CRUDOrderModalTypes, string> = {
         'create': 'Criar Pedido',
@@ -52,19 +64,42 @@ export default function CreateOrderModal(props: ICRUDOrderModalProps) {
         'update': 'Editar'
     }
 
-    async function onSubmit(value: CreateOrderModel) {
-        await create({
-            isOpened: value.isOpened,
-            name: value.name,
-            attendantId: value.attendantId ?? null
-        })
-    }
-    async function onInvalid(value: object) {
-        console.log(value)
+    function clearAttendant() {
+        setValue('attendantId', undefined)
     }
 
-    return <Modal opened={props.opened} title={titles[props.action]} width="50%" close={props.onClose}>
-        <CRUDOrderFormStyle onSubmit={handleSubmit(onSubmit, onInvalid)}>
+    async function onSubmit(value: CreateOrderModel) {
+        if(props.action === 'create') {
+            await create({
+                isOpened: value.isOpened,
+                name: value.name,
+                attendantId: value.attendantId ?? null
+            })
+        } else {
+            await update({
+                isOpened: value.isOpened,
+                name: value.name,
+                attendantId: value.attendantId ?? null,
+                id: props.order?.id
+            })
+        }
+
+        handleClose()
+    }
+
+    function handleReset() {
+        setValue('name', '')
+        setValue('attendantId', undefined)
+        setValue('isOpened', true)
+    }
+
+    function handleClose() {
+        handleReset()
+        props.close()
+    }
+
+    return <Modal opened={props.opened} title={titles[props.action]} width="50%" close={props.close}>
+        <CRUDOrderFormStyle onSubmit={handleSubmit(onSubmit)}>
             <TextField 
                 id="order-name" 
                 label="Nome" 
@@ -82,22 +117,23 @@ export default function CreateOrderModal(props: ICRUDOrderModalProps) {
                 register={register('isOpened')}
             />
             }
-            <SelectField 
+            <SelectField
                 id="order-attendant" 
                 items={attendants} 
                 itemTitle="name" 
                 itemValue="id" 
                 label="Atendente" 
-                clearable 
+                clearable
                 errorMessage={errors.attendantId?.message} 
+                isOptional={currentStatus === 'true' || currentStatus === true}
                 loading={attendantsLoading}
                 register={register('attendantId')}
-                isOpcional={currentStatus.isOpened}
+                onClear={clearAttendant}
             />
             <CRUDOrderFormActionsStyle>
                 <Button 
                     text="Cancelar" 
-                    onClick={() => props.onClose()} 
+                    onClick={handleClose} 
                     model="secondary" 
                     loading={loading}
                 />

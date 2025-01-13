@@ -7,7 +7,8 @@ export const TableStyle = styled.table`
   border-collapse: collapse;
 
   th {
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   td {
@@ -21,16 +22,21 @@ export const TableStyle = styled.table`
       justify-content: center;
     }
   }
+
+  td, th {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
 `;
 
 export const TableHeaderColumnStyle = styled.th<IColumnStyleProps>`
-  width: ${(props) => props.width};
-  max-width: ${(props) => props.width};
-  min-width: ${(props) => props.width};
+  width: ${(props) => props.$width};
+  max-width: ${(props) => props.$width};
+  min-width: ${(props) => props.$width};
 `;
 
 export const TableCellStyle = styled.td<IColumnStyleProps>`
-  width: ${(props) => props.width};
-  max-width: ${(props) => props.width};
-  min-width: ${(props) => props.width};
+  width: ${(props) => props.$width};
+  max-width: ${(props) => props.$width};
+  min-width: ${(props) => props.$width};
 `;

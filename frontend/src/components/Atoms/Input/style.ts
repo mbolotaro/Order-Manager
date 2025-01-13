@@ -27,7 +27,7 @@ export const InputStyle =
       `}
 
     ${(props) =>
-      props.error &&
+      props.$error &&
       css`
         border-color: ${(props) =>
           props.theme.colors?.danger};

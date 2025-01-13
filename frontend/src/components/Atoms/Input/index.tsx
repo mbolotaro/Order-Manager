@@ -20,7 +20,7 @@ export default function Input(props: InputProps) {
                 onChange={!props.register? handleChange : undefined}
                 disabled={props.disabled ?? false}
                 value={!props.register ? props.value : undefined}
-                error={props.error ?? false}
+                $error={props.error ?? false}
                 {...props.register}
             />
             <InputIconStyle>

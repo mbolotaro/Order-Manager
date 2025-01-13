@@ -30,7 +30,7 @@ export const MenuItemStyle = styled(Link)<IMenuItemStyleProps>`
   }
 
   ${(props) =>
-    props.isSelected &&
+    props.$isSelected &&
     css`
       background-color: ${(props) => props.theme.colors.primary};
       color: ${props.theme.colors.light} !important;

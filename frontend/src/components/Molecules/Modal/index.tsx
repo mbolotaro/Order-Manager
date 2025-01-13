@@ -41,14 +41,14 @@ export default function Modal(props: IModalProps) {
             ReactDOM.createPortal(
         <>
             <Overlay active={props.opened}/>
-            <ModalContainerStyle opened={props.opened} onClick={props.close}>
+            <ModalContainerStyle $opened={props.opened} onClick={props.close}>
                 <ModalStyle
                     onClick={(event) => event.stopPropagation()}
                     open={opened}
-                    duration={duration}
+                    $duration={duration}
                     width={props.width ?? '50%'} 
                     height={props.height ?? 'fit-content'}
-                    animateEnd={animateEnd}
+                    $animateEnd={animateEnd}
                     >
                     <ModalHeaderStyle>
                         <span>{props.title}</span>

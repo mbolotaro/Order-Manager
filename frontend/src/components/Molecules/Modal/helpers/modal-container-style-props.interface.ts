@@ -1,3 +1,3 @@
 export interface IModalContainerStyleProps {
-    opened: boolean;
+    $opened: boolean;
 }

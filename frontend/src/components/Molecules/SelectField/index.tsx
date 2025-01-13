@@ -6,7 +6,7 @@ import InputAlert from "@/components/Atoms/InputAlert";
 
 export default function SelectField<T extends selectPropTypes>(props: ISelectFieldProps<T>) {
     return <div>
-        <Label for={props.id} text={props.label} disabled={props.disabled} error={!!props.errorMessage} isOpcional={props.isOpcional}/>
+        <Label for={props.id} text={props.label} disabled={props.disabled} error={!!props.errorMessage} isOptional={props.isOptional}/>
         <Select<T>
             items={props.items} 
             id={props.id} 
@@ -17,6 +17,7 @@ export default function SelectField<T extends selectPropTypes>(props: ISelectFie
             loading={props.loading}
             disabled={props.disabled}
             onChange={(value) => props.onChange? props.onChange(value): undefined}
+            onClear={props.onClear}
             value={props.value}
             error={!!props.errorMessage}
             clearable={props.clearable}

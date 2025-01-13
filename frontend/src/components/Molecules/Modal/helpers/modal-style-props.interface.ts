@@ -1,6 +1,6 @@
 export interface IModalStyleProps {
     width: string;
     height: string;
-    animateEnd: boolean;
-    duration: number;
+    $animateEnd: boolean;
+    $duration: number;
 }

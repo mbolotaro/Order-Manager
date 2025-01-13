@@ -47,18 +47,17 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
             onBlur={() => setOpened(false)}
             onChange={(event) => handleChange(event)}
             id={props.id}
-            error={props.error ?? false}
+            $error={props.error ?? false}
             {...props.register}
         >
             {
                 props.items.length > 0 ? 
                 
                 <>
-                    <OptionStyle disabled selected>{props.customNotSelectedMessage ?? 'Escolha uma opção'}</OptionStyle>
+                    <OptionStyle disabled selected value={undefined}>{props.customNotSelectedMessage ?? 'Escolha uma opção'}</OptionStyle>
                     {
                         props.items.map((item, index) => 
                             <OptionStyle key={index} value={String(getOptionValue(item))}>
-                                <Arrow size={40} direction="bottom"></Arrow>
                                 {getOptionTitle(item)}
                             </OptionStyle>
                         )
@@ -71,7 +70,7 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
         <SelectIconStyle>
             {
                 props.clearable? 
-                <ClearIconStyle className="clearable-icon" onClick={() => props.onChange ? props.onChange(undefined) : undefined}>
+                <ClearIconStyle className="clearable-icon" onClick={() => props.onClear ? props.onClear() : undefined}>
                     <Close size={40} styleType="background"/>
                 </ClearIconStyle> :
                 props.loading && 

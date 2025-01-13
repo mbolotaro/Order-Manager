@@ -25,7 +25,7 @@ export const SelectStyle = styled.select<ISelectStyleProps>`
       border-color: ${(props) => props.theme.colors.grey};
     `}
   ${(props) =>
-    props.error &&
+    props.$error &&
     css`
       border-color: ${(props) => props.theme.colors?.danger};
     `};
