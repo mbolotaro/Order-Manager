@@ -1,8 +1,11 @@
 import { db } from "@/db";
 import { CreateOrderModel, IOrder, ViewOrderModel } from "@/models/order.interface"
 import { createOrder, deleteOrders, getOrders, updateOrder } from "@/services/orders";
+import { store } from "@/store";
+import { ITableQueriesData } from "@/store/helpers/table-queries-data.interface";
 import { useLiveQuery } from "dexie-react-hooks";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from 'yup'
 
 export const MAX_NAME_LENGTH = 50
@@ -35,12 +38,18 @@ export const schema = yup.object().shape({
 });
 
 export function useOrder() {
+  const tableQueries = useSelector<ReturnType<typeof store.getState>>(state => state.tableQueries) as ITableQueriesData
+  
   const [loading, setLoading] = useState(false)
   const [alreadyLoaded] = useState(false)
   const [listLoading, setListLoading] = useState(false)
   const [alreadyListLoaded, setAlreadyListLoaded] = useState(false)
   
   const orders: (ViewOrderModel)[] = useLiveQuery(() => db.orders?.toArray()) ?? [] as ViewOrderModel[];
+
+  const filteredOrders: (ViewOrderModel)[] = useMemo(() => {
+    return []
+  }, [tableQueries, orders])
 
   async function create(createOrderModel: CreateOrderModel) {
     setLoading(true)
@@ -53,6 +62,14 @@ export function useOrder() {
     } finally {
       setLoading(false)
     }
+  }
+
+  async function filter() {
+
+  }
+
+  async function reloadFilter() {
+
   }
 
   async function getAll() {
@@ -76,6 +93,7 @@ export function useOrder() {
 
     try {
       await updateOrder(updateOrderModel)
+      await getAll()
     } catch (error) {
       throw error;
     } finally {

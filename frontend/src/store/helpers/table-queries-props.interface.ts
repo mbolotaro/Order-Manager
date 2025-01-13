@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
 
-export interface ICustomThemeProviderProps {
+export interface ITableQueriesProps {
     children: ReactNode
 }

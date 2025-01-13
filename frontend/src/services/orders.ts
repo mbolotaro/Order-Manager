@@ -3,18 +3,18 @@ import { api } from "./api";
 import { IAttendant } from "@/models/attendant.interface";
 
 export async function createOrder(order: CreateOrderModel) {
-    return await api('POST', 'orders', order)
+    return await (await api('POST', 'orders', order)).json()
 }
 
 export async function getOrders(): Promise<ViewOrderModel[]> {
     const params = new URLSearchParams({
         select: "id, name, createdAt, attendants(id, name), attendantId, isOpened",
     });
-    return (await (await api('GET', `orders?${params}`)).json()).map((order: ViewOrderModel & {attendants: IAttendant, createdAt: number}) => ({...order, attendants: undefined, attendant: order.attendants, createdAt: new Date(order.createdAt)})) as ViewOrderModel[] ?? []
+    return await (await (await api('GET', `orders?${params}`)).json()).map((order: ViewOrderModel & {attendants: IAttendant, createdAt: number}) => ({...order, attendants: undefined, attendant: order.attendants, createdAt: new Date(order.createdAt)})) as ViewOrderModel[] ?? []
 }
 
 export async function updateOrder(updateOrderModel: IOrder) {
-    return (await (await api('PATCH', `orders?id=eq.${updateOrderModel.id}`, updateOrderModel)).json())
+    return await api('PATCH', `orders?id=eq.${updateOrderModel.id}`, updateOrderModel)
 }
 
 export async function deleteOrders(ordersId: number[]) {
