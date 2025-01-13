@@ -17,6 +17,8 @@ import { CRUDOrderModalTypes } from "@/components/Organisms/OrderModal/helpers/c
 import { TableInfoType } from "@/components/Molecules/TableInfo/helpers/table-info-props.interface";
 import TrashIcon from "@/assets/icons/TrashIcon";
 import TablePagination from "@/components/Molecules/TablePagination";
+import CogIcon from "@/assets/icons/CogIcon";
+import FilterOrderModal from "@/components/Organisms/FilterOrderModal";
 
 export default function OrderCRUD() {
     
@@ -122,11 +124,14 @@ export default function OrderCRUD() {
                         <div>
                             <Button 
                                 text="Adicionar Pedido" 
-                                icon={<Plus size={24} styleType="light"/>} density="compact" onClick={() => handleOnCreateOrder()}
+                                icon={<Plus size={24} styleType="light"/>} 
+                                density="compact" 
+                                onClick={() => handleOnCreateOrder()}
                             />
                         </div>
-                        <div>
+                        <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
                             <SearchInput/>
+                            <CogIcon size={27} styleType="text"/>
                         </div>
                     </>
                 }
@@ -158,6 +163,9 @@ export default function OrderCRUD() {
         close={handleOnClose} 
         order={currentOrder} 
         ordersId={checkedItems}
+    />
+    <FilterOrderModal
+    
     />
     </>
 }
