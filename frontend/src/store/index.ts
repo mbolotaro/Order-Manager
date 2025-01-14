@@ -9,7 +9,6 @@ export const store = configureStore({
     },
 })
 
-
 export function loadAllStateStorage() {
     store.dispatch(loadThemeSliceStorage())
     store.dispatch(loadTableQueriesSliceStorage());

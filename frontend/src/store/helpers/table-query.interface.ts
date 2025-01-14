@@ -4,8 +4,5 @@ export interface ITableQuery<T extends object> {
         by: keyof T | undefined;
         asc: boolean;
     };
-    pagination: {
-        skip: number;
-        limit: number
-    }
+    limit: number;
 }

@@ -8,10 +8,7 @@ const initialTableQueries: ITableQueriesData = {
             by: 'createdAt',
             asc: true
         },
-        pagination: {
-            limit: 10,
-            skip: 0
-        }
+        limit: 10
     }
 }
 
@@ -19,7 +16,7 @@ const tableQueriesSlice = createSlice({
     name: 'table-queries',
     initialState: initialTableQueries as ITableQueriesData,
     reducers: {
-        loadStorage: (state) => {
+        loadStorage: () => {
             if(typeof window !== undefined) {
                 const savedTableQuery = localStorage.getItem('table-queries')
                 console.log(savedTableQuery)

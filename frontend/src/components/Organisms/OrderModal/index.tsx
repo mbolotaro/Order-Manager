@@ -34,7 +34,6 @@ export default function OrderModal(props: ICRUDOrderModalProps) {
         setValue,
     } = useForm({ resolver: yupResolver(schema), defaultValues: {isOpened: true, attendantId: undefined }})
 
-
     useEffect(() => {
         if(props.opened) {
             const fetchData = async () => {
@@ -69,6 +68,7 @@ export default function OrderModal(props: ICRUDOrderModalProps) {
     }
 
     async function onSubmit(value: CreateOrderModel) {
+        console.log(value)
         if(props.action === 'create') {
             await create({
                 isOpened: value.isOpened,

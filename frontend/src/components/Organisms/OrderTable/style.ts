@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { IStatusCellStyleProps } from "./helpers/status-cell-props.interface";
 
+export const TableContainerStyle = styled.div`
+  overflow-y: scroll;
+  height: 64%;
+`
+
 export const ActionContainer = styled.div`
     display: flex;
     align-items: center;

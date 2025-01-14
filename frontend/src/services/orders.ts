@@ -3,7 +3,7 @@ import { api } from "./api";
 import { IAttendant } from "@/models/attendant.interface";
 
 export async function createOrder(order: CreateOrderModel) {
-    return await (await api('POST', 'orders', order)).json()
+    return await api('POST', 'orders', order)
 }
 
 export async function getOrders(): Promise<ViewOrderModel[]> {

@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 export const DefaultLayoutMainStyle = styled.main`
-  margin-top: 60px;
-  margin-left: 60px;
-  height: calc(100% - 60px);
-  width: calc(100% - 60px);
+  margin: 40px;
+  height: calc(100% - 40px);
+  width: calc(100% - 20px);
   position: fixed;
   display: flex;
   align-items: start;

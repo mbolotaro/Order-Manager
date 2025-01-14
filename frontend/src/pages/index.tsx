@@ -19,9 +19,16 @@ import TrashIcon from "@/assets/icons/TrashIcon";
 import TablePagination from "@/components/Molecules/TablePagination";
 import CogIcon from "@/assets/icons/CogIcon";
 import FilterOrderModal from "@/components/Organisms/FilterOrderModal";
+import { useDispatch, useSelector } from "react-redux";
+import { store } from "@/store";
+import { ITableQuery } from "@/store/helpers/table-query.interface";
+import { updateOrderQuery } from "@/store/table-queries";
 
 export default function OrderCRUD() {
-    
+
+    const orderTableQuery = useSelector<ReturnType<typeof store.getState>>(state => state.tableQueries.orders) as ITableQuery<ViewOrderModel>
+    const dispatch = useDispatch()
+
     const [ viewModalOpened, setViewModalOpened ] = useState(false)
     const [ modalOpened, setModalOpened ] = useState(false)
     const [ deleteModalOpened, setDeleteModalOpened ] = useState(false)
@@ -36,19 +43,27 @@ export default function OrderCRUD() {
 
     const {
         getAll,
+        orders,
         filteredOrders,
+        paginatedFilteredOrders,
+        searchValue,
+        currentPage,
+        setCurrentPage,
+        setSearchValue,
     } = useOrder()
+
+    // pega orders / (pedidos por página )
     
     const tableInfos = useMemo<TableInfoType[]>(() => [
         {
             key: 'Todos os Pedidos',
-            value: filteredOrders?.length
+            value: orders?.length
         },
         {
             key: 'Pedidos Abertos',
-            value: filteredOrders?.filter(order => order.isOpened).length
+            value: orders?.filter(order => order.isOpened).length
         }
-    ], [ filteredOrders ])
+    ], [ orders ])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -57,9 +72,8 @@ export default function OrderCRUD() {
                 setAlreadyLisyLoaded(true)
             }
         }
-
         fetchData()
-    }, [filteredOrders, alreadyListLoaded, getAll])
+    }, [alreadyListLoaded, getAll])
 
     function handleOnCreateOrder() {
         setCurrentAction('create')
@@ -131,7 +145,7 @@ export default function OrderCRUD() {
                             />
                         </div>
                         <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-                            <SearchInput/>
+                            <SearchInput value={searchValue} onChange={setSearchValue}/>
                             <Button
                                 text=""
                                 density="compact"
@@ -144,13 +158,19 @@ export default function OrderCRUD() {
                 }
             </TableToolsStyle>
             <OrderTable
-                orders={filteredOrders}
+                orders={paginatedFilteredOrders}
                 onView={handleOnViewOrder} 
                 onUpdate={handleOnUpdateOrder} 
                 onDelete={handleOnDeleteOrder}
                 onCheckChange={handleOnCheckChange}
             />
-            <TablePagination/>
+            <TablePagination
+                listLength={filteredOrders.length}
+                limit={orderTableQuery.limit}
+                currentPage={currentPage}
+                onChangePage={(value) => setCurrentPage(value ?? 1)}
+                onChangeLimit={(newLimit) => dispatch(updateOrderQuery({ limit: newLimit}))}
+            />
         </CRUDTemplateStyle>
     </DefaultLayout>
     <ViewOrderModal 

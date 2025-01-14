@@ -7,7 +7,7 @@ export default function Input(props: InputProps) {
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         props.onChange(
             props.trim ?
-            event.target?.value.trim() :
+            event.target?.value.trimStart() :
             event.target?.value
         )
     }

@@ -23,8 +23,6 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
   cursor: pointer;
   border: 2px solid transparent;
 
-
-
   ${(props) => {
     if (props.$loading) {
       return css<IButtonStyleProps>`

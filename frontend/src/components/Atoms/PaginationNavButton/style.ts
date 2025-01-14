@@ -27,5 +27,13 @@ export const PaginationNavButtonStyle = styled.button<IPaginationNavButtonStyleP
         `
       : css`
         border-right-color: transparent;
-      `}
+      `
+  }
+
+  ${(props) => 
+    props.current &&
+      css`
+        background-color: ${props.theme.colors.primary}
+      `
+  }
 `;

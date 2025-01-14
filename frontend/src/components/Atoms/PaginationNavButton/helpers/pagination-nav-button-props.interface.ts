@@ -1,4 +1,8 @@
 export interface IPaginationNavButtonProps {
-    action?: 'next' | 'previous';
-    pageNumber?: number;
+  action?: PaginationNavActions;
+  pageNumber?: number;
+  currentPage?: number;
+  onClick: (value?: number | PaginationNavActions) => void;
 }
+
+export type PaginationNavActions = 'next' | 'previous'

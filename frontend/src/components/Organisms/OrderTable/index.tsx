@@ -5,7 +5,7 @@ import Checkbox from "@/components/Atoms/Checkbox"
 import { IOrder, ViewOrderModel } from "@/models/order.interface"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { Column, Row, useTable } from "react-table"
-import { ActionIcon, ActionContainer, CheckHeaderStyle, IDCellStyle, OnLeftCellStyle, OnLeftHeaderStyle, StatusCellStyle, EmptyInfoCellStyle, SwapIconContainer, HeaderStyle } from "./style"
+import { ActionIcon, ActionContainer, CheckHeaderStyle, IDCellStyle, OnLeftCellStyle, OnLeftHeaderStyle, StatusCellStyle, EmptyInfoCellStyle, SwapIconContainer, HeaderStyle, TableContainerStyle } from "./style"
 import Table from "@/components/Molecules/Table"
 import { IOrderTableProps } from "./helpers/order-table-props.interface"
 import SwapIcon from "@/assets/icons/SwapIcon"
@@ -172,7 +172,7 @@ export default function OrderTable(props: IOrderTableProps) {
 
     const tableInstance = useTable({ columns, data })
 
-    return  <>
+    return  <TableContainerStyle>
         { props.orders?.length > 0 && <Table tableInstance={tableInstance}/> }
-    </>
+    </TableContainerStyle>
 }

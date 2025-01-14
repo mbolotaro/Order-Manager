@@ -6,9 +6,16 @@ export const TableStyle = styled.table`
   text-align: center;
   border-collapse: collapse;
 
+  thead {
+    box-shadow: 0px 2px 9px -10px rgba(15, 19, 25, 0.75);
+    position: sticky;
+    top: 0;
+  }
   th {
     padding-top: 10px;
     padding-bottom: 10px;
+
+    background-color: ${(props) => props.theme.colors.card};
   }
 
   td {
@@ -23,7 +30,8 @@ export const TableStyle = styled.table`
     }
   }
 
-  td, th {
+  td,
+  th {
     padding-left: 4px;
     padding-right: 4px;
     user-select: none;
