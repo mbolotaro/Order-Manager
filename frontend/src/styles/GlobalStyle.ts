@@ -21,7 +21,7 @@ body {
 * {
   box-sizing: border-box;
   padding: 0;
-  transition: 0.2s;
+  transition: 0.1s;
   margin: 0;
   font-family: ${(props: styleExecutionContextProps) => props.theme.fonts?.body};
 

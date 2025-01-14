@@ -2,18 +2,33 @@ import EyeIcon from "@/assets/icons/EyeIcon"
 import PenIcon from "@/assets/icons/PenIcon"
 import TrashIcon from "@/assets/icons/TrashIcon"
 import Checkbox from "@/components/Atoms/Checkbox"
-import { ViewOrderModel } from "@/models/order.interface"
+import { IOrder, ViewOrderModel } from "@/models/order.interface"
 import { useCallback, useEffect, useMemo, useState } from "react"
-import { Column, Row, useFilters, useTable } from "react-table"
-import { ActionIcon, ActionContainer, CheckHeaderStyle, IDCellStyle, OnLeftCellStyle, OnLeftHeaderStyle, StatusCellStyle, EmptyInfoCellStyle } from "./style"
+import { Column, Row, useTable } from "react-table"
+import { ActionIcon, ActionContainer, CheckHeaderStyle, IDCellStyle, OnLeftCellStyle, OnLeftHeaderStyle, StatusCellStyle, EmptyInfoCellStyle, SwapIconContainer, HeaderStyle } from "./style"
 import Table from "@/components/Molecules/Table"
 import { IOrderTableProps } from "./helpers/order-table-props.interface"
+import SwapIcon from "@/assets/icons/SwapIcon"
+import { useDispatch, useSelector } from "react-redux"
+import { updateOrderQuery } from "@/store/table-queries"
+import { store } from "@/store"
+import { ITableQuery } from "@/store/helpers/table-query.interface"
 
 
 export default function OrderTable(props: IOrderTableProps) {
 
     const [ checkboxes, setCheckboxes ] = useState<Record<number, boolean>>({})
     const [ allSelected, setAllSelected ] = useState(false)
+
+    const orderTableQuery = useSelector<ReturnType<typeof store.getState>>(state => state.tableQueries.orders) as ITableQuery<Omit<IOrder, 'createdAt'> & {createdAt: string}>
+
+    const dispatch = useDispatch()
+
+    function handleSetTableOrder(orderBy: keyof ViewOrderModel) {
+        if(orderBy === orderTableQuery.order.by) {
+            dispatch(updateOrderQuery({ order: {by: orderBy, asc: !orderTableQuery.order.asc} }))
+        } else dispatch(updateOrderQuery({ order: { by: orderBy, asc: true}}))
+    }
 
     useEffect(() => {
         const updatedCheckboxes = props.orders.reduce((acc, order) => {
@@ -60,7 +75,7 @@ export default function OrderTable(props: IOrderTableProps) {
             Cell: ({row}: {row: Row<ViewOrderModel & {_order: ViewOrderModel}>}) => (
                 <div>
                     <Checkbox 
-                        value={checkboxes[row.original._order.id as string]} 
+                        value={checkboxes[row.original._order.id ?? 0]} 
                         onChange={() => handleCheckboxChange(row.original._order.id as number)}
                     />
                 </div>
@@ -72,26 +87,45 @@ export default function OrderTable(props: IOrderTableProps) {
             Header: 'ID',
             accessor: 'id',
             width: '3.57%',
-            
         },
         {
-            Header: <OnLeftHeaderStyle>Nome</OnLeftHeaderStyle>,
+            Header: <OnLeftHeaderStyle onClick={() => handleSetTableOrder('name')}>
+                Nome
+                <SwapIconContainer>
+                    <SwapIcon size={20}/>
+                </SwapIconContainer>
+            </OnLeftHeaderStyle>,
             accessor: 'name',
             width: '14.28%'
         },
         {
-            Header: <OnLeftHeaderStyle>Status</OnLeftHeaderStyle>,
+            Header: <OnLeftHeaderStyle onClick={() => handleSetTableOrder('isOpened')}>
+                Status
+                <SwapIconContainer>
+                    <SwapIcon size={20}/>
+                </SwapIconContainer>
+            </OnLeftHeaderStyle>,
             accessor: 'isOpened',
             width: '14.28%'
         },
         {
-            Header: <OnLeftHeaderStyle>Atendente</OnLeftHeaderStyle>,
+            Header: <OnLeftHeaderStyle onClick={() => handleSetTableOrder('attendantId')}>
+                Atendente
+                <SwapIconContainer>
+                    <SwapIcon size={20}/>
+                </SwapIconContainer>
+            </OnLeftHeaderStyle>,
             accessor: 'attendant',
             width: '14.28%',
 
         },
         {
-            Header: 'Data de Criação',
+            Header: <HeaderStyle onClick={() => handleSetTableOrder('createdAt')}>
+                Data de Criação
+                <SwapIconContainer>
+                    <SwapIcon size={20}/>
+                </SwapIconContainer>
+            </HeaderStyle>,
             accessor: 'createdAt',
             width: '14.28%',
             
@@ -136,7 +170,7 @@ export default function OrderTable(props: IOrderTableProps) {
         return []
     }, [props.orders])
 
-    const tableInstance = useTable({ columns, data }, useFilters)
+    const tableInstance = useTable({ columns, data })
 
     return  <>
         { props.orders?.length > 0 && <Table tableInstance={tableInstance}/> }

@@ -29,13 +29,38 @@ export const CheckHeaderStyle = styled.div`
   
 `;
 
+export const HeaderStyle = styled.div`
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  &:hover div {
+    opacity: 100
+  }
+`
+
 export const OnLeftHeaderStyle = styled.div`
   text-align: left !important;
   width: 100% !important;
   display: flex !important;
   align-items: center !important;
   justify-content: left !important;
+  gap: 6px;
+
+  &:hover div {
+    opacity: 100;
+  }
+
+  cursor: pointer;
 `;
+
+export const SwapIconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+`
 
 export const IDCellStyle = styled.div`
     color: ${props => props.theme.colors.primary};

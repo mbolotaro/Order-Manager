@@ -26,6 +26,7 @@ export const TableStyle = styled.table`
   td, th {
     padding-left: 4px;
     padding-right: 4px;
+    user-select: none;
   }
 `;
 

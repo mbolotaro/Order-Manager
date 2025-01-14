@@ -54,7 +54,7 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
                 props.items.length > 0 ? 
                 
                 <>
-                    <OptionStyle disabled selected value={undefined}>{props.customNotSelectedMessage ?? 'Escolha uma opção'}</OptionStyle>
+                    <OptionStyle disabled value={undefined}>{props.customNotSelectedMessage ?? 'Escolha uma opção'}</OptionStyle>
                     {
                         props.items.map((item, index) => 
                             <OptionStyle key={index} value={String(getOptionValue(item))}>

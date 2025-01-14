@@ -25,6 +25,7 @@ export default function OrderCRUD() {
     const [ viewModalOpened, setViewModalOpened ] = useState(false)
     const [ modalOpened, setModalOpened ] = useState(false)
     const [ deleteModalOpened, setDeleteModalOpened ] = useState(false)
+    const [ filterModelOpened, setFilterModalOpened ] = useState(false)
     
     const [ currentOrder, setCurrentOrder ] = useState<ViewOrderModel | undefined>(undefined)
     const [ alreadyListLoaded, setAlreadyLisyLoaded ] = useState(false)
@@ -35,19 +36,19 @@ export default function OrderCRUD() {
 
     const {
         getAll,
-        orders,
+        filteredOrders,
     } = useOrder()
     
     const tableInfos = useMemo<TableInfoType[]>(() => [
         {
             key: 'Todos os Pedidos',
-            value: orders?.length
+            value: filteredOrders?.length
         },
         {
             key: 'Pedidos Abertos',
-            value: orders?.filter(order => order.isOpened).length
+            value: filteredOrders?.filter(order => order.isOpened).length
         }
-    ], [ orders ])
+    ], [ filteredOrders ])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -58,7 +59,7 @@ export default function OrderCRUD() {
         }
 
         fetchData()
-    }, [orders, alreadyListLoaded, getAll])
+    }, [filteredOrders, alreadyListLoaded, getAll])
 
     function handleOnCreateOrder() {
         setCurrentAction('create')
@@ -131,13 +132,19 @@ export default function OrderCRUD() {
                         </div>
                         <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
                             <SearchInput/>
-                            <CogIcon size={27} styleType="text"/>
+                            <Button
+                                text=""
+                                density="compact"
+                                model="terciary"
+                                onClick={() => setFilterModalOpened(true)}
+                                icon={<CogIcon size={27} styleType="text" />}
+                            />
                         </div>
                     </>
                 }
             </TableToolsStyle>
             <OrderTable
-                orders={orders}
+                orders={filteredOrders}
                 onView={handleOnViewOrder} 
                 onUpdate={handleOnUpdateOrder} 
                 onDelete={handleOnDeleteOrder}
@@ -165,7 +172,8 @@ export default function OrderCRUD() {
         ordersId={checkedItems}
     />
     <FilterOrderModal
-    
+        opened={filterModelOpened}
+        close={() => setFilterModalOpened(false)}
     />
     </>
 }

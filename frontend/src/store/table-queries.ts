@@ -19,18 +19,26 @@ const tableQueriesSlice = createSlice({
     name: 'table-queries',
     initialState: initialTableQueries as ITableQueriesData,
     reducers: {
-        loadStorage: () => {
+        loadStorage: (state) => {
             if(typeof window !== undefined) {
-                const savedTheme = localStorage.getItem('table-queries')
-
-                if(!savedTheme) {
+                const savedTableQuery = localStorage.getItem('table-queries')
+                console.log(savedTableQuery)
+                if(!savedTableQuery) {
                     localStorage.setItem('table-queries', JSON.stringify(initialTableQueries))
                 }
-                return savedTheme ? JSON.parse(savedTheme) : initialTableQueries
+                return savedTableQuery ? JSON.parse(savedTableQuery) : initialTableQueries
             } else return initialTableQueries
+        },
+
+        updateOrderQuery: (state, changes) => {
+            if(typeof window !== undefined) {
+                console.log(changes.payload)
+                state.orders = {...state.orders, ...changes.payload}
+                localStorage.setItem('table-queries', JSON.stringify(state))
+            }
         }
     }
 })
 
-export const { loadStorage } = tableQueriesSlice.actions
+export const { loadStorage, updateOrderQuery } = tableQueriesSlice.actions
 export default tableQueriesSlice.reducer;
