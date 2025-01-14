@@ -101,6 +101,10 @@ export function useOrder() {
             return orderTableQuery.order.asc
               ? Number(a.isOpened) - Number(b.isOpened)
               : Number(b.isOpened) - Number(a.isOpened);
+          case 'createdAt':
+            return orderTableQuery.order.asc
+              ? (a.createdAt?.getTime() ?? 0) - (b.createdAt?.getTime() ?? 0)
+              : (b.createdAt?.getTime() ?? 0) - (a.createdAt?.getTime() ?? 0);
           default: return (a.id ?? 0) - (b.id ?? 0)
         }
       })
