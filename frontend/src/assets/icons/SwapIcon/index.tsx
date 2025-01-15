@@ -1,5 +1,5 @@
 import { useTheme } from "styled-components";
-import { BaseIconProps } from "../_helpers/base-icon-props";
+import { BaseIconProps } from "../helpers/base-icon-props";
 import { StyleThemeConfig } from "@/styles/helpers/style-theme-config";
 
 export default function SwapIcon(props: BaseIconProps) {

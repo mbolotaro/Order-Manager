@@ -1,5 +1,5 @@
 import { useTheme } from "styled-components";
-import { BaseIconProps } from "../_helpers/base-icon-props";
+import { BaseIconProps } from "../helpers/base-icon-props";
 
 export default function PlusIcon(props: BaseIconProps) {
     const theme = useTheme()
