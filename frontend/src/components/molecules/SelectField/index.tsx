@@ -1,10 +1,10 @@
 import Select from "@/components/atoms/Select";
-import { ISelectFieldProps } from "./helpers/select-field-props";
-import { selectPropTypes } from "@/components/atoms/Select/helpers/select-props";
+import { SelectFieldProps } from "./helpers/select-field-props";
+import { SelectPropTypes } from "@/components/atoms/Select/helpers/select-props";
 import Label from "@/components/atoms/Label";
 import InputAlert from "@/components/atoms/InputAlert";
 
-export default function SelectField<T extends selectPropTypes>(props: ISelectFieldProps<T>) {
+export default function SelectField<T extends SelectPropTypes>(props: SelectFieldProps<T>) {
     return <div>
         <Label for={props.id} text={props.label} disabled={props.disabled} error={!!props.errorMessage} isOptional={props.isOptional}/>
         <Select<T>

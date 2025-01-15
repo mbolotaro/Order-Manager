@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export interface IModalProps {
+export interface ModalProps {
     title: string;
     width: string;
     height?: string;

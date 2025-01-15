@@ -3,18 +3,28 @@ import Modal from "@/components/molecules/Modal";
 import SelectField from "@/components/molecules/SelectField";
 import TextField from "@/components/molecules/TextField";
 import { useEffect } from "react";
-import { CRUDOrderModalTypes, ICRUDOrderModalProps } from "./helpers/crud-order-modal-props";
+import { CRUDOrderModalTypes, CRUDOrderModalProps } from "./helpers/crud-order-modal-props";
 import { useForm } from 'react-hook-form' 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CRUDOrderFormActionsStyle, CRUDOrderFormStyle } from "./style";
 import { useOrder } from "@/hooks/use-order";
 import { useAttendant } from "@/hooks/use-attendant";
-import { statusValues } from "@/models/status.values";
 import { CreateOrderModel } from "@/models/order";
+import { orderSchema } from "@/validations/orders/validate-order";
 
-export default function OrderModal(props: ICRUDOrderModalProps) {
+export const statusValues = [
+  {
+    name: "🟢 Aberto",
+    value: true,
+  },
+  {
+    name: "🔴 Fechado",
+    value: false,
+  },
+];
+
+export default function OrderModal(props: CRUDOrderModalProps) {
     const {
-        schema,
         loading,
         create,
         update
@@ -32,7 +42,7 @@ export default function OrderModal(props: ICRUDOrderModalProps) {
         watch,
         formState: { errors },
         setValue,
-    } = useForm({ resolver: yupResolver(schema), defaultValues: {isOpened: true, attendantId: undefined }})
+    } = useForm({ resolver: yupResolver(orderSchema), defaultValues: {isOpened: true, attendantId: undefined }})
 
     useEffect(() => {
         if(props.opened) {
@@ -68,19 +78,17 @@ export default function OrderModal(props: ICRUDOrderModalProps) {
     }
 
     async function onSubmit(value: CreateOrderModel) {
-        console.log(value)
         if(props.action === 'create') {
             await create({
                 isOpened: value.isOpened,
                 name: value.name,
-                attendantId: value.attendantId ?? null
+                attendantId: value.attendantId
             })
         } else {
-            await update({
+            await update(props.order.id, {
                 isOpened: value.isOpened,
                 name: value.name,
-                attendantId: value.attendantId ?? null,
-                id: props.order?.id
+                attendantId: value.attendantId,
             })
         }
 

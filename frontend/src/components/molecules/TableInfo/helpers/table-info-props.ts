@@ -1,4 +1,4 @@
-export interface ITableInfoProps {
+export interface TableInfoProps {
     infos: TableInfoType[]
 }
 

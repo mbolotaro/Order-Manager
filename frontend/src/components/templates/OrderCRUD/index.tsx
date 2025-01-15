@@ -19,13 +19,13 @@ import TablePagination from "@/components/molecules/TablePagination";
 import CogIcon from "@/assets/icons/CogIcon";
 import FilterOrderModal from "@/components/organisms/FilterOrderModal";
 import { useDispatch, useSelector } from "react-redux";
-import { store } from "@/store";
-import { ITableQuery } from "@/store/helpers/table-query";
+import { StoreTypeHelper } from "@/store";
 import { updateOrderQuery } from "@/store/table-queries";
+import { OrderQueries } from "@/store/helpers/table-queries-data";
 
 export default function OrderCRUD() {
 
-    const orderTableQuery = useSelector<ReturnType<typeof store.getState>>(state => state.tableQueries.orders) as ITableQuery<ViewOrderModel>
+    const orderTableQuery = useSelector<StoreTypeHelper>(state => state.tableQueries.orders) as OrderQueries
     const dispatch = useDispatch()
 
     const [ viewModalOpened, setViewModalOpened ] = useState(false)
@@ -50,8 +50,6 @@ export default function OrderCRUD() {
         setCurrentPage,
         setSearchValue,
     } = useOrder()
-
-    // pega orders / (pedidos por página )
     
     const tableInfos = useMemo<TableInfoType[]>(() => [
         {
@@ -179,7 +177,7 @@ export default function OrderCRUD() {
         opened={modalOpened} 
         close={handleOnClose} 
         action={currentAction} 
-        order={currentOrder}
+        order={currentOrder as ViewOrderModel}
     />
     <DeleteOrderModal 
         many={isDeleteMany} 

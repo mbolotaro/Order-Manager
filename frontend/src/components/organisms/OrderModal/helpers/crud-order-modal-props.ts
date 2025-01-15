@@ -1,10 +1,16 @@
-import { IOrder } from "@/models/order";
+import { ViewOrderModel } from "@/models/order";
 
-export interface ICRUDOrderModalProps {
-    action: CRUDOrderModalTypes
-    opened: boolean
-    close: () => void;
-    order?: IOrder;
-}
+export type CRUDOrderModalProps =
+  | {
+      action: "create";
+      opened: boolean;
+      close: () => void;
+    }
+  | {
+      action: "update";
+      opened: boolean;
+      close: () => void;
+      order: ViewOrderModel;
+    };
 
 export type CRUDOrderModalTypes = 'create' | 'update'

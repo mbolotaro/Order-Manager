@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { IModalStyleProps } from "./helpers/modal-style-props";
+import { ModalStyleProps } from "./helpers/modal-style-props";
 import { expandAnimation } from "@/styles/utils/animations/expand-animation";
 import { shrinkAnimation } from "@/styles/utils/animations/shrink-animation";
-import { IModalContainerStyleProps } from "./helpers/modal-container-style-props";
+import { ModalContainerStyleProps } from "./helpers/modal-container-style-props";
 
-export const ModalContainerStyle = styled.div<IModalContainerStyleProps>`
+export const ModalContainerStyle = styled.div<ModalContainerStyleProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@ export const ModalContainerStyle = styled.div<IModalContainerStyleProps>`
   pointer-events: ${props => props.$opened? 'all' : 'none'};
 `;
 
-export const ModalStyle = styled.dialog<IModalStyleProps>`
+export const ModalStyle = styled.dialog<ModalStyleProps>`
   padding: 16px;
   border: 0;
   position: initial;

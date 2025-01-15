@@ -1,6 +1,6 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 
-export interface ITextFieldProps {
+export interface TextFieldProps {
   label: string;
   id: string;
   errorMessage?: string;

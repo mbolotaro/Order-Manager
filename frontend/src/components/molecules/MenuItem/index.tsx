@@ -1,7 +1,7 @@
-import { IMenuProps } from "./helpers/menu-item-props";
+import { MenuProps } from "./helpers/menu-item-props";
 import { MenuItemStyle } from "./style";
 
-export default function MenuItem(props: IMenuProps) {
+export default function MenuItem(props: MenuProps) {
     return <MenuItemStyle href={props.path} $isSelected={props.isSelected}>
         <div>
             {props.icon}

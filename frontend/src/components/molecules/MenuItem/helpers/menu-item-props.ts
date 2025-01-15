@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 
-export interface IMenuProps {
+export interface MenuProps {
     name: string;
     icon: ReactNode;
     path: string;

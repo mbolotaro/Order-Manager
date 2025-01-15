@@ -1,4 +1,4 @@
-export interface IOverlayStyleProps {
+export interface OverlayStyleProps {
     $active: boolean;
     $duration: number;
     $animateEnd: boolean;

@@ -1,3 +1,3 @@
-export interface IInputAlertProps {
+export interface InputAlertProps {
     message: string
 }

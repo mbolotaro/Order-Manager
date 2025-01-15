@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import { IButtonStyleProps } from "./helpers/button-style-props";
+import { ButtonStyleProps } from "./helpers/button-style-props";
 
-export const ButtonStyle = styled.button<IButtonStyleProps>`
+export const ButtonStyle = styled.button<ButtonStyleProps>`
   min-width: 100px;
   padding: ${(props) => (props.$density === "default" ? "6px" : "0px")};
   padding-left: 10px;
@@ -25,14 +25,14 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
 
   ${(props) => {
     if (props.$loading) {
-      return css<IButtonStyleProps>`
+      return css<ButtonStyleProps>`
         background-color: transparent;
         border-color: ${(props) => props.$color};
         padding: 0px;
         cursor: default;
       `;
     } else if (props.disabled) {
-      return css<IButtonStyleProps>`
+      return css<ButtonStyleProps>`
         background-color: transparent;
         border-color: ${(props) => props.theme.colors.grey};
         color: ${(props) => props.theme.colors.grey};
@@ -41,7 +41,7 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
     } else
       switch (props.$model) {
         case "primary":
-          return css<IButtonStyleProps>`
+          return css<ButtonStyleProps>`
             background-color: ${(props) => props.$color};
 
             &:hover {
@@ -55,7 +55,7 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
             }
           `;
         case "secondary":
-          return css<IButtonStyleProps>`
+          return css<ButtonStyleProps>`
             background-color: transparent;
             border-color: ${(props) => props.$color};
             color: ${(props) => props.$color};
@@ -70,7 +70,7 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
             }
           `;
         case "terciary":
-          return css<IButtonStyleProps>`
+          return css<ButtonStyleProps>`
             color: ${(props) => props.$color};
 
             &:hover {

@@ -1,7 +1,7 @@
-import { ITableProps } from "./helpers/table-props";
+import { TableProps } from "./helpers/table-props";
 import { TableCellStyle, TableHeaderColumnStyle, TableStyle } from "./style";
 
-export default function Table<T extends object>(props: ITableProps<T>) {
+export default function Table<T extends object>(props: TableProps<T>) {
     return <TableStyle {...props.tableInstance.getTableProps()}>
         <thead>
             {

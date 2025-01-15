@@ -1,4 +1,4 @@
-export interface IModalStyleProps {
+export interface ModalStyleProps {
     width: string;
     height: string;
     $animateEnd: boolean;

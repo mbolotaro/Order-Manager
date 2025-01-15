@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ITableQueriesData } from "./helpers/table-queries-data";
+import { TableQueriesData } from "./helpers/table-queries-data";
 
-const initialTableQueries: ITableQueriesData = {
+const initialTableQueries: TableQueriesData = {
     orders: {
         filter: {},
         order: {
@@ -14,7 +14,7 @@ const initialTableQueries: ITableQueriesData = {
 
 const tableQueriesSlice = createSlice({
     name: 'table-queries',
-    initialState: initialTableQueries as ITableQueriesData,
+    initialState: initialTableQueries as TableQueriesData,
     reducers: {
         loadStorage: () => {
             if(typeof window !== undefined) {

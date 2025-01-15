@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
 
-export interface IDefaultLayoutProps {
+export interface DefaultLayoutProps {
     children: ReactNode
 }

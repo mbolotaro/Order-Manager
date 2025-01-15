@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import { ILabelStyleProps } from "./helpers/label-style-props";
+import { LabelStyleProps } from "./helpers/label-style-props";
 
-export const LabelStyle = styled.label<ILabelStyleProps>`
+export const LabelStyle = styled.label<LabelStyleProps>`
     color: ${props => props.theme.colors.text};
     ${props => props.disabled ?
         css`color: ${props.theme.colors.grey};` :

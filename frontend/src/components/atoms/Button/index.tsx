@@ -1,11 +1,11 @@
 import LoadingIcon from "@/assets/icons/LoadingIcon";
-import { IButtonProps } from "./helpers/button-props";
+import { ButtonProps } from "./helpers/button-props";
 import { ButtonStyle } from "./style";
 import { useTheme } from "styled-components";
-import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config";
+import { StyleThemeConfig } from "@/styles/helpers/style-theme-config";
 
-export default function Button(props: IButtonProps) {
-    const theme = useTheme() as IStyleThemeConfig
+export default function Button(props: ButtonProps) {
+    const theme = useTheme() as StyleThemeConfig
     function handleClick() {
         if(!props.loading && !props.disabled && props.onClick) {
             props.onClick()

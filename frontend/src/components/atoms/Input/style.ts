@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
-import { IInputStyleProps } from "./helpers/input-style-props";
+import { InputStyleProps } from "./helpers/input-style-props";
 
 export const InputStyle =
-  styled.input<IInputStyleProps>`
+  styled.input<InputStyleProps>`
     background: transparent;
     border-radius: 6px;
     border-width: 1px;

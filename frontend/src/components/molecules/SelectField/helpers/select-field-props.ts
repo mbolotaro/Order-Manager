@@ -1,7 +1,7 @@
-import { selectPropTypes } from "@/components/atoms/Select/helpers/select-props";
+import { SelectPropTypes } from "@/components/atoms/Select/helpers/select-props";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-export interface ISelectFieldProps<T extends selectPropTypes> {
+export interface SelectFieldProps<T extends SelectPropTypes> {
   id: string;
   items: T[];
   customEmptyMessage?: string;

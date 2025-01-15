@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import { IPaginationNavButtonStyleProps } from "./helpers/pagination-nav-button-style-props";
+import { PaginationNavButtonStyleProps } from "./helpers/pagination-nav-button-style-props";
 
-export const PaginationNavButtonStyle = styled.button<IPaginationNavButtonStyleProps>`
+export const PaginationNavButtonStyle = styled.button<PaginationNavButtonStyleProps>`
   width: 35px;
   height: 35px;
   border: 1px solid ${(props) => props.theme.colors.text};
@@ -31,7 +31,7 @@ export const PaginationNavButtonStyle = styled.button<IPaginationNavButtonStyleP
   }
 
   ${(props) => 
-    props.current &&
+    props.$current &&
       css`
         background-color: ${props.theme.colors.primary}
       `

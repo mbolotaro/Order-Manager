@@ -1,3 +1,3 @@
-export interface IStatusCellStyleProps {
+export interface StatusCellStyleProps {
     $opened: boolean
 }

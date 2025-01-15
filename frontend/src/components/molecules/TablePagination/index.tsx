@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { ITablePaginationProps } from "./helpers/table-pagination-props";
+import { TablePaginationProps } from "./helpers/table-pagination-props";
 import { OrderQuantCounter, PaginationNavStyle, QuantByPageContainer, QuantByPageLabel, SelectStyle, TablePaginationStyleContainer } from "./style";
 import PaginationNavButton from "@/components/atoms/PaginationNavButton";
 
-export default function TablePagination(props: ITablePaginationProps) {
+export default function TablePagination(props: TablePaginationProps) {
     const quantPagesOptions = [10, 20, 30]
 
     const buttonTotalQuant = useMemo(() => Math.ceil(props.listLength / props.limit), [props.listLength, props.limit])

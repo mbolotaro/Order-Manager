@@ -1,43 +1,16 @@
 import { db } from "@/db";
-import { CreateOrderModel, IOrder, ViewOrderModel } from "@/models/order"
+import { CreateOrderModel, UpdateOrderModel, ViewOrderModel } from "@/models/order"
 import { createOrder, deleteOrders, getOrders, updateOrder } from "@/services/orders";
-import { store } from "@/store";
-import { ITableQuery } from "@/store/helpers/table-query";
+import { StoreTypeHelper } from "@/store";
+import { OrderQueries } from "@/store/helpers/table-queries-data";
 import { useLiveQuery } from "dexie-react-hooks";
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import * as yup from 'yup'
-
-export const MAX_NAME_LENGTH = 50
-export const MIN_NAME_LENGTH = 5
-
-export const schema = yup.object().shape({
-  name: yup
-    .string()
-    .required("Nome deve ser definido!")
-    .min(
-      MIN_NAME_LENGTH,
-      `Nome deve ter no mínimo ${MIN_NAME_LENGTH} carácteres!`
-    )
-    .max(
-      MAX_NAME_LENGTH,
-      `Nome deve ter no máximo ${MAX_NAME_LENGTH} carácteres!`
-    ),
-  isOpened: yup
-    .boolean()
-    .required("Status é obrigatório!"),
-  attendantId: yup
-    .number()
-    .transform((value) => (isNaN(value) ? undefined : Number(value)))
-    .when(['isOpened'], {
-      is: (value: boolean) => value === false,
-      then: (schema) => schema.required('É obrigatório que haja um atendente em um pedido fechado!'),
-      otherwise: (schema) => schema.notRequired()
-    })
-});
 
 export function useOrder() {
-  const orderTableQuery = useSelector<ReturnType<typeof store.getState>>(state => state.tableQueries.orders) as ITableQuery<ViewOrderModel>
+  const orderTableQuery = useSelector<StoreTypeHelper>(
+    (state) => state.tableQueries.orders
+  ) as OrderQueries;
   
   const [loading, setLoading] = useState(false)
   const [alreadyLoaded] = useState(false)
@@ -188,11 +161,11 @@ export function useOrder() {
     }
   }
 
-  async function update(updateOrderModel: IOrder) {
+  async function update(id: number, updateOrderModel: UpdateOrderModel) {
     setLoading(true)
 
     try {
-      await updateOrder(updateOrderModel)
+      await updateOrder(id, updateOrderModel)
       await getAll()
     } catch (error) {
       throw error;
@@ -215,10 +188,6 @@ export function useOrder() {
   }
 
   return {
-      MAX_NAME_LENGTH, 
-      MIN_NAME_LENGTH,
-      schema,
-
       create,
       getAll,
       update,

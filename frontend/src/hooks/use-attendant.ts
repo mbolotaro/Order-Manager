@@ -1,5 +1,5 @@
 import { db } from "@/db"
-import { IAttendant } from "@/models/attendant"
+import { Attendant } from "@/models/attendant"
 import { getAttendants } from "@/services/attendants"
 import { useLiveQuery } from "dexie-react-hooks"
 import { useState } from "react"
@@ -8,7 +8,7 @@ export function useAttendant() {
     const [listLoading, setListLoading] = useState(false)
     const [alreadyListLoaded, setAlreadyListLoaded] = useState(false)
 
-    const attendants = useLiveQuery(() => db.attendants.toArray()) ?? [] as IAttendant[];
+    const attendants = useLiveQuery(() => db.attendants.toArray()) ?? [] as Attendant[];
 
     async function getAll() {
         setListLoading(true)

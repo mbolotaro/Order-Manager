@@ -2,10 +2,10 @@ import ReactDOM from 'react-dom'
 import { CloseIconStyle, ModalContainerStyle, ModalHeaderStyle, ModalStyle } from './style'
 import React, { useEffect, useState } from 'react';
 import Overlay from '@/components/atoms/Overlay';
-import { IModalProps } from './helpers/modal-props';
+import { ModalProps } from './helpers/modal-props';
 import CloseIcon from '@/assets/icons/CloseIcon';
 
-export default function Modal(props: IModalProps) {
+export default function Modal(props: ModalProps) {
     const [mounted, setMounted] = useState(false)
 
     const [opened, setOpened] = useState(false)

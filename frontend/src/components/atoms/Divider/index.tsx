@@ -1,10 +1,10 @@
-import { IDividerProps } from "./helpers/divider-props";
+import { DividerProps } from "./helpers/divider-props";
 import { DividerStyle } from "./style";
 import { useTheme } from "styled-components";
-import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config";
+import { StyleThemeConfig } from "@/styles/helpers/style-theme-config";
 
-export default function Divider(props: IDividerProps) {
-    const theme = useTheme() as IStyleThemeConfig
+export default function Divider(props: DividerProps) {
+    const theme = useTheme() as StyleThemeConfig
     let color; 
 
     if(props.color) {

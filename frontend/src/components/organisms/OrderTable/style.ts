@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IStatusCellStyleProps } from "./helpers/status-cell-props";
+import { StatusCellStyleProps } from "./helpers/status-cell-props";
 
 export const TableContainerStyle = styled.div`
   overflow-y: scroll;
@@ -85,7 +85,7 @@ export const EmptyInfoCellStyle = styled.div`
     color: ${props => props.theme.colors.grey};
 `
 
-export const StatusCellStyle = styled.div<IStatusCellStyleProps>`
+export const StatusCellStyle = styled.div<StatusCellStyleProps>`
   text-align: left !important;
   width: 100% !important;
   display: flex !important;

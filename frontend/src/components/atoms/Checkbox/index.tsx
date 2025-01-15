@@ -1,9 +1,9 @@
 import { ChangeEvent } from "react";
-import { ICheckboxProps } from "./helpers/checkbox-props";
+import { CheckboxProps } from "./helpers/checkbox-props";
 import { CustomCheckbox, CustomCheckedMarkation, RealCheckbox } from "./style";
 import CheckmarkIcon from "@/assets/icons/CheckmarkIcon";
 
-export default function Checkbox(props: ICheckboxProps) {
+export default function Checkbox(props: CheckboxProps) {
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const value = event.target.checked
         if(props.onChange) {

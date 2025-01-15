@@ -1,9 +1,9 @@
 import { useTheme } from "styled-components";
-import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config";
-import { IBaseIconProps } from "../_helpers/base-icon-props";
+import { StyleThemeConfig } from "@/styles/helpers/style-theme-config";
+import { BaseIconProps } from "../_helpers/base-icon-props";
 
-export default function MenuIcon(props: IBaseIconProps) {
-    const theme = useTheme() as IStyleThemeConfig
+export default function MenuIcon(props: BaseIconProps) {
+    const theme = useTheme() as StyleThemeConfig
 
     let color;
 

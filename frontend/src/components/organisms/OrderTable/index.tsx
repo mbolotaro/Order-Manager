@@ -2,25 +2,25 @@ import EyeIcon from "@/assets/icons/EyeIcon"
 import PenIcon from "@/assets/icons/PenIcon"
 import TrashIcon from "@/assets/icons/TrashIcon"
 import Checkbox from "@/components/atoms/Checkbox"
-import { IOrder, ViewOrderModel } from "@/models/order"
+import { ViewOrderModel } from "@/models/order"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { Column, Row, useTable } from "react-table"
 import { ActionIcon, ActionContainer, CheckHeaderStyle, IDCellStyle, OnLeftCellStyle, OnLeftHeaderStyle, StatusCellStyle, EmptyInfoCellStyle, SwapIconContainer, HeaderStyle, TableContainerStyle } from "./style"
 import Table from "@/components/molecules/Table"
-import { IOrderTableProps } from "./helpers/order-table-props"
+import { OrderTableProps } from "./helpers/order-table-props"
 import SwapIcon from "@/assets/icons/SwapIcon"
 import { useDispatch, useSelector } from "react-redux"
 import { updateOrderQuery } from "@/store/table-queries"
-import { store } from "@/store"
-import { ITableQuery } from "@/store/helpers/table-query"
+import { StoreTypeHelper } from "@/store"
+import { OrderQueries } from "@/store/helpers/table-queries-data"
 
 
-export default function OrderTable(props: IOrderTableProps) {
+export default function OrderTable(props: OrderTableProps) {
 
     const [ checkboxes, setCheckboxes ] = useState<Record<number, boolean>>({})
     const [ allSelected, setAllSelected ] = useState(false)
 
-    const orderTableQuery = useSelector<ReturnType<typeof store.getState>>(state => state.tableQueries.orders) as ITableQuery<Omit<IOrder, 'createdAt'> & {createdAt: string}>
+    const orderTableQuery = useSelector<StoreTypeHelper>(state => state.tableQueries.orders) as OrderQueries
 
     const dispatch = useDispatch()
 

@@ -1,7 +1,7 @@
-export interface ITableQuery<T extends object> {
-    filter: Partial<T>;
+export interface TableQuery<Model extends object, Filter extends object> {
+    filter: Partial<Filter>;
     order: {
-        by: keyof T | undefined;
+        by: keyof Model | undefined;
         asc: boolean;
     };
     limit: number;

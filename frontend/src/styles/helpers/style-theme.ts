@@ -1,17 +1,17 @@
-import { IStyleThemeConfig } from "./style-theme-config";
+import { StyleThemeConfig } from "./style-theme-config";
 
 export class StyleTheme {
-  constructor({ base, light, dark }: StyleTheme) {
+  constructor({ base, light, dark }: Omit<StyleTheme, 'getTheme'>) {
     this.base = base;
     this.light = light;
     this.dark = dark;
   }
 
-  readonly base: Partial<IStyleThemeConfig>;
-  readonly light?: Partial<IStyleThemeConfig>;
-  readonly dark?: Partial<IStyleThemeConfig>;
+  readonly base: Partial<StyleThemeConfig>;
+  readonly light?: Partial<StyleThemeConfig>;
+  readonly dark?: Partial<StyleThemeConfig>;
 
-  getTheme(themeName: "light" | "dark"): IStyleThemeConfig {
-    return { ...this.base, ...this[themeName] } as IStyleThemeConfig;
+  getTheme(themeName: "light" | "dark"): StyleThemeConfig {
+    return { ...this.base, ...this[themeName] } as StyleThemeConfig;
   }
 }

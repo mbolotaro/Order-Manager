@@ -1,1 +1,1 @@
-export type styleThemeNames = 'dark' | 'light' 
+export type StyleThemeNames = 'dark' | 'light' 

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import styled, { css } from "styled-components";
-import { IMenuItemStyleProps } from "./helpers/menu-item-style-props";
+import { MenuItemStyleProps } from "./helpers/menu-item-style-props";
 
-export const MenuItemStyle = styled(Link)<IMenuItemStyleProps>`
+export const MenuItemStyle = styled(Link)<MenuItemStyleProps>`
   display: flex;
   align-items: center;
   font-size: ${(props) => props.theme.fontSizes.normal};

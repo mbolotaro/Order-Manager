@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
 
-export interface ITableQueriesProps {
+export interface TableQueriesProps {
     children: ReactNode
 }

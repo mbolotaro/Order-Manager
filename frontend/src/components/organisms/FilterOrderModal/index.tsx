@@ -2,28 +2,32 @@ import Button from "@/components/atoms/Button";
 import Modal from "@/components/molecules/Modal";
 import SelectField from "@/components/molecules/SelectField";
 import { useAttendant } from "@/hooks/use-attendant";
-import { statusValues } from "@/models/status.values";
-import { IFilterOrderModalProps } from "./helpers/filter-order-modal-props";
+import { FilterOrderModalProps } from "./helpers/filter-order-modal-props";
 import { FilterFieldsContainer, FilterOrderModalActionContainerStyle } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "@/store";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from 'yup'
-import { ITableQuery } from "@/store/helpers/table-query";
-import { IOrder } from "@/models/order";
+import { FilterByCreatedAtValues, FilterOrderModel } from "@/models/order";
 import { updateOrderQuery } from "@/store/table-queries";
 import { useEffect } from "react";
+import { filterOrderSchema } from "@/validations/orders/validate-filter-order";
+import { OrderQueries } from "@/store/helpers/table-queries-data";
 
-const schema = yup.object().shape({
-    isOpened: yup.boolean().notRequired().transform((value) => typeof value !== 'boolean' ? undefined : value).nullable(),
-    attendantId: yup.number().notRequired().transform((value) => isNaN(value) ? undefined: Number(value)).nullable(),
-    createdAt: yup.string().notRequired().nullable(),
-})
+const statusValues = [
+  {
+    name: "🟢 Aberto",
+    value: true,
+  },
+  {
+    name: "🔴 Fechado",
+    value: false,
+  },
+];
 
-export default function FilterOrderModal(props: IFilterOrderModalProps) {
+export default function FilterOrderModal(props: FilterOrderModalProps) {
 
-    const orderFilter = useSelector<ReturnType<typeof store.getState>>(state => state.tableQueries.orders) as ITableQuery<Omit<IOrder, 'createdAt'> & {createdAt: string}>
+    const orderFilter = useSelector<ReturnType<typeof store.getState>>(state => state.tableQueries.orders) as OrderQueries
 
     const dispatch = useDispatch()
 
@@ -38,7 +42,7 @@ export default function FilterOrderModal(props: IFilterOrderModalProps) {
         formState: { errors },
         setValue,
         reset
-    } = useForm({ resolver: yupResolver(schema), defaultValues: {
+    } = useForm({ resolver: yupResolver(filterOrderSchema), defaultValues: {
         isOpened: undefined,
         attendantId: undefined,
         createdAt: undefined
@@ -52,13 +56,13 @@ export default function FilterOrderModal(props: IFilterOrderModalProps) {
         }
     }, [props.opened, orderFilter, setValue])
 
-    const dateOptions = [
-        { name: 'Hoje', value: 'today'},
-        { name: 'Desta semana', value: 'week'},
-        { name: 'Deste mês', value: 'month'}
+    const dateOptions: { name: string, value: FilterByCreatedAtValues}[] = [
+        { name: 'Hoje', value: FilterByCreatedAtValues.Today},
+        { name: 'Desta semana', value: FilterByCreatedAtValues.Week},
+        { name: 'Deste mês', value: FilterByCreatedAtValues.Month}
     ]
 
-    function onSubmit(filter: Record<keyof IOrder, string>) {
+    function onSubmit(filter: FilterOrderModel) {
         props.close()
         dispatch(updateOrderQuery({ filter }))
         setTimeout(reset, 200)

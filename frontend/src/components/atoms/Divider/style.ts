@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { IDividerStyleProps } from "./helpers/divider-style-props";
+import { DividerStyleProps } from "./helpers/divider-style-props";
 
-export const DividerStyle = styled.hr<IDividerStyleProps>`
+export const DividerStyle = styled.hr<DividerStyleProps>`
     background-color: ${props => props.color};
     width: 100%;
     height: ${props => props.size ?? '2px'};

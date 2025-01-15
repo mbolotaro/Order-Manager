@@ -1,6 +1,6 @@
 import { ExecutionContext } from "styled-components";
-import { IStyleThemeConfig } from "./style-theme-config";
+import { StyleThemeConfig } from "./style-theme-config";
 
-export type styleExecutionContextProps = ExecutionContext & {
-  theme?: IStyleThemeConfig;
+export type StyleExecutionContextProps = ExecutionContext & {
+  theme?: StyleThemeConfig;
 };

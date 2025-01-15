@@ -1,3 +1,3 @@
-export interface IMenuItemStyleProps {
+export interface MenuItemStyleProps {
     $isSelected: boolean;
 }

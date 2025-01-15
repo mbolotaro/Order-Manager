@@ -1,7 +1,7 @@
-import { styleColorTypes } from "@/styles/helpers/style-color-types";
+import { StyleColorTypes } from "@/styles/helpers/style-color-types";
 
-export interface IBaseIconProps {
+export interface BaseIconProps {
     size: number;
-    styleType?: styleColorTypes;
+    styleType?: StyleColorTypes;
     color?: string;
 }

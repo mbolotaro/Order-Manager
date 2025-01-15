@@ -1,4 +1,4 @@
-export interface IDividerStyleProps {
+export interface DividerStyleProps {
     color: string
     size?: string
 }

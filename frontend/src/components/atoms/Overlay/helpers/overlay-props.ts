@@ -1,3 +1,3 @@
-export interface IOverlayProps {
+export interface OverlayProps {
     active: boolean;
 }

@@ -1,4 +1,4 @@
-export interface IPaginationNavButtonStyleProps {
+export interface PaginationNavButtonStyleProps {
     $type: 'previous' | 'mid' | 'next'
-    current: boolean
+    $current: boolean
 }

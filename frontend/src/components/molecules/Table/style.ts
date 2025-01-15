@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IColumnStyleProps } from "./helpers/column-style-props";
+import { ColumnStyleProps } from "./helpers/column-style-props";
 
 export const TableStyle = styled.table`
   width: 100%;
@@ -38,13 +38,13 @@ export const TableStyle = styled.table`
   }
 `;
 
-export const TableHeaderColumnStyle = styled.th<IColumnStyleProps>`
+export const TableHeaderColumnStyle = styled.th<ColumnStyleProps>`
   width: ${(props) => props.$width};
   max-width: ${(props) => props.$width};
   min-width: ${(props) => props.$width};
 `;
 
-export const TableCellStyle = styled.td<IColumnStyleProps>`
+export const TableCellStyle = styled.td<ColumnStyleProps>`
   width: ${(props) => props.$width};
   max-width: ${(props) => props.$width};
   min-width: ${(props) => props.$width};

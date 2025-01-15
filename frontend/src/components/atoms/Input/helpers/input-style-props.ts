@@ -1,3 +1,3 @@
-export interface IInputStyleProps {
+export interface InputStyleProps {
     $error: boolean
 }

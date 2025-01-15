@@ -1,11 +1,11 @@
 import ArrowIcon from "@/assets/icons/ArrowIcon";
 import { ClearIconStyle, OptionStyle, SelectContainerStyle, SelectIconStyle, SelectStyle } from "./style";
 import { ChangeEvent, useState } from "react";
-import { ISelectProps, selectPropTypes } from "./helpers/select-props";
+import { SelectProps, SelectPropTypes } from "./helpers/select-props";
 import LoadingIcon from "@/assets/icons/LoadingIcon";
 import CloseIcon from "@/assets/icons/CloseIcon";
 
-export default function Select<T extends selectPropTypes>(props: ISelectProps<T>) {
+export default function Select<T extends SelectPropTypes>(props: SelectProps<T>) {
     const [opened, setOpened] = useState<boolean>(false)
 
     function getOptionValue(item: T): T[keyof T] | T {
@@ -69,12 +69,12 @@ export default function Select<T extends selectPropTypes>(props: ISelectProps<T>
         </SelectStyle>
         <SelectIconStyle>
             {
-                props.clearable? 
+                props.loading ?
+                <LoadingIcon size={20}/> :
+                props.clearable &&
                 <ClearIconStyle className="clearable-icon" onClick={() => props.onClear ? props.onClear() : undefined}>
                     <CloseIcon size={40} styleType="background"/>
-                </ClearIconStyle> :
-                props.loading && 
-                <LoadingIcon/>
+                </ClearIconStyle>
             }
             <ArrowIcon direction={opened ? 'top' : 'bottom'} size={20} styleType="text"/>
         </SelectIconStyle>

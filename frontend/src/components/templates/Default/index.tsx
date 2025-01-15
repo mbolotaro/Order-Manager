@@ -1,10 +1,10 @@
 import Header from "@/components/organisms/Header";
-import { IDefaultLayoutProps } from "./helpers/default-layout-props";
+import { DefaultLayoutProps } from "./helpers/default-layout-props";
 import Footer from "@/components/organisms/Footer";
 import LateralMenu from "@/components/organisms/LateralMenu";
 import { DefaultLayoutMainStyle } from "./style";
 
-export default function DefaultLayout(props: IDefaultLayoutProps) {
+export default function DefaultLayout(props: DefaultLayoutProps) {
     return <>
         <Header/>
         <div>

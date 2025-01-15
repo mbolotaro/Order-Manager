@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { IOverlayProps } from "./helpers/overlay-props";
+import { OverlayProps } from "./helpers/overlay-props";
 import { OverlayStyle } from "./style";
 
-export default function Overlay(props: IOverlayProps) {
+export default function Overlay(props: OverlayProps) {
     const [animateEnd, setAnimateEnd] = useState(false)
 
     const [active, setActive] = useState(false)

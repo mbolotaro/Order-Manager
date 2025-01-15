@@ -1,4 +1,4 @@
-export interface ICheckboxProps {
+export interface CheckboxProps {
     value: boolean;
     onChange?: (value: boolean) => void;
 }

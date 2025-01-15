@@ -1,5 +1,5 @@
-import { IBaseIconProps } from "../../_helpers/base-icon-props"
+import { BaseIconProps } from "../../_helpers/base-icon-props"
 
-export interface IArrowProps extends IBaseIconProps {
+export interface ArrowProps extends BaseIconProps {
     direction: 'top' | 'bottom' | 'left' | 'right'
 }

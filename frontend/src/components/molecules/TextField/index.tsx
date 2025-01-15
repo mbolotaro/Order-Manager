@@ -2,9 +2,9 @@ import Label from "@/components/atoms/Label";
 import { TextFieldStyle } from "./style";
 import Input from "@/components/atoms/Input";
 import InputAlert from "@/components/atoms/InputAlert";
-import { ITextFieldProps } from "./helpers/text-field-props";
+import { TextFieldProps } from "./helpers/text-field-props";
 
-export default function TextField(props: ITextFieldProps) {
+export default function TextField(props: TextFieldProps) {
     return <TextFieldStyle>
         <Label 
             text={props.label} 

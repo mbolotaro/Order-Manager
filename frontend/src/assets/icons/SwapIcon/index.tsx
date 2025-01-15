@@ -1,9 +1,9 @@
 import { useTheme } from "styled-components";
-import { IBaseIconProps } from "../_helpers/base-icon-props";
-import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config";
+import { BaseIconProps } from "../_helpers/base-icon-props";
+import { StyleThemeConfig } from "@/styles/helpers/style-theme-config";
 
-export default function SwapIcon(props: IBaseIconProps) {
-    const theme = useTheme() as IStyleThemeConfig
+export default function SwapIcon(props: BaseIconProps) {
+    const theme = useTheme() as StyleThemeConfig
     
     let color;
     

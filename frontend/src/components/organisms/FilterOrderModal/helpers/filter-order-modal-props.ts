@@ -1,4 +1,4 @@
-export interface IFilterOrderModalProps {
+export interface FilterOrderModalProps {
     opened: boolean;
     close: () => void;
 }

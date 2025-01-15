@@ -1,8 +1,8 @@
 import { fade } from "@/styles/utils/animations/fade-in-animation";
 import styled from "styled-components";
-import { IOverlayStyleProps } from "./helpers/overlay-style-props";
+import { OverlayStyleProps } from "./helpers/overlay-style-props";
 
-export const OverlayStyle = styled.div<IOverlayStyleProps>`
+export const OverlayStyle = styled.div<OverlayStyleProps>`
   width: 100vw;
   height: 100vh;
   background-color: ${props => props.theme.colors.grey};

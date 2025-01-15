@@ -1,6 +1,6 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 
-export interface ISelectProps<T extends selectPropTypes> {
+export interface SelectProps<T extends SelectPropTypes> {
   id: string;
   items: T[];
   customEmptyMessage?: string;
@@ -17,4 +17,4 @@ export interface ISelectProps<T extends selectPropTypes> {
   register?: UseFormRegisterReturn;
 }
 
-export type selectPropTypes = string | number | object
+export type SelectPropTypes = string | number | object

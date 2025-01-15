@@ -1,7 +1,7 @@
-import { styleColorTypes } from "@/styles/helpers/style-color-types";
+import { StyleColorTypes } from "@/styles/helpers/style-color-types";
 
-export interface IDividerProps {
-    styleType?: styleColorTypes;
+export interface DividerProps {
+    styleType?: StyleColorTypes;
     color?: string;
     size?: string;
 }

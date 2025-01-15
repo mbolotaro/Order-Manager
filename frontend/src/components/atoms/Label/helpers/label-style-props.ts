@@ -1,4 +1,4 @@
-export interface ILabelStyleProps {
+export interface LabelStyleProps {
     error: boolean;
     disabled: boolean;
 }

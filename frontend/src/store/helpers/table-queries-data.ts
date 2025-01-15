@@ -1,6 +1,8 @@
-import { IOrder } from "@/models/order";
-import { ITableQuery } from "./table-query";
+import { FilterOrderModel, ViewOrderModel } from "@/models/order";
+import { TableQuery } from "./table-query";
 
-export interface ITableQueriesData {
-    orders: ITableQuery<Omit<IOrder, 'createdAt'> & { createdAt: string}>;
+export interface TableQueriesData {
+    orders: OrderQueries;
 }
+
+export type OrderQueries = TableQuery<ViewOrderModel, FilterOrderModel>;

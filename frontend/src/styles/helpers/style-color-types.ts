@@ -1,4 +1,4 @@
-export type styleColorTypes = 
+export type StyleColorTypes = 
     | 'primary' 
     | 'secondary' 
     | 'danger' 

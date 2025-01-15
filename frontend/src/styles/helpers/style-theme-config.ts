@@ -1,8 +1,8 @@
-import { styleColorTypes } from "./style-color-types";
+import { StyleColorTypes } from "./style-color-types";
 
-export interface IStyleThemeConfig {
+export interface StyleThemeConfig {
   
-  colors: Record<styleColorTypes, string>;
+  colors: Record<StyleColorTypes, string>;
   fonts?: {
     body: string;
     heading: string;

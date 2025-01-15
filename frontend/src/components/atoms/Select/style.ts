@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import { ISelectStyleProps } from "./helpers/select-style-props";
+import { SelectStyleProps } from "./helpers/select-style-props";
 
-export const SelectStyle = styled.select<ISelectStyleProps>`
+export const SelectStyle = styled.select<SelectStyleProps>`
   width: 100%;
   border-radius: 6px;
   padding: 8px;

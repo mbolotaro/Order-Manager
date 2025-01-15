@@ -1,9 +1,9 @@
-import { styleThemeNames } from "@/styles/helpers/style-theme-names";
+import { StyleThemeNames } from "@/styles/helpers/style-theme-names";
 import { createSlice } from "@reduxjs/toolkit";
 
 const themeSlice = createSlice({
     name: 'theme',
-    initialState: 'light' as styleThemeNames,
+    initialState: 'light' as StyleThemeNames,
     reducers: {
         toggleTheme: (state) => {
             const newTheme = state == 'light' ? 'dark' : 'light'
@@ -16,7 +16,7 @@ const themeSlice = createSlice({
 
         loadStorage: () => {
             if(typeof window !== undefined) {
-                const savedTheme = localStorage.getItem('theme') as styleThemeNames
+                const savedTheme = localStorage.getItem('theme') as StyleThemeNames
 
                 if(!savedTheme) {
                     localStorage.setItem('theme', 'light')

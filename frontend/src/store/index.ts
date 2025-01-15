@@ -13,3 +13,5 @@ export function loadAllStateStorage() {
     store.dispatch(loadThemeSliceStorage())
     store.dispatch(loadTableQueriesSliceStorage());
 }
+
+export type StoreTypeHelper = ReturnType<typeof store.getState>

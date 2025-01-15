@@ -1,4 +1,4 @@
-export interface ITablePaginationProps {
+export interface TablePaginationProps {
     limit: number;
     currentPage: number;
     listLength: number;

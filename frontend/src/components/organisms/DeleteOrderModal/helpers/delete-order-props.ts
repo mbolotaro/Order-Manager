@@ -1,7 +1,7 @@
-import { IOrder } from "@/models/order";
+import { ViewOrderModel } from "@/models/order";
 
-export interface IDeleteOrderProps {
-    order?: IOrder;
+export interface DeleteOrderProps {
+    order?: ViewOrderModel;
     opened: boolean;
     many?: boolean;
     ordersId?: number[];

@@ -1,9 +1,9 @@
-import { styleColorTypes } from "@/styles/helpers/style-color-types";
+import { StyleColorTypes } from "@/styles/helpers/style-color-types";
 import { ReactNode } from "react"
 
-export interface IButtonProps {
+export interface ButtonProps {
     model?: ButtonModel
-    styleType?: styleColorTypes;
+    styleType?: StyleColorTypes;
     type?: ButtonType
     density?: ButtonDensity;
     icon?: ReactNode;

@@ -1,5 +1,5 @@
 import { TableInstance } from "react-table";
 
-export interface ITableProps<T extends object> {
+export interface TableProps<T extends object> {
     tableInstance: TableInstance<T>;
 }

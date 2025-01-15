@@ -1,3 +1,3 @@
-export interface ISelectStyleProps {
+export interface SelectStyleProps {
     $error: boolean
 }

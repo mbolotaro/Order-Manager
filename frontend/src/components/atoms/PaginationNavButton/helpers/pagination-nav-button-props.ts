@@ -1,4 +1,4 @@
-export interface IPaginationNavButtonProps {
+export interface PaginationNavButtonProps {
   action?: PaginationNavActions;
   pageNumber?: number;
   currentPage?: number;

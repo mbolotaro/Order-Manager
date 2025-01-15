@@ -1,10 +1,10 @@
 import Modal from "@/components/molecules/Modal";
-import { IDeleteOrderProps } from "./helpers/delete-order-props";
+import { DeleteOrderProps } from "./helpers/delete-order-props";
 import Button from "@/components/atoms/Button";
 import AlertIcon from "@/assets/icons/AlertIcon";
 import { useOrder } from "@/hooks/use-order";
 
-export default function DeleteOrderModal(props: IDeleteOrderProps) {
+export default function DeleteOrderModal(props: DeleteOrderProps) {
     const { removeMany, loading } = useOrder()
 
     async function onSubmit() {
