@@ -11,7 +11,7 @@ export const ModalContainerStyle = styled.div<ModalContainerStyleProps>`
   width: 100vw;
   height: 100vh;
   position: fixed;
-  z-index: 110;
+  z-index: 100;
   pointer-events: ${props => props.$opened? 'all' : 'none'};
 `;
 

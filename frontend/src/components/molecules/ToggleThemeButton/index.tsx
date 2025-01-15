@@ -3,7 +3,7 @@ import SunIcon from "@/assets/icons/SunIcon";
 import { ToggleThemeButtonStyle } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { type store } from '@/store'
-import { toggleTheme } from '@/store/theme-slice'
+import { toggleTheme } from '@/store/theme'
 import { StyleThemeNames } from "@/styles/helpers/style-theme-names";
 
 export default function ToggleThemeButton() {

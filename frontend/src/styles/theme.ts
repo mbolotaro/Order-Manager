@@ -14,6 +14,7 @@ export const theme = new StyleTheme({
     },
   },
   light: {
+    name: 'light',
     colors: {
       primary: "#736CED",
       secondary: "#B7B5B3",
@@ -28,6 +29,7 @@ export const theme = new StyleTheme({
     },
   },
   dark: {
+    name: 'dark',
     colors: {
       primary: "#736CED",
       secondary: "#B7B5B3",

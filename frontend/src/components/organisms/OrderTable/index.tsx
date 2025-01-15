@@ -173,6 +173,6 @@ export default function OrderTable(props: OrderTableProps) {
     const tableInstance = useTable({ columns, data })
 
     return  <TableContainerStyle>
-        { props.orders?.length > 0 && <Table tableInstance={tableInstance}/> }
+        <Table tableInstance={tableInstance} loading={props.loading}/>
     </TableContainerStyle>
 }

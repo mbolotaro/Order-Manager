@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import themeSliceReducer, { loadStorage as loadThemeSliceStorage } from './theme-slice'
+import themeSliceReducer, { loadStorage as loadThemeSliceStorage } from './theme'
 import tableQueriesSliceReducer, { loadStorage as loadTableQueriesSliceStorage } from './table-queries'
+import toastSliceReducer from './toast'
 
 export const store = configureStore({
     reducer: {
         theme: themeSliceReducer,
-        tableQueries: tableQueriesSliceReducer
+        tableQueries: tableQueriesSliceReducer,
+        toast: toastSliceReducer
     },
 })
 

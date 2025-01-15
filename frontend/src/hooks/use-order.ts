@@ -157,7 +157,7 @@ export function useOrder() {
       throw error;        
     } finally {
       setListLoading(false)
-      setAlreadyListLoaded(false)
+      setAlreadyListLoaded(true)
     }
   }
 

@@ -1,8 +1,15 @@
+import Skeleton from "@/components/atoms/Skeleton";
 import { TableProps } from "./helpers/table-props";
 import { TableCellStyle, TableHeaderColumnStyle, TableStyle } from "./style";
 
 export default function Table<T extends object>(props: TableProps<T>) {
-    return <TableStyle {...props.tableInstance.getTableProps()}>
+    return props.loading ? <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
+        <Skeleton height="43px;" width="100%"/>
+        <Skeleton height="43px;" width="90%"/>
+        <Skeleton height="43px;" width="80%"/>
+    </div> :
+     <TableStyle {...props.tableInstance.getTableProps()}>
+    
         <thead>
             {
                 props.tableInstance.headerGroups.map((headerGroup, index) => (
@@ -55,4 +62,5 @@ export default function Table<T extends object>(props: TableProps<T>) {
         })}
         </tbody>
     </TableStyle>
+    
 }

@@ -34,7 +34,6 @@ export default function OrderCRUD() {
     const [ filterModelOpened, setFilterModalOpened ] = useState(false)
     
     const [ currentOrder, setCurrentOrder ] = useState<ViewOrderModel | undefined>(undefined)
-    const [ alreadyListLoaded, setAlreadyLisyLoaded ] = useState(false)
     const [ currentAction, setCurrentAction ] = useState<CRUDOrderModalTypes>("create")
     const [ checkedItems, setCheckedItems ] = useState<number[]>([])
     
@@ -47,6 +46,8 @@ export default function OrderCRUD() {
         paginatedFilteredOrders,
         searchValue,
         currentPage,
+        listLoading,
+        alreadyListLoaded,
         setCurrentPage,
         setSearchValue,
     } = useOrder()
@@ -66,10 +67,11 @@ export default function OrderCRUD() {
         const fetchData = async () => {
             if(!alreadyListLoaded) {
                 getAll()
-                setAlreadyLisyLoaded(true)
             }
         }
+        
         fetchData()
+    
     }, [alreadyListLoaded, getAll])
 
     function handleOnCreateOrder() {
@@ -138,6 +140,7 @@ export default function OrderCRUD() {
                             icon={<PlusIcon size={24} styleType="light"/>} 
                             density="compact" 
                             onClick={() => handleOnCreateOrder()}
+                            loading={!alreadyListLoaded || listLoading}
                         />
                     </div>
                     <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
@@ -154,6 +157,7 @@ export default function OrderCRUD() {
             }
         </TableToolsStyle>
         <OrderTable
+            loading={listLoading || !alreadyListLoaded}
             orders={paginatedFilteredOrders}
             onView={handleOnViewOrder} 
             onUpdate={handleOnUpdateOrder} 
