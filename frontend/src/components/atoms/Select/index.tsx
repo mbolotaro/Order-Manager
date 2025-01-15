@@ -1,7 +1,7 @@
 import ArrowIcon from "@/assets/icons/ArrowIcon";
 import { ClearIconStyle, OptionStyle, SelectContainerStyle, SelectIconStyle, SelectStyle } from "./style";
 import { ChangeEvent, useState } from "react";
-import { ISelectProps, selectPropTypes } from "./helpers/select-props.interface";
+import { ISelectProps, selectPropTypes } from "./helpers/select-props";
 import LoadingIcon from "@/assets/icons/LoadingIcon";
 import CloseIcon from "@/assets/icons/CloseIcon";
 

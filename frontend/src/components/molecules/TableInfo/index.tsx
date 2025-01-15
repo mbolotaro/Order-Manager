@@ -1,4 +1,4 @@
-import { ITableInfoProps } from "./helpers/table-info-props.interface";
+import { ITableInfoProps } from "./helpers/table-info-props";
 import { InfoKeyStyle, InfoRowStyle, InfoValueStyle } from "./style";
 
 export default function TableInfo(props: ITableInfoProps) {

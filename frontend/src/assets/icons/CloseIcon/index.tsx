@@ -1,6 +1,6 @@
-import { ICloseProps } from "./helpers/close-props.interface";
+import { ICloseProps } from "./helpers/close-props";
 import { useTheme } from "styled-components";
-import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config.interface";
+import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config";
 
 export default function CloseIcon(props: ICloseProps) {
     const theme = useTheme() as IStyleThemeConfig

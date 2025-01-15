@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IStatusCellStyleProps } from "./helpers/status-cell-props.interface";
+import { IStatusCellStyleProps } from "./helpers/status-cell-props";
 
 export const TableContainerStyle = styled.div`
   overflow-y: scroll;

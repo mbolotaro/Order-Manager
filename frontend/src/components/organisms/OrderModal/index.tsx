@@ -3,14 +3,14 @@ import Modal from "@/components/molecules/Modal";
 import SelectField from "@/components/molecules/SelectField";
 import TextField from "@/components/molecules/TextField";
 import { useEffect } from "react";
-import { CRUDOrderModalTypes, ICRUDOrderModalProps } from "./helpers/crud-order-modal-props.interface";
+import { CRUDOrderModalTypes, ICRUDOrderModalProps } from "./helpers/crud-order-modal-props";
 import { useForm } from 'react-hook-form' 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CRUDOrderFormActionsStyle, CRUDOrderFormStyle } from "./style";
 import { useOrder } from "@/hooks/use-order";
 import { useAttendant } from "@/hooks/use-attendant";
 import { statusValues } from "@/models/status.values";
-import { CreateOrderModel } from "@/models/order.interface";
+import { CreateOrderModel } from "@/models/order";
 
 export default function OrderModal(props: ICRUDOrderModalProps) {
     const {

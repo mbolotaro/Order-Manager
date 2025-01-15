@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { IPaginationNavButtonStyleProps } from "./helpers/pagination-nav-button-style-props.interface";
+import { IPaginationNavButtonStyleProps } from "./helpers/pagination-nav-button-style-props";
 
 export const PaginationNavButtonStyle = styled.button<IPaginationNavButtonStyleProps>`
   width: 35px;

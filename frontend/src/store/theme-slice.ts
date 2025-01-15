@@ -1,4 +1,4 @@
-import { styleThemeNames } from "@/styles/helpers/style-theme-names.type";
+import { styleThemeNames } from "@/styles/helpers/style-theme-names";
 import { createSlice } from "@reduxjs/toolkit";
 
 const themeSlice = createSlice({

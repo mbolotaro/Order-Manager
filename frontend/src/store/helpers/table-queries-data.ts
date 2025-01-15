@@ -1,5 +1,5 @@
-import { IOrder } from "@/models/order.interface";
-import { ITableQuery } from "./table-query.interface";
+import { IOrder } from "@/models/order";
+import { ITableQuery } from "./table-query";
 
 export interface ITableQueriesData {
     orders: ITableQuery<Omit<IOrder, 'createdAt'> & { createdAt: string}>;

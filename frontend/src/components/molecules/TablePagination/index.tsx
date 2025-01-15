@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { ITablePaginationProps } from "./helpers/table-pagination-props.interface";
+import { ITablePaginationProps } from "./helpers/table-pagination-props";
 import { OrderQuantCounter, PaginationNavStyle, QuantByPageContainer, QuantByPageLabel, SelectStyle, TablePaginationStyleContainer } from "./style";
 import PaginationNavButton from "@/components/atoms/PaginationNavButton";
 

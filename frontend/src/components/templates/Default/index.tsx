@@ -1,5 +1,5 @@
 import Header from "@/components/organisms/Header";
-import { IDefaultLayoutProps } from "./helpers/default-layout-props.interface";
+import { IDefaultLayoutProps } from "./helpers/default-layout-props";
 import Footer from "@/components/organisms/Footer";
 import LateralMenu from "@/components/organisms/LateralMenu";
 import { DefaultLayoutMainStyle } from "./style";

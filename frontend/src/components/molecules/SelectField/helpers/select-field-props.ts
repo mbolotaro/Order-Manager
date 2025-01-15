@@ -1,4 +1,4 @@
-import { selectPropTypes } from "@/components/atoms/Select/helpers/select-props.interface";
+import { selectPropTypes } from "@/components/atoms/Select/helpers/select-props";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 export interface ISelectFieldProps<T extends selectPropTypes> {

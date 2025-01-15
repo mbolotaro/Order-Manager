@@ -1,5 +1,5 @@
-import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config.interface";
-import { IArrowProps } from "./helpers/arrow-props.interface";
+import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config";
+import { IArrowProps } from "./helpers/arrow-props";
 import { useTheme } from "styled-components";
 
 export default function ArrowIcon(props: IArrowProps) {

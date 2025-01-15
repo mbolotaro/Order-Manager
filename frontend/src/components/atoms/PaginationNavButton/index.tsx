@@ -1,5 +1,5 @@
 import ArrowIcon from "@/assets/icons/ArrowIcon";
-import { IPaginationNavButtonProps } from "./helpers/pagination-nav-button-props.interface";
+import { IPaginationNavButtonProps } from "./helpers/pagination-nav-button-props";
 import { PaginationNavButtonStyle } from "./style";
 
 export default function PaginationNavButton(props: IPaginationNavButtonProps) {

@@ -1,4 +1,4 @@
-import { ILabelProps } from "./helpers/label-props.interface";
+import { ILabelProps } from "./helpers/label-props";
 import { LabelStyle, OpcionalAlertStyle } from "./style";
 
 export default function Label(props: ILabelProps) {

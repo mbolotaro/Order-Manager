@@ -1,4 +1,4 @@
-import { StyleTheme } from "@/styles/helpers/style-theme.class";
+import { StyleTheme } from "@/styles/helpers/style-theme";
 
 export const theme = new StyleTheme({
   base: {

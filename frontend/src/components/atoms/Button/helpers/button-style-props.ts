@@ -1,4 +1,4 @@
-import { ButtonDensity, ButtonModel } from "./button-props.interface";
+import { ButtonDensity, ButtonModel } from "./button-props";
 
 export interface IButtonStyleProps {
   $model: ButtonModel;

@@ -1,6 +1,6 @@
 import { useTheme } from "styled-components";
 import { IOrderProps } from "./helpers/order-icon.props";
-import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config.interface";
+import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config";
 
 export default function OrderIcon(props: IOrderProps) {
     const theme = useTheme() as IStyleThemeConfig

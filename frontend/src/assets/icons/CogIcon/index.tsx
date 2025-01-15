@@ -1,6 +1,6 @@
 import { useTheme } from "styled-components";
-import { IBaseIconProps } from "../_helpers/base-icon-props.interface";
-import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config.interface";
+import { IBaseIconProps } from "../_helpers/base-icon-props";
+import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config";
 
 export default function CogIcon(props: IBaseIconProps) {
     const theme = useTheme() as IStyleThemeConfig

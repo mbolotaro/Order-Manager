@@ -1,6 +1,6 @@
-﻿import { ILoadingProps } from "./helpers/loading-props.interface";
+﻿import { ILoadingProps } from "./helpers/loading-props";
 import { useTheme } from "styled-components";
-import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config.interface";
+import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config";
 
 export default function LoadingIcon(props: ILoadingProps) {
     const theme = useTheme() as IStyleThemeConfig

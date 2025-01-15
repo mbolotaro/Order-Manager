@@ -1,5 +1,5 @@
-import { IAttendant } from "@/models/attendant.interface";
-import { ViewOrderModel } from "@/models/order.interface";
+import { IAttendant } from "@/models/attendant";
+import { ViewOrderModel } from "@/models/order";
 import Dexie, { type EntityTable } from "dexie";
 
 export const db = new Dexie('OrdersDatabase') as Dexie & {

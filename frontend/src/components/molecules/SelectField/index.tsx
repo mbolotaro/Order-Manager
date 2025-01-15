@@ -1,6 +1,6 @@
 import Select from "@/components/atoms/Select";
-import { ISelectFieldProps } from "./helpers/select-field-props.interface";
-import { selectPropTypes } from "@/components/atoms/Select/helpers/select-props.interface";
+import { ISelectFieldProps } from "./helpers/select-field-props";
+import { selectPropTypes } from "@/components/atoms/Select/helpers/select-props";
 import Label from "@/components/atoms/Label";
 import InputAlert from "@/components/atoms/InputAlert";
 

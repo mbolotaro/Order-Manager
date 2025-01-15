@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { ICheckboxProps } from "./helpers/checkbox-props.interface";
+import { ICheckboxProps } from "./helpers/checkbox-props";
 import { CustomCheckbox, CustomCheckedMarkation, RealCheckbox } from "./style";
 import CheckmarkIcon from "@/assets/icons/CheckmarkIcon";
 

@@ -1,4 +1,4 @@
-import { IMenuProps } from "./helpers/menu-item-props.interface";
+import { IMenuProps } from "./helpers/menu-item-props";
 import { MenuItemStyle } from "./style";
 
 export default function MenuItem(props: IMenuProps) {

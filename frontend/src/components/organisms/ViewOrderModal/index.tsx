@@ -1,5 +1,5 @@
 import Modal from "@/components/molecules/Modal";
-import { IViewOrderModalPropsInterface } from "./helpers/view-order-modal-props.interface";
+import { IViewOrderModalPropsInterface } from "./helpers/view-order-modal-props";
 
 export default function ViewOrderModal(props: IViewOrderModalPropsInterface) {
     return <Modal opened={props.opened} title={props.order?.name ?? 'Carregando...'} width="900px" close={props.close}>

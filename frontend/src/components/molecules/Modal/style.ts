@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { IModalStyleProps } from "./helpers/modal-style-props.interface";
+import { IModalStyleProps } from "./helpers/modal-style-props";
 import { expandAnimation } from "@/styles/utils/animations/expand-animation";
 import { shrinkAnimation } from "@/styles/utils/animations/shrink-animation";
-import { IModalContainerStyleProps } from "./helpers/modal-container-style-props.interface";
+import { IModalContainerStyleProps } from "./helpers/modal-container-style-props";
 
 export const ModalContainerStyle = styled.div<IModalContainerStyleProps>`
   display: flex;

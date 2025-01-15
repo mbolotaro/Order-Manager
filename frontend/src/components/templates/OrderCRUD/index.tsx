@@ -10,17 +10,17 @@ import Head from "next/head";
 import ViewOrderModal from "@/components/organisms/ViewOrderModal";
 import OrderModal from "@/components/organisms/OrderModal";
 import DeleteOrderModal from "@/components/organisms/DeleteOrderModal";
-import { ViewOrderModel } from "@/models/order.interface";
+import { ViewOrderModel } from "@/models/order";
 import { useOrder } from "@/hooks/use-order";
-import { CRUDOrderModalTypes } from "@/components/organisms/OrderModal/helpers/crud-order-modal-props.interface";
-import { TableInfoType } from "@/components/molecules/TableInfo/helpers/table-info-props.interface";
+import { CRUDOrderModalTypes } from "@/components/organisms/OrderModal/helpers/crud-order-modal-props";
+import { TableInfoType } from "@/components/molecules/TableInfo/helpers/table-info-props";
 import TrashIcon from "@/assets/icons/TrashIcon";
 import TablePagination from "@/components/molecules/TablePagination";
 import CogIcon from "@/assets/icons/CogIcon";
 import FilterOrderModal from "@/components/organisms/FilterOrderModal";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "@/store";
-import { ITableQuery } from "@/store/helpers/table-query.interface";
+import { ITableQuery } from "@/store/helpers/table-query";
 import { updateOrderQuery } from "@/store/table-queries";
 
 export default function OrderCRUD() {

@@ -1,6 +1,6 @@
-import { CreateOrderModel, IOrder, ViewOrderModel } from "@/models/order.interface";
+import { CreateOrderModel, IOrder, ViewOrderModel } from "@/models/order";
 import { api } from "./api";
-import { IAttendant } from "@/models/attendant.interface";
+import { IAttendant } from "@/models/attendant";
 
 export async function createOrder(order: CreateOrderModel) {
     return await api('POST', 'orders', order)

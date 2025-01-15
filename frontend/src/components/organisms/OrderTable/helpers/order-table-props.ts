@@ -1,4 +1,4 @@
-import { ViewOrderModel } from "@/models/order.interface";
+import { ViewOrderModel } from "@/models/order";
 
 export interface IOrderTableProps {
   onView: (order: ViewOrderModel) => void;

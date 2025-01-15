@@ -1,8 +1,8 @@
 import LoadingIcon from "@/assets/icons/LoadingIcon";
-import { IButtonProps } from "./helpers/button-props.interface";
+import { IButtonProps } from "./helpers/button-props";
 import { ButtonStyle } from "./style";
 import { useTheme } from "styled-components";
-import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config.interface";
+import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config";
 
 export default function Button(props: IButtonProps) {
     const theme = useTheme() as IStyleThemeConfig

@@ -1,4 +1,4 @@
-import { IAttendant } from "@/models/attendant.interface";
+import { IAttendant } from "@/models/attendant";
 import { api } from "./api";
 
 export async function getAttendants() : Promise<IAttendant[]> {

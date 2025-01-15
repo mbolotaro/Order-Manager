@@ -4,7 +4,7 @@ import { Provider, useDispatch, useSelector } from 'react-redux'
 import { loadAllStateStorage, store } from "@/store";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@/styles/theme";
-import { styleThemeNames } from "@/styles/helpers/style-theme-names.type";
+import { styleThemeNames } from "@/styles/helpers/style-theme-names";
 import { ReactNode, useEffect, useState } from "react";
 
 function ThemeWrapper({ children } : { children: ReactNode}) {

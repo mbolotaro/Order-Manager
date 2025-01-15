@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styled, { css } from "styled-components";
-import { IMenuItemStyleProps } from "./helpers/menu-item-style-props.interface";
+import { IMenuItemStyleProps } from "./helpers/menu-item-style-props";
 
 export const MenuItemStyle = styled(Link)<IMenuItemStyleProps>`
   display: flex;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IColumnStyleProps } from "./helpers/column-style-props.interface";
+import { IColumnStyleProps } from "./helpers/column-style-props";
 
 export const TableStyle = styled.table`
   width: 100%;

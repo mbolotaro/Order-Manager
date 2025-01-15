@@ -1,6 +1,6 @@
 import { fade } from "@/styles/utils/animations/fade-in-animation";
 import styled from "styled-components";
-import { IOverlayStyleProps } from "./helpers/overlay-style-props.interface";
+import { IOverlayStyleProps } from "./helpers/overlay-style-props";
 
 export const OverlayStyle = styled.div<IOverlayStyleProps>`
   width: 100vw;

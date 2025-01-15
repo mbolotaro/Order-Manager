@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { IButtonStyleProps } from "./helpers/button-style-props.interface";
+import { IButtonStyleProps } from "./helpers/button-style-props";
 
 export const ButtonStyle = styled.button<IButtonStyleProps>`
   min-width: 100px;

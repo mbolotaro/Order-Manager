@@ -1,8 +1,8 @@
 import { db } from "@/db";
-import { CreateOrderModel, IOrder, ViewOrderModel } from "@/models/order.interface"
+import { CreateOrderModel, IOrder, ViewOrderModel } from "@/models/order"
 import { createOrder, deleteOrders, getOrders, updateOrder } from "@/services/orders";
 import { store } from "@/store";
-import { ITableQuery } from "@/store/helpers/table-query.interface";
+import { ITableQuery } from "@/store/helpers/table-query";
 import { useLiveQuery } from "dexie-react-hooks";
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";

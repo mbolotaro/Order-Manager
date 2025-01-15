@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { IInputStyleProps } from "./helpers/input-style-props.interface";
+import { IInputStyleProps } from "./helpers/input-style-props";
 
 export const InputStyle =
   styled.input<IInputStyleProps>`

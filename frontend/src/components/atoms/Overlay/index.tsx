@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IOverlayProps } from "./helpers/overlay-props.interface";
+import { IOverlayProps } from "./helpers/overlay-props";
 import { OverlayStyle } from "./style";
 
 export default function Overlay(props: IOverlayProps) {

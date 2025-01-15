@@ -1,4 +1,4 @@
-import { ViewOrderModel } from "@/models/order.interface";
+import { ViewOrderModel } from "@/models/order";
 
 export interface IViewOrderModalPropsInterface {
     opened: boolean;

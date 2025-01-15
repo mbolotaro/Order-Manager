@@ -3,15 +3,15 @@ import Modal from "@/components/molecules/Modal";
 import SelectField from "@/components/molecules/SelectField";
 import { useAttendant } from "@/hooks/use-attendant";
 import { statusValues } from "@/models/status.values";
-import { IFilterOrderModalProps } from "./helpers/filter-order-modal-props.interface";
+import { IFilterOrderModalProps } from "./helpers/filter-order-modal-props";
 import { FilterFieldsContainer, FilterOrderModalActionContainerStyle } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "@/store";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup'
-import { ITableQuery } from "@/store/helpers/table-query.interface";
-import { IOrder } from "@/models/order.interface";
+import { ITableQuery } from "@/store/helpers/table-query";
+import { IOrder } from "@/models/order";
 import { updateOrderQuery } from "@/store/table-queries";
 import { useEffect } from "react";
 

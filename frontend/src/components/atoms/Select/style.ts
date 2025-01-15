@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { ISelectStyleProps } from "./helpers/select-style-props.interface";
+import { ISelectStyleProps } from "./helpers/select-style-props";
 
 export const SelectStyle = styled.select<ISelectStyleProps>`
   width: 100%;

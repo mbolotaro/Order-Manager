@@ -1,5 +1,5 @@
 import { ChangeEvent, } from "react";
-import { InputProps } from "./helpers/input-props.interface";
+import { InputProps } from "./helpers/input-props";
 import { InputContainerStyle, InputIconStyle, InputStyle } from "./style";
 
 export default function Input(props: InputProps) {

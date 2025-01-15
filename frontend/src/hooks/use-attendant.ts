@@ -1,5 +1,5 @@
 import { db } from "@/db"
-import { IAttendant } from "@/models/attendant.interface"
+import { IAttendant } from "@/models/attendant"
 import { getAttendants } from "@/services/attendants"
 import { useLiveQuery } from "dexie-react-hooks"
 import { useState } from "react"

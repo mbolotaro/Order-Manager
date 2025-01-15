@@ -1,4 +1,4 @@
-import { IOrder } from "@/models/order.interface";
+import { IOrder } from "@/models/order";
 
 export interface IDeleteOrderProps {
     order?: IOrder;

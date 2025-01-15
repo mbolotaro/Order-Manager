@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ITableQueriesData } from "./helpers/table-queries-data.interface";
+import { ITableQueriesData } from "./helpers/table-queries-data";
 
 const initialTableQueries: ITableQueriesData = {
     orders: {
