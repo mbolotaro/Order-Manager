@@ -1,8 +1,8 @@
 import { useTheme } from "styled-components";
-import { ITrashIconProps } from "./helpers/trash-icon-props.interface";
 import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config.interface";
+import { IBaseIconProps } from "../_helpers/base-icon-props.interface";
 
-export default function TrashIcon(props: ITrashIconProps) {
+export default function TrashIcon(props: IBaseIconProps) {
     const theme = useTheme() as IStyleThemeConfig
     
     let color;

@@ -1,8 +1,8 @@
 import { useTheme } from "styled-components";
-import { IAlertIconProps } from "./helpers/alert-icon-props.interface";
 import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config.interface";
+import { IBaseIconProps } from "../_helpers/base-icon-props.interface";
 
-export default function AlertIcon(props: IAlertIconProps) {
+export default function AlertIcon(props: IBaseIconProps) {
     const theme = useTheme() as IStyleThemeConfig
 
     let color;

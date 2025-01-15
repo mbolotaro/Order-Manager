@@ -13,7 +13,7 @@ export default function SwapIcon(props: IBaseIconProps) {
         color = theme.colors[props.styleType ?? 'text']
     }
 
-    return <svg width={props.size} height={props.size} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="swapVerticalIconTitle" stroke={color} stroke-width="1" stroke-linecap="square" strokeLineJoin="miter" fill="none" color={color}> 
+    return <svg width={props.size} height={props.size} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="swapVerticalIconTitle" stroke={color} stroke-width="1" stroke-linecap="square" strokeLinejoin="miter" fill="none" color={color}> 
         <title id="swapVerticalIconTitle">Swap items (vertically)</title> 
         <desc id="swapVerticalIconDesc"/> 
         <path d="M4 8L7 5L10 8"/> 

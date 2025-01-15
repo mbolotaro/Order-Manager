@@ -1,8 +1,8 @@
 import { useTheme } from "styled-components";
-import { ISearchIconProps } from "./helpers/search-icon-props.interface";
 import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config.interface";
+import { IBaseIconProps } from "../_helpers/base-icon-props.interface";
 
-export default function SearchIcon(props: ISearchIconProps) {
+export default function SearchIcon(props: IBaseIconProps) {
     const theme = useTheme() as IStyleThemeConfig
     
     let color;

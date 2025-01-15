@@ -1,8 +1,8 @@
 import { useTheme } from "styled-components";
-import { IEyeIconProps } from "./helpers/eye-icon-props.interface";
 import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config.interface";
+import { IBaseIconProps } from "../_helpers/base-icon-props.interface";
 
-export default function EyeIcon(props: IEyeIconProps) {
+export default function EyeIcon(props: IBaseIconProps) {
     const theme = useTheme() as IStyleThemeConfig;
 
     let color;

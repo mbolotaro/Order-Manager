@@ -1,8 +1,8 @@
 import { useTheme } from "styled-components";
-import { IPenIconProps } from "./helpers/pen-icon-props.interface";
 import { IStyleThemeConfig } from "@/styles/helpers/style-theme-config.interface";
+import { IBaseIconProps } from "../_helpers/base-icon-props.interface";
 
-export default function PenIcon(props: IPenIconProps) {
+export default function PenIcon(props: IBaseIconProps) {
     const theme = useTheme() as IStyleThemeConfig
     
     let color;
