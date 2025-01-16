@@ -48,6 +48,7 @@ export const SelectIconStyle = styled.div`
   align-items: center;
   height: 100%;
   cursor: pointer;
+  pointer-events: none;
   
 `;
 

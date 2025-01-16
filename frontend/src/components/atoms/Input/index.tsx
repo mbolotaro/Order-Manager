@@ -13,7 +13,7 @@ export default function Input(props: InputProps) {
     }
 
     return (
-        <InputContainerStyle>
+        <InputContainerStyle $width={props.width}>
             <InputStyle
                 id={props.id} 
                 type={props.type ?? 'text'}

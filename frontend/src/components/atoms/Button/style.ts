@@ -3,6 +3,7 @@ import { ButtonStyleProps } from "./helpers/button-style-props";
 
 export const ButtonStyle = styled.button<ButtonStyleProps>`
   min-width: 100px;
+  width: ${props => props.$width ?? 'none'};
   padding: ${(props) => (props.$density === "default" ? "6px" : "0px")};
   padding-left: 10px;
   padding-right: 10px;
@@ -12,7 +13,6 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
   color: white;
   letter-spacing: 1px;
   text-align: center;
-  flex: 1;
   font-weight: 700;
   height: 100% !important;
   vertical-align: middle;

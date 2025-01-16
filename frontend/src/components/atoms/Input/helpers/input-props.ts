@@ -11,5 +11,6 @@ export interface InputProps {
   icon?: ReactElement;
   register?: UseFormRegisterReturn;
   onChange: (value: string) => void;
+  width?: string;
 }
 

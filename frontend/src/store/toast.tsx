@@ -21,6 +21,12 @@ const toastSlice = createSlice({
             }
         },
 
+        warningAlert(state, message: PayloadAction<string>) {
+            if(!state.find(toast => toast.message === message.payload)) {
+                state.push({ message: message.payload, styleType: 'primary', icon: <AlertIcon size={25} styleType="primary"/>})
+            }
+        },
+
         removeToast(state, message: PayloadAction<string>) {
             return state.filter(toast => toast.message !== message.payload)
         }
@@ -33,6 +39,6 @@ export interface ToastData {
     icon?: ReactNode
 }
 
-export const { errorAlert, successAlert, removeToast } = toastSlice.actions
+export const { errorAlert, successAlert, warningAlert, removeToast } = toastSlice.actions
 
 export default toastSlice.reducer

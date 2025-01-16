@@ -7,10 +7,10 @@ export type CRUDOrderModalProps =
       close: () => void;
     }
   | {
-      action: "update";
+      action: "update" | "view";
       opened: boolean;
       close: () => void;
       order: ViewOrderModel;
     };
 
-export type CRUDOrderModalTypes = 'create' | 'update'
+export type CRUDOrderModalTypes = 'create' | 'update' | 'view'

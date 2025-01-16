@@ -41,20 +41,13 @@ export default function FilterOrderModal(props: FilterOrderModalProps) {
         handleSubmit,
         formState: { errors },
         setValue,
-        reset
+        reset,
     } = useForm({ resolver: yupResolver(filterOrderSchema), defaultValues: {
         isOpened: undefined,
         attendantId: undefined,
         createdAt: undefined
     }})
 
-    useEffect(() => {
-        if(props.opened) {
-            setValue('attendantId', orderFilter?.filter?.attendantId)
-            setValue('isOpened', orderFilter?.filter?.isOpened)
-            setValue('createdAt', orderFilter?.filter?.createdAt)
-        }
-    }, [props.opened, orderFilter, setValue])
 
     const dateOptions: { name: string, value: FilterByCreatedAtValues}[] = [
         { name: 'Hoje', value: FilterByCreatedAtValues.Today},
@@ -66,6 +59,24 @@ export default function FilterOrderModal(props: FilterOrderModalProps) {
         props.close()
         dispatch(updateOrderQuery({ filter }))
         setTimeout(reset, 200)
+    }
+
+    function revertChanges() {
+        setValue('attendantId', orderFilter.filter.attendantId)
+        setValue('createdAt', orderFilter.filter.createdAt)
+        setValue('isOpened', orderFilter.filter.isOpened)
+    }
+
+    function resetFields() {
+        setValue('attendantId', undefined)
+        setValue('createdAt', undefined)
+        setValue('isOpened', undefined)
+
+        dispatch(updateOrderQuery({ filter: {
+            attendantId: undefined,
+            createdAt: undefined,
+            isOpened: undefined
+        }}))
     }
 
 
@@ -111,8 +122,8 @@ export default function FilterOrderModal(props: FilterOrderModalProps) {
                 />
             </FilterFieldsContainer>
             <FilterOrderModalActionContainerStyle>
-                <Button text="Limpar Campos" model="terciary" type="reset"/>
-                <Button text="Descartar Alterações" model="secondary"/>
+                <Button text="Limpar Campos" model="terciary" type="reset" onClick={resetFields}/>
+                <Button text="Descartar Alterações" onClick={revertChanges} model="secondary"/>
                 <Button text="Confirmar" model="primary" type="submit"/>
             </FilterOrderModalActionContainerStyle>
         </form>

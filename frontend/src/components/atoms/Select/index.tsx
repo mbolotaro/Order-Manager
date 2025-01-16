@@ -76,7 +76,9 @@ export default function Select<T extends SelectPropTypes>(props: SelectProps<T>)
                     <CloseIcon size={40} styleType="background"/>
                 </ClearIconStyle>
             }
-            <ArrowIcon direction={opened ? 'top' : 'bottom'} size={20} styleType="text"/>
+            <div>
+                <ArrowIcon direction={opened ? 'top' : 'bottom'} size={20} styleType="text"/>
+            </div>
         </SelectIconStyle>
     </SelectContainerStyle>
 }

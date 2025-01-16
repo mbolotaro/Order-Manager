@@ -40,7 +40,7 @@ export default function Modal(props: ModalProps) {
         {
             ReactDOM.createPortal(
         <>
-            <Overlay active={props.opened}/>
+                <Overlay active={props.opened}/>
             <ModalContainerStyle $opened={props.opened} onClick={props.close}>
                 <ModalStyle
                     onClick={(event) => event.stopPropagation()}
@@ -66,7 +66,7 @@ export default function Modal(props: ModalProps) {
                     
                 </ModalStyle>
             </ModalContainerStyle>
-        </>,
+            </>,
         document.body
     )
         }

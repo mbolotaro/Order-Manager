@@ -5,19 +5,20 @@ import { shrinkAnimation } from "@/styles/utils/animations/shrink-animation";
 import { ModalContainerStyleProps } from "./helpers/modal-container-style-props";
 
 export const ModalContainerStyle = styled.div<ModalContainerStyleProps>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100vw;
   height: 100vh;
   position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 100;
+  top: 0;
   pointer-events: ${props => props.$opened? 'all' : 'none'};
 `;
 
 export const ModalStyle = styled.dialog<ModalStyleProps>`
   padding: 16px;
-  border: 0;
+  border: 0; 
   position: initial;
   -webkit-box-shadow: 6px 9px 32px -8px rgba(15, 19, 25, 1);
   -moz-box-shadow: 6px 9px 32px -8px rgba(15, 19, 25, 1);

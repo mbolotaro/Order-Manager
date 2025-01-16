@@ -1,9 +1,6 @@
 import styled from "styled-components";
-import { StatusCellStyleProps } from "./helpers/status-cell-props";
 
 export const TableContainerStyle = styled.div`
-  overflow-y: scroll;
-  height: 64%;
 `
 
 export const ActionContainer = styled.div`
@@ -13,7 +10,7 @@ export const ActionContainer = styled.div`
     gap: 4px;
     flex-wrap: wrap;
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1300px) {
         flex-direction: column
     }
 `
@@ -27,7 +24,7 @@ export const ActionIcon = styled.div`
         background-color: ${props => props.theme.colors.primary}
     }
 `
-export const CheckHeaderStyle = styled.div`
+export const CheckColumnStyle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,7 +44,8 @@ export const HeaderStyle = styled.div`
 
 export const OnLeftHeaderStyle = styled.div`
   text-align: left !important;
-  width: 100% !important;
+  white-space: nowrap;
+
   display: flex !important;
   align-items: center !important;
   justify-content: left !important;
@@ -71,35 +69,27 @@ export const IDCellStyle = styled.div`
     color: ${props => props.theme.colors.primary};
     font-weight: 800;
     display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 export const OnLeftCellStyle = styled.div`
-    text-align: left !important;
-    width: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: left !important;
-`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  width: 100px;
+  display: block;
+
+  @media (min-width: 900px) {
+    width: 200px;
+  }
+
+  @media (min-width: 1000px) {
+    width: 300px
+  }
+`;
 
 export const EmptyInfoCellStyle = styled.div`
     color: ${props => props.theme.colors.grey};
 `
-
-export const StatusCellStyle = styled.div<StatusCellStyleProps>`
-  text-align: left !important;
-  width: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: left !important;
-  gap: 6px;
-
-  &::before {
-    content: "";
-    width: 12px;
-    height: 12px;
-    background-color: ${(props) =>
-      props.$opened ? props.theme.colors.opened : props.theme.colors.danger};
-    border-radius: 100%;
-    margin-top: 4px;
-  }
-`;

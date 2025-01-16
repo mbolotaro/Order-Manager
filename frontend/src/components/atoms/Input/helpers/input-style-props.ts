@@ -1,3 +1,7 @@
 export interface InputStyleProps {
-    $error: boolean
+    $error: boolean;
+}
+
+export interface InputContainerStyleProps {
+  $width?: string;
 }

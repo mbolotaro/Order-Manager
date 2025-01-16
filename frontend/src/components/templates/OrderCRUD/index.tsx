@@ -1,5 +1,5 @@
 import TableInfo from "@/components/molecules/TableInfo";
-import { CRUDTemplateStyle, TableToolsStyle } from "./_helpers/style";
+import { CRUDHeadingStyle, CRUDTemplateStyle, TableToolsStyle } from "./style";
 import OrderTable from "@/components/organisms/OrderTable";
 import Button from "@/components/atoms/Button";
 import SearchInput from "@/components/molecules/SearchInput";
@@ -117,7 +117,7 @@ export default function OrderCRUD() {
         <title>Gerenciador de Pedidos</title>
     </Head>
     <CRUDTemplateStyle>
-        <h2>Pedidos</h2>
+        <CRUDHeadingStyle>Pedidos</CRUDHeadingStyle>
         <TableInfo infos={tableInfos}/>
         <Divider styleType="background" size="1px"/>
         <TableToolsStyle>
@@ -134,18 +134,22 @@ export default function OrderCRUD() {
                     </div>
                 </> :
                 <>
-                    <div>
-                        <Button 
-                            text="Adicionar Pedido" 
-                            icon={<PlusIcon size={24} styleType="light"/>} 
-                            density="compact" 
-                            onClick={() => handleOnCreateOrder()}
-                            loading={!alreadyListLoaded || listLoading}
+                    <Button 
+                        text="Adicionar Pedido" 
+                        width="fit-content"
+                        icon={<PlusIcon size={24} styleType="light"/>} 
+                        density="compact" 
+                        onClick={() => handleOnCreateOrder()}
+                        loading={!alreadyListLoaded || listLoading}
+                    />
+                    <div style={{display: 'flex', alignItems: 'center', width: '45%', justifyContent: 'end'}}>
+                        <SearchInput 
+                            value={searchValue} 
+                            onChange={setSearchValue} 
+                            width="90%"
                         />
-                    </div>
-                    <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-                        <SearchInput value={searchValue} onChange={setSearchValue}/>
                         <Button
+                            width="10%"
                             text=""
                             density="compact"
                             model="terciary"

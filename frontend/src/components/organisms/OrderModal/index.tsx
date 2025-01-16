@@ -63,12 +63,12 @@ export default function OrderModal(props: CRUDOrderModalProps) {
         }
     }, [props, setValue])
 
-    const titles: Record<CRUDOrderModalTypes, string> = {
+    const titles: Record<Partial<CRUDOrderModalTypes>, string> = {
         'create': 'Criar Pedido',
         'update': 'Editar Pedido'
     }
 
-    const actions: Record<CRUDOrderModalTypes, string> = {
+    const actions: Record<Partial<CRUDOrderModalTypes>, string> = {
         'create': 'Criar',
         'update': 'Editar'
     }

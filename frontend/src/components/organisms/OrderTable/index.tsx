@@ -5,7 +5,7 @@ import Checkbox from "@/components/atoms/Checkbox"
 import { ViewOrderModel } from "@/models/order"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { Column, Row, useTable } from "react-table"
-import { ActionIcon, ActionContainer, CheckHeaderStyle, IDCellStyle, OnLeftCellStyle, OnLeftHeaderStyle, StatusCellStyle, EmptyInfoCellStyle, SwapIconContainer, HeaderStyle, TableContainerStyle } from "./style"
+import { ActionIcon, ActionContainer, CheckColumnStyle, IDCellStyle, OnLeftCellStyle, OnLeftHeaderStyle, EmptyInfoCellStyle, SwapIconContainer, HeaderStyle, TableContainerStyle } from "./style"
 import Table from "@/components/molecules/Table"
 import { OrderTableProps } from "./helpers/order-table-props"
 import SwapIcon from "@/assets/icons/SwapIcon"
@@ -13,7 +13,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { updateOrderQuery } from "@/store/table-queries"
 import { StoreTypeHelper } from "@/store"
 import { OrderQueries } from "@/store/helpers/table-queries-data"
-
+import StatusShow from "@/components/atoms/StatusShow"
+import { warningAlert } from "@/store/toast"
 
 export default function OrderTable(props: OrderTableProps) {
 
@@ -28,6 +29,18 @@ export default function OrderTable(props: OrderTableProps) {
         if(orderBy === orderTableQuery.order.by) {
             dispatch(updateOrderQuery({ order: {by: orderBy, asc: !orderTableQuery.order.asc} }))
         } else dispatch(updateOrderQuery({ order: { by: orderBy, asc: true}}))
+    }
+
+    function handleUpdate(order: ViewOrderModel) {
+        if(!order.isOpened) {
+            dispatch(warningAlert('Não é possível editar pedidos fechados!'))
+        } else props.onUpdate(order)
+    }
+
+    function handleDelete(order: ViewOrderModel) {
+        if(!order.isOpened) {
+            dispatch(warningAlert('Não é possível remover pedidos fechados!'))
+        } else props.onDelete(order)
     }
 
     useEffect(() => {
@@ -64,21 +77,19 @@ export default function OrderTable(props: OrderTableProps) {
 
     }, [props])
 
-
-
     const columns = useMemo(() => [
         {
-            Header: <CheckHeaderStyle>
+            Header: <CheckColumnStyle>
                 <Checkbox value={allSelected} onChange={(value) => setAllSelected(value)}/>
-            </CheckHeaderStyle>,
+            </CheckColumnStyle>,
             
             Cell: ({row}: {row: Row<ViewOrderModel & {_order: ViewOrderModel}>}) => (
-                <div>
+                <CheckColumnStyle>
                     <Checkbox 
                         value={checkboxes[row.original._order.id ?? 0]} 
                         onChange={() => handleCheckboxChange(row.original._order.id as number)}
                     />
-                </div>
+                </CheckColumnStyle>
             ),
             accessor: 'checkbox',
             width: '3.57%',
@@ -139,11 +150,11 @@ export default function OrderTable(props: OrderTableProps) {
                     <ActionIcon onClick={() => props.onView(row.original._order)}>
                         <EyeIcon size={24}/>
                     </ActionIcon>
-                    <ActionIcon onClick={() => props.onUpdate(row.original._order)}>
-                        <PenIcon size={24}/>
+                    <ActionIcon onClick={() => handleUpdate(row.original._order)}>
+                        <PenIcon size={24} styleType={row.original._order.isOpened ? 'text' : 'secondary'}/>
                     </ActionIcon>
-                    <ActionIcon onClick={() => props.onDelete(row.original._order)}>
-                        <TrashIcon size={24}/>
+                    <ActionIcon onClick={() => handleDelete(row.original._order)}>
+                        <TrashIcon size={24} styleType={row.original._order.isOpened ? 'text' : 'secondary'}/>
                     </ActionIcon>
                 </ActionContainer>
                 
@@ -157,7 +168,7 @@ export default function OrderTable(props: OrderTableProps) {
                 order => ({
                     id: <IDCellStyle>{order.id}</IDCellStyle>,
                     name: <OnLeftCellStyle>{order.name}</OnLeftCellStyle>,
-                    isOpened: <StatusCellStyle $opened={order.isOpened}>{order.isOpened ? 'Aberto' : 'Fechado'}</StatusCellStyle>,
+                    isOpened: <StatusShow opened={order.isOpened}/>,
                     attendant: <OnLeftCellStyle>{
                         order.attendant?.name ?? <EmptyInfoCellStyle>Não informado</EmptyInfoCellStyle>
                     }</OnLeftCellStyle> 

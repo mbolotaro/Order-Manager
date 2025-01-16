@@ -4,7 +4,7 @@ import { PaginationNavButtonStyleProps } from "./helpers/pagination-nav-button-s
 export const PaginationNavButtonStyle = styled.button<PaginationNavButtonStyleProps>`
   width: 35px;
   height: 35px;
-  border: 1px solid ${(props) => props.theme.colors.text};
+  border: 1px solid ${(props) => props.theme.colors.secondary};
   background-color: transparent;
   color: ${(props) => props.theme.colors.text};
   display: flex;

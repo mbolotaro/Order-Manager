@@ -11,6 +11,7 @@ export interface ButtonProps {
     loading?: boolean;
     disabled?: boolean;
     onClick?: () => void;
+    width?: string;
 }
 
 export type ButtonModel = 'primary' | 'secondary' | 'terciary'

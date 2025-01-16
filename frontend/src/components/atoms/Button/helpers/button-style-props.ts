@@ -6,4 +6,5 @@ export interface ButtonStyleProps {
   $color: string;
   $loading: boolean;
   disabled: boolean;
+  $width?: string;
 }

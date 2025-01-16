@@ -4,6 +4,7 @@ export const HeaderStyle = styled.header`
   position: fixed;
   display: flex;
   align-items: center;
+  top: 0;
   gap: 14px;
   cursor: pointer;
   box-shadow: 0px 7px 9px -10px rgba(15, 19, 25, 0.75);

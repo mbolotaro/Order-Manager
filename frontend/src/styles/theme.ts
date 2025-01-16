@@ -32,7 +32,7 @@ export const theme = new StyleTheme({
     name: 'dark',
     colors: {
       primary: "#736CED",
-      secondary: "#B7B5B3",
+      secondary: "#878583",
       background: "#191C29",
       card: "#0F1319",
       text: "#E5E7E6",
