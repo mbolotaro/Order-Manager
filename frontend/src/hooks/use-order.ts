@@ -3,9 +3,10 @@ import { CreateOrderModel, UpdateOrderModel, ViewOrderModel } from "@/models/ord
 import { createOrder, deleteOrders, getOrders, updateOrder } from "@/services/orders";
 import { StoreTypeHelper } from "@/store";
 import { OrderQueries } from "@/store/helpers/table-queries-data";
+import { errorAlert } from "@/store/toast";
 import { useLiveQuery } from "dexie-react-hooks";
 import { useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export function useOrder() {
   const orderTableQuery = useSelector<StoreTypeHelper>(
@@ -18,6 +19,7 @@ export function useOrder() {
   const [alreadyListLoaded, setAlreadyListLoaded] = useState(false)
   const [searchValue, setSearchValue] = useState<string | undefined>(undefined)
   const [currentPage, setCurrentPage] = useState<number>(1)
+  const dispatch = useDispatch()
 
   // FILTRAGEM
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -139,7 +141,9 @@ export function useOrder() {
       await createOrder(createOrderModel)
       await getAll()
     } catch (error) {
-      throw error;
+      if(error instanceof Error && error.message) {
+        dispatch(errorAlert(error.message))
+      } else dispatch(errorAlert('Não foi possível criar pedido!'))
     } finally {
       setLoading(false)
     }
@@ -154,7 +158,9 @@ export function useOrder() {
         await db.orders.bulkPut((await getOrders() ?? []))
       }
     } catch (error) {
-      throw error;        
+      if(error instanceof Error && error.message) {
+        dispatch(errorAlert(error.message))
+      } else dispatch(errorAlert('Não foi possível obter pedidos!'))
     } finally {
       setListLoading(false)
       setAlreadyListLoaded(true)
@@ -168,7 +174,9 @@ export function useOrder() {
       await updateOrder(id, updateOrderModel)
       await getAll()
     } catch (error) {
-      throw error;
+      if(error instanceof Error) {
+        dispatch(errorAlert(error.message))
+      } else dispatch(errorAlert("Não foi possível atualizar pedidos!"));
     } finally {
       setLoading(false)
     }
@@ -181,7 +189,9 @@ export function useOrder() {
       await deleteOrders(ordersId)
       await getAll()
     } catch (error) {
-      throw error;
+      if(error instanceof Error) {
+        dispatch(errorAlert(error.message))
+      } else dispatch(errorAlert("Não foi possível remover pedido!"));
     } finally {
       setLoading(false)
     }

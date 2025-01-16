@@ -3,9 +3,9 @@ import PenIcon from "@/assets/icons/PenIcon"
 import TrashIcon from "@/assets/icons/TrashIcon"
 import Checkbox from "@/components/atoms/Checkbox"
 import { ViewOrderModel } from "@/models/order"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useMemo } from "react"
 import { Column, Row, useTable } from "react-table"
-import { ActionIcon, ActionContainer, CheckColumnStyle, IDCellStyle, OnLeftCellStyle, OnLeftHeaderStyle, EmptyInfoCellStyle, SwapIconContainer, HeaderStyle, TableContainerStyle } from "./style"
+import { ActionRow, CheckColumnStyle, IDCellStyle, OnLeftCellStyle, OnLeftHeaderStyle, EmptyInfoCellStyle, SwapIconContainer, HeaderStyle, TableContainerStyle } from "./style"
 import Table from "@/components/molecules/Table"
 import { OrderTableProps } from "./helpers/order-table-props"
 import SwapIcon from "@/assets/icons/SwapIcon"
@@ -13,14 +13,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { updateOrderQuery } from "@/store/table-queries"
 import { StoreTypeHelper } from "@/store"
 import { OrderQueries } from "@/store/helpers/table-queries-data"
-import StatusShow from "@/components/atoms/StatusShow"
+import StatusCard from "@/components/atoms/StatusCard"
 import { warningAlert } from "@/store/toast"
+import IconButton from "@/components/atoms/IconButton"
 
 export default function OrderTable(props: OrderTableProps) {
-
-    const [ checkboxes, setCheckboxes ] = useState<Record<number, boolean>>({})
-    const [ allSelected, setAllSelected ] = useState(false)
-
     const orderTableQuery = useSelector<StoreTypeHelper>(state => state.tableQueries.orders) as OrderQueries
 
     const dispatch = useDispatch()
@@ -31,62 +28,30 @@ export default function OrderTable(props: OrderTableProps) {
         } else dispatch(updateOrderQuery({ order: { by: orderBy, asc: true}}))
     }
 
-    function handleUpdate(order: ViewOrderModel) {
-        if(!order.isOpened) {
-            dispatch(warningAlert('Não é possível editar pedidos fechados!'))
-        } else props.onUpdate(order)
-    }
-
-    function handleDelete(order: ViewOrderModel) {
-        if(!order.isOpened) {
-            dispatch(warningAlert('Não é possível remover pedidos fechados!'))
-        } else props.onDelete(order)
-    }
-
-    useEffect(() => {
-        const updatedCheckboxes = props.orders.reduce((acc, order) => {
-            if(typeof order.id === 'number') {
-                acc[order.id] = allSelected
-            }
-
-            return acc;
-        }, {} as Record<number, boolean>)
-
-        setCheckboxes(updatedCheckboxes)
-
+    function handleCheckboxChange (id: number) {
         if(props.onCheckChange) {
-            props.onCheckChange(updatedCheckboxes)
+            props.onCheckChange({ ...props.checkedItems, [id]: !props.checkedItems[id]})
         }
 
+    }
 
-    }, [allSelected, setCheckboxes])
+    function handleOnSelectAll(value: boolean) {
+        if(props.onSelectAll) {
+            props.onSelectAll(value)
+        }
+    }
 
-    const handleCheckboxChange = useCallback((id: number) => {
-        setCheckboxes((prev) => {
-            const updatedCheckboxes: Record<number, boolean> = {
-                ...prev,
-                [id]: !prev[id]
-            } 
-        
-            if(props.onCheckChange) {
-                props.onCheckChange(updatedCheckboxes)
-            }
-
-            return updatedCheckboxes;
-        })
-
-    }, [props])
 
     const columns = useMemo(() => [
         {
             Header: <CheckColumnStyle>
-                <Checkbox value={allSelected} onChange={(value) => setAllSelected(value)}/>
+                <Checkbox value={props.allSelected} onChange={(value) => handleOnSelectAll(value)}/>
             </CheckColumnStyle>,
             
             Cell: ({row}: {row: Row<ViewOrderModel & {_order: ViewOrderModel}>}) => (
                 <CheckColumnStyle>
                     <Checkbox 
-                        value={checkboxes[row.original._order.id ?? 0]} 
+                        value={props.checkedItems[row.original._order.id ?? 0]} 
                         onChange={() => handleCheckboxChange(row.original._order.id as number)}
                     />
                 </CheckColumnStyle>
@@ -144,23 +109,34 @@ export default function OrderTable(props: OrderTableProps) {
 
         {
             Header: 'Ações',
-            width: '7.14%',
+            width: '7%',
             Cell: ({row}: {row: Row<ViewOrderModel & {_order: ViewOrderModel}>}) => (
-                <ActionContainer>
-                    <ActionIcon onClick={() => props.onView(row.original._order)}>
-                        <EyeIcon size={24}/>
-                    </ActionIcon>
-                    <ActionIcon onClick={() => handleUpdate(row.original._order)}>
+                <ActionRow >
+                    <IconButton onClick={() => props.onView(row.original._order)}>
+                        <EyeIcon size={24} styleType="text"/>
+                    </IconButton>
+                    <IconButton 
+                        onClick={() => props.onUpdate(row.original._order)} 
+                        onDenyClick={() => dispatch(warningAlert('Não é possível editar pedidos fechados!'))}
+                        disabled={!row.original._order.isOpened}
+                    >
                         <PenIcon size={24} styleType={row.original._order.isOpened ? 'text' : 'secondary'}/>
-                    </ActionIcon>
-                    <ActionIcon onClick={() => handleDelete(row.original._order)}>
-                        <TrashIcon size={24} styleType={row.original._order.isOpened ? 'text' : 'secondary'}/>
-                    </ActionIcon>
-                </ActionContainer>
+                    </IconButton>
+                    <IconButton 
+                        onClick={() => props.onDelete(row.original._order)} 
+                        onDenyClick={() => dispatch(warningAlert('Não é possível remover pedidos fechados!'))}
+                        disabled={!row.original._order.isOpened}
+                    >
+                        <TrashIcon 
+                            size={24} 
+                            styleType={row.original._order.isOpened ? 'danger' : 'secondary'}
+                        />
+                    </IconButton>
+                </ActionRow>
                 
             )
         }
-    ] as Column[], [ checkboxes, props, allSelected, handleCheckboxChange ])
+    ] as Column[], [ props, dispatch ])
 
     const data = useMemo(() => {
         if(Array.isArray(props.orders)) {
@@ -168,7 +144,7 @@ export default function OrderTable(props: OrderTableProps) {
                 order => ({
                     id: <IDCellStyle>{order.id}</IDCellStyle>,
                     name: <OnLeftCellStyle>{order.name}</OnLeftCellStyle>,
-                    isOpened: <StatusShow opened={order.isOpened}/>,
+                    isOpened: <StatusCard opened={order.isOpened}/>,
                     attendant: <OnLeftCellStyle>{
                         order.attendant?.name ?? <EmptyInfoCellStyle>Não informado</EmptyInfoCellStyle>
                     }</OnLeftCellStyle> 

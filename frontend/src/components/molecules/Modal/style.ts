@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ModalStyleProps } from "./helpers/modal-style-props";
-import { expandAnimation } from "@/styles/utils/animations/expand-animation";
-import { shrinkAnimation } from "@/styles/utils/animations/shrink-animation";
+import { expandAnimation } from "@/styles/animations/expand-animation";
+import { shrinkAnimation } from "@/styles/animations/shrink-animation";
 import { ModalContainerStyleProps } from "./helpers/modal-container-style-props";
 
 export const ModalContainerStyle = styled.div<ModalContainerStyleProps>`
@@ -46,6 +46,11 @@ export const ModalHeaderStyle = styled.div`
     flex: 1;
     font-family: ${(props) => props.theme.fonts.body};
     font-size: ${(props) => props.theme.fontSizes.large};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    display: block;
   }
 `;
 

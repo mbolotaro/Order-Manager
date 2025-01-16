@@ -1,4 +1,4 @@
-import { fade } from "@/styles/utils/animations/fade-in-animation";
+import { fade } from "@/styles/animations/fade-in-animation";
 import styled from "styled-components";
 import { OverlayStyleProps } from "./helpers/overlay-style-props";
 

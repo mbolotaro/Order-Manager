@@ -5,6 +5,7 @@ export const TableStyle = styled.table`
   width: 100%;
   text-align: center;
   border-collapse: collapse;
+  table-layout: fixed;
 
   th {
     padding-top: 10px;
@@ -20,7 +21,6 @@ export const TableStyle = styled.table`
           : props.theme.colors.secondary};
     padding-top: 10px;
     padding-bottom: 10px;
-
   }
 
   td,
@@ -33,12 +33,12 @@ export const TableStyle = styled.table`
 
 export const TableHeaderColumnStyle = styled.th<ColumnStyleProps>`
   width: ${(props) => props.$width};
-  max-width: ${(props) => props.$width};
-  min-width: ${(props) => props.$width};
+  max-width: ${(props) => props.$maxWidth};
+  min-width: ${(props) => props.$minWidth};
 `;
 
 export const TableCellStyle = styled.td<ColumnStyleProps>`
   width: ${(props) => props.$width};
-  max-width: ${(props) => props.$width};
-  min-width: ${(props) => props.$width};
+  max-width: ${(props) => props.$maxWidth};
+  min-width: ${(props) => props.$minWidth};
 `;

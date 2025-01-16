@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { SkeletonStyleProps } from "./helpers/skeleton-style-props";
-import { skeletonAnimation } from "@/styles/utils/animations/skeleton-animation";
+import { skeletonAnimation } from "@/styles/animations/skeleton-animation";
 
 export const SkeletonStyle = styled.div<SkeletonStyleProps>`
   width: ${(props) => props.$width};

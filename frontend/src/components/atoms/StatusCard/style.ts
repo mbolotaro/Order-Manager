@@ -1,4 +1,4 @@
-import { StatusCellStyleProps } from "@/components/atoms/StatusShow/helpers/status-cell-style-props";
+import { StatusCellStyleProps } from "@/components/atoms/StatusCard/helpers/status-cell-style-props";
 import styled from "styled-components";
 
 export const StatusCellStyle = styled.div<StatusCellStyleProps>`

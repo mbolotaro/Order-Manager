@@ -1,6 +1,7 @@
 import Skeleton from "@/components/atoms/Skeleton";
 import { TableProps } from "./helpers/table-props";
 import { TableCellStyle, TableHeaderColumnStyle, TableStyle } from "./style";
+import EmptyMessage from "@/components/atoms/EmptyMessage";
 
 export default function Table<T extends object>(props: TableProps<T>) {
     return props.loading ? <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
@@ -8,8 +9,9 @@ export default function Table<T extends object>(props: TableProps<T>) {
         <Skeleton height="43px;" width="90%"/>
         <Skeleton height="43px;" width="80%"/>
     </div> :
-     <TableStyle {...props.tableInstance.getTableProps()}>
-    
+    props.tableInstance.data.length === 0 ?
+    <EmptyMessage message="Nenhum pedido encontrado!"/> :
+    <TableStyle {...props.tableInstance.getTableProps()}>
         <thead>
             {
                 props.tableInstance.headerGroups.map((headerGroup, index) => (
@@ -27,7 +29,6 @@ export default function Table<T extends object>(props: TableProps<T>) {
                                         column.render('Header')
                                         
                                     }
-                                    <div></div>
                                 </TableHeaderColumnStyle>
                             ))
                         }
@@ -62,5 +63,4 @@ export default function Table<T extends object>(props: TableProps<T>) {
         })}
         </tbody>
     </TableStyle>
-    
 }

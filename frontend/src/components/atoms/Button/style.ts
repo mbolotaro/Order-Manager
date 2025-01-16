@@ -1,10 +1,11 @@
 import styled, { css } from "styled-components";
 import { ButtonStyleProps } from "./helpers/button-style-props";
+import { baseStyle } from "@/styles/base-style";
 
 export const ButtonStyle = styled.button<ButtonStyleProps>`
   min-width: 100px;
-  width: ${props => props.$width ?? 'none'};
-  padding: ${(props) => (props.$density === "default" ? "6px" : "0px")};
+  width: ${(props) => props.$width ?? "none"};
+  padding: ${(props) => (props.$density === "default" ? "6px" : "2.5px")};
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 6px;
@@ -61,11 +62,10 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
             color: ${(props) => props.$color};
             border-width: 2px;
             border-style: solid;
-            
 
             &:hover {
               background-color: ${(props) => props.$color};
-              color: white;
+              color: ${(props) => props.theme.colors.light};
               border-color: ${(props) => props.$color};
             }
           `;
@@ -74,9 +74,12 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
             color: ${(props) => props.$color};
 
             &:hover {
-              color: ${(props) => props.$color};
+              background-color: ${(props) => props.$color};
+              color: ${(props) => props.theme.colors.light};
             }
           `;
       }
   }}
+
+  ${baseStyle}
 `;

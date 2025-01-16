@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ToastStyleProps } from "./helpers/toast-style-props";
-import { slideAnimation } from "@/styles/utils/animations/slide-animation";
+import { slideAnimation } from "@/styles/animations/slide-animation";
 
 export const ToastStyle = styled.div<ToastStyleProps>`
   position: fixed;

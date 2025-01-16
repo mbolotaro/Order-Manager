@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { TablePaginationProps } from "./helpers/table-pagination-props";
-import { OrderQuantCounter, PaginationNavStyle, QuantByPageContainer, QuantByPageLabel, SelectStyle, TablePaginationStyleContainer } from "./style";
+import { OrderQuantCounter, PaginationNavStyle, QuantByPageContainer, QuantByPageLabel, SelectStyle } from "./style";
 import PaginationNavButton from "@/components/atoms/PaginationNavButton";
+import Row from "@/components/atoms/Row";
 
 export default function TablePagination(props: TablePaginationProps) {
     const quantPagesOptions = [10, 20, 30]
@@ -48,7 +49,7 @@ export default function TablePagination(props: TablePaginationProps) {
         }
     }
 
-    return <TablePaginationStyleContainer>
+    return <Row $justify="space-between" $wrap $gap="24px">
         <QuantByPageContainer>
             <QuantByPageLabel htmlFor="quant-order-by-page">Pedidos por página</QuantByPageLabel>
             <SelectStyle 
@@ -66,5 +67,5 @@ export default function TablePagination(props: TablePaginationProps) {
             }
             <PaginationNavButton action="next" onClick={handleNext}/>
         </PaginationNavStyle>
-    </TablePaginationStyleContainer>
+    </Row>
 }

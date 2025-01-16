@@ -6,11 +6,14 @@ import { useEffect } from "react";
 import { CRUDOrderModalTypes, CRUDOrderModalProps } from "./helpers/crud-order-modal-props";
 import { useForm } from 'react-hook-form' 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { CRUDOrderFormActionsStyle, CRUDOrderFormStyle } from "./style";
+import { CRUDOrderFormStyle } from "./style";
 import { useOrder } from "@/hooks/use-order";
 import { useAttendant } from "@/hooks/use-attendant";
 import { CreateOrderModel } from "@/models/order";
 import { orderSchema } from "@/validations/orders/validate-order";
+import Row from "@/components/atoms/Row";
+import { ViewOrderModalInfo, ViewOrderModalKey, ViewOrderModalValue } from "./style";
+import StatusCard from "@/components/atoms/StatusCard";
 
 export const statusValues = [
   {
@@ -63,14 +66,16 @@ export default function OrderModal(props: CRUDOrderModalProps) {
         }
     }, [props, setValue])
 
-    const titles: Record<Partial<CRUDOrderModalTypes>, string> = {
+    const titles: Record<CRUDOrderModalTypes, string> = {
         'create': 'Criar Pedido',
-        'update': 'Editar Pedido'
+        'update': 'Editar Pedido',
+        'view': 'Visualizar Pedido'
     }
 
-    const actions: Record<Partial<CRUDOrderModalTypes>, string> = {
+    const actions: Record<CRUDOrderModalTypes, string> = {
         'create': 'Criar',
-        'update': 'Editar'
+        'update': 'Editar',
+        'view': 'Visualizar'
     }
 
     function clearAttendant() {
@@ -102,11 +107,31 @@ export default function OrderModal(props: CRUDOrderModalProps) {
     }
 
     function handleClose() {
-        handleReset()
-        props.close()
+        if(props.action !== 'view') {
+            handleReset()
+            props.close()
+        }
     }
 
-    return <Modal opened={props.opened} title={titles[props.action]} width="50%" close={props.close}>
+    return <Modal opened={props.opened} title={props.action !== 'view' ? titles[props.action] : props.order?.name ?? ''} width="40%" close={props.close}>
+        {props.action === 'view' ?
+        <>
+            <ViewOrderModalInfo>
+                <ViewOrderModalKey>Nome: </ViewOrderModalKey> 
+                <ViewOrderModalValue>{props.order?.name}</ViewOrderModalValue>
+            </ViewOrderModalInfo>
+            <ViewOrderModalInfo>
+                <ViewOrderModalKey>Status: </ViewOrderModalKey>
+                <ViewOrderModalValue>
+                    <StatusCard opened={props.order?.isOpened ?? false}/>
+                </ViewOrderModalValue>
+            </ViewOrderModalInfo>
+            <ViewOrderModalInfo>
+                <ViewOrderModalKey>Atendente: </ViewOrderModalKey> 
+                <ViewOrderModalValue>{props.order?.attendant?.name ?? 'NÃO INFORMADO'}</ViewOrderModalValue>
+            </ViewOrderModalInfo> 
+        </>
+        :
         <CRUDOrderFormStyle onSubmit={handleSubmit(onSubmit)}>
             <TextField 
                 id="order-name" 
@@ -138,7 +163,7 @@ export default function OrderModal(props: CRUDOrderModalProps) {
                 register={register('attendantId')}
                 onClear={clearAttendant}
             />
-            <CRUDOrderFormActionsStyle>
+            <Row $gap="12px" $padding={{top: '12px'}}>
                 <Button 
                     text="Cancelar" 
                     onClick={handleClose} 
@@ -150,7 +175,8 @@ export default function OrderModal(props: CRUDOrderModalProps) {
                     type="submit" 
                     loading={loading}
                 />
-            </CRUDOrderFormActionsStyle>
+            </Row>
         </CRUDOrderFormStyle>
+    }
     </Modal>
 }

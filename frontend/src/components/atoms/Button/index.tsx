@@ -20,7 +20,7 @@ export default function Button(props: ButtonProps) {
             onClick={handleClick}
             type={props.type ?? 'button' }
             $density={props.density ?? 'default'}
-            $width={props.width}
+            $width={props.$width}
         >
             {
                 props.loading? 

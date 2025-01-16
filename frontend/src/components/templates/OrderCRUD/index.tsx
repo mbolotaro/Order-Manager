@@ -1,5 +1,5 @@
 import TableInfo from "@/components/molecules/TableInfo";
-import { CRUDHeadingStyle, CRUDTemplateStyle, TableToolsStyle } from "./style";
+import { CRUDHeadingStyle, CRUDTemplateStyle } from "./style";
 import OrderTable from "@/components/organisms/OrderTable";
 import Button from "@/components/atoms/Button";
 import SearchInput from "@/components/molecules/SearchInput";
@@ -7,35 +7,38 @@ import Divider from "@/components/atoms/Divider";
 import PlusIcon from "@/assets/icons/PlusIcon";
 import { useEffect, useMemo, useState } from "react";
 import Head from "next/head";
-import ViewOrderModal from "@/components/organisms/ViewOrderModal";
-import OrderModal from "@/components/organisms/OrderModal";
-import DeleteOrderModal from "@/components/organisms/DeleteOrderModal";
+import OrderModal from "@/components/templates/OrderModal";
+import ConfirmDeleteModal from "@/components/organisms/ConfirmDeleteModal";
 import { ViewOrderModel } from "@/models/order";
 import { useOrder } from "@/hooks/use-order";
-import { CRUDOrderModalTypes } from "@/components/organisms/OrderModal/helpers/crud-order-modal-props";
+import { CRUDOrderModalTypes } from "@/components/templates/OrderModal/helpers/crud-order-modal-props";
 import { TableInfoType } from "@/components/molecules/TableInfo/helpers/table-info-props";
 import TrashIcon from "@/assets/icons/TrashIcon";
 import TablePagination from "@/components/molecules/TablePagination";
 import CogIcon from "@/assets/icons/CogIcon";
-import FilterOrderModal from "@/components/organisms/FilterOrderModal";
+import FilterOrderModal from "@/components/templates/FilterOrderModal";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreTypeHelper } from "@/store";
 import { updateOrderQuery } from "@/store/table-queries";
 import { OrderQueries } from "@/store/helpers/table-queries-data";
+import Row from "@/components/atoms/Row";
+import IconButton from "@/components/atoms/IconButton";
+import LoadingIcon from "@/assets/icons/LoadingIcon";
 
 export default function OrderCRUD() {
 
     const orderTableQuery = useSelector<StoreTypeHelper>(state => state.tableQueries.orders) as OrderQueries
     const dispatch = useDispatch()
 
-    const [ viewModalOpened, setViewModalOpened ] = useState(false)
     const [ modalOpened, setModalOpened ] = useState(false)
     const [ deleteModalOpened, setDeleteModalOpened ] = useState(false)
     const [ filterModelOpened, setFilterModalOpened ] = useState(false)
     
     const [ currentOrder, setCurrentOrder ] = useState<ViewOrderModel | undefined>(undefined)
     const [ currentAction, setCurrentAction ] = useState<CRUDOrderModalTypes>("create")
-    const [ checkedItems, setCheckedItems ] = useState<number[]>([])
+    const [ checkboxes, setCheckboxes ] = useState<Record<number, boolean>>([])
+
+    const [allSelected, setAllSelected] = useState(false)
     
     const [ isDeleteMany, setIsDeleteMany ] = useState(false)
 
@@ -47,10 +50,30 @@ export default function OrderCRUD() {
         searchValue,
         currentPage,
         listLoading,
+        loading,
         alreadyListLoaded,
         setCurrentPage,
         setSearchValue,
+        removeMany
     } = useOrder()
+
+    const checkedItems = useMemo(() => Object.keys(checkboxes).filter(checkbox => !!checkboxes[Number(checkbox)]).map(checkbox => Number(checkbox)), 
+        [checkboxes]
+    )
+
+    useEffect(() => {
+        const updatedCheckboxes = paginatedFilteredOrders.reduce((acc, order) => {
+            if(typeof order.id === 'number') {
+                acc[order.id] = allSelected
+            }
+
+            return acc;
+        }, {} as Record<number, boolean>)
+
+        setCheckboxes(updatedCheckboxes)
+
+
+    }, [allSelected, setCheckboxes, paginatedFilteredOrders])
     
     const tableInfos = useMemo<TableInfoType[]>(() => [
         {
@@ -87,7 +110,8 @@ export default function OrderCRUD() {
 
     function handleOnViewOrder(order: ViewOrderModel) {
         setCurrentOrder(order)
-        setViewModalOpened(true)
+        setCurrentAction('view')
+        setModalOpened(true)
     }
 
     function handleOnDeleteOrder(order: ViewOrderModel) {
@@ -102,14 +126,22 @@ export default function OrderCRUD() {
     }
 
     function handleOnCheckChange(checkboxes: Record<number, boolean>) {
-        setCheckedItems(Object.keys(checkboxes).filter(checkbox => !!checkboxes[Number(checkbox)]).map(checkbox => Number(checkbox))) 
+        setCheckboxes(checkboxes) 
     }
 
     function handleOnClose() {
         setCurrentOrder(undefined)
         setModalOpened(false)
         setDeleteModalOpened(false)
-        setViewModalOpened(false)
+    }
+
+    async function handleConfirmDelete() {
+        if(isDeleteMany) {
+            await removeMany(checkedItems)
+        } else await removeMany([currentOrder?.id as number])
+
+        setDeleteModalOpened(false)
+        setCheckboxes([])
     }
 
     return <>
@@ -120,53 +152,60 @@ export default function OrderCRUD() {
         <CRUDHeadingStyle>Pedidos</CRUDHeadingStyle>
         <TableInfo infos={tableInfos}/>
         <Divider styleType="background" size="1px"/>
-        <TableToolsStyle>
+        <Row $justify="space-between" $margin={{ y: '20px' }}>
             { checkedItems.length > 0 ? 
                 <>
-                    <div>
-                        <Button 
-                            text={`Excluir ${checkedItems.length} ${checkedItems.length > 1 ? 'pedidos' : 'pedido'}`} 
-                            styleType="danger" 
-                            icon={<TrashIcon size={24} styleType="light"/>} 
-                            density="compact"
-                            onClick={handleOnDeleteManyOrders}
-                        />
-                    </div>
+                    <Button 
+                        text={`Excluir ${checkedItems.length} ${checkedItems.length > 1 ? 'pedidos' : 'pedido'}`} 
+                        styleType="danger" 
+                        icon={<TrashIcon size={24} styleType="light"/>} 
+                        density="compact"
+                        onClick={handleOnDeleteManyOrders}
+                        $width="fit-content"
+                        $maxWidth="10%"
+                    />
                 </> :
                 <>
-                    <Button 
-                        text="Adicionar Pedido" 
-                        width="fit-content"
-                        icon={<PlusIcon size={24} styleType="light"/>} 
-                        density="compact" 
-                        onClick={() => handleOnCreateOrder()}
-                        loading={!alreadyListLoaded || listLoading}
-                    />
-                    <div style={{display: 'flex', alignItems: 'center', width: '45%', justifyContent: 'end'}}>
+                    <Row $gap="8px">
+                        <Button 
+                            text="Adicionar Pedido" 
+                            $width="fit-content"
+                            icon={<PlusIcon size={24} styleType="light"/>} 
+                            density="compact" 
+                            onClick={() => handleOnCreateOrder()}
+                            loading={!alreadyListLoaded || listLoading}
+                        />
+                        {
+                            (listLoading || !alreadyListLoaded) &&
+                            <>
+                                <LoadingIcon size={20}/>
+                                <div>Carregando...</div>
+                            </>
+                        }
+                    </Row>
+                    <Row $gap="4px" $justify="space-between" $width="40%">
                         <SearchInput 
                             value={searchValue} 
                             onChange={setSearchValue} 
                             width="90%"
                         />
-                        <Button
-                            width="10%"
-                            text=""
-                            density="compact"
-                            model="terciary"
-                            onClick={() => setFilterModalOpened(true)}
-                            icon={<CogIcon size={27} styleType="text" />}
-                        />
-                    </div>
+                        <IconButton onClick={() => setFilterModalOpened(true)}>
+                            <CogIcon size={27} styleType="text" />
+                        </IconButton>
+                    </Row>
                 </>
             }
-        </TableToolsStyle>
+        </Row>
         <OrderTable
-            loading={listLoading || !alreadyListLoaded}
+            loading={!alreadyListLoaded}
             orders={paginatedFilteredOrders}
             onView={handleOnViewOrder} 
             onUpdate={handleOnUpdateOrder} 
             onDelete={handleOnDeleteOrder}
+            checkedItems={checkboxes}
             onCheckChange={handleOnCheckChange}
+            allSelected={allSelected}
+            onSelectAll={(value) => setAllSelected(value)}
         />
         <TablePagination
             listLength={filteredOrders.length}
@@ -176,23 +215,19 @@ export default function OrderCRUD() {
             onChangeLimit={(newLimit) => dispatch(updateOrderQuery({ limit: newLimit}))}
         />
     </CRUDTemplateStyle>
-    <ViewOrderModal 
-        opened={viewModalOpened} 
-        close={handleOnClose} 
-        order={currentOrder}
-    />
     <OrderModal 
         opened={modalOpened} 
         close={handleOnClose} 
         action={currentAction} 
         order={currentOrder as ViewOrderModel}
     />
-    <DeleteOrderModal 
-        many={isDeleteMany} 
+    <ConfirmDeleteModal 
+        title="Excluir Pedido"
+        subtitle={isDeleteMany ? `Deseja excluir ${checkedItems.length} pedidos?` : `Deseja excluir o pedido "${currentOrder?.name} ?"`}
         opened={deleteModalOpened} 
-        close={handleOnClose} 
-        order={currentOrder} 
-        ordersId={checkedItems}
+        close={handleOnClose}
+        onConfirm={handleConfirmDelete}
+        loading={loading}
     />
     <FilterOrderModal
         opened={filterModelOpened}

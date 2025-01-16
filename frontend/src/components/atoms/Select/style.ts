@@ -41,6 +41,19 @@ export const OptionStyle = styled.option`
 export const SelectIconStyle = styled.div`
   position: absolute;
   top: 100%;
+  right: 28px;
+  transform: translateY(-100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+`;
+
+export const ArrowIconStyle = styled.div`
+  pointer-events: none;
+  position: absolute;
+  top: 100%;
   right: 6px;
   transform: translateY(-100%);
   display: flex;
@@ -48,8 +61,6 @@ export const SelectIconStyle = styled.div`
   align-items: center;
   height: 100%;
   cursor: pointer;
-  pointer-events: none;
-  
 `;
 
 export const ClearIconStyle = styled.div`

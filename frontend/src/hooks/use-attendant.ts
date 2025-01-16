@@ -15,13 +15,12 @@ export function useAttendant() {
     async function getAll() {
         setListLoading(true)
         try {
-            throw new Error('Não foi pofssífvel obter atfendentes! ' + new Date().getTime())
-/*             if(!listLoading && !alreadyListLoaded) {
+            if(!listLoading && !alreadyListLoaded) {
                 await db.attendants.bulkPut(await getAttendants() ?? [])
             }
-            return attendants */
+            return attendants
         } catch (error) {
-            if(error instanceof Error) {
+            if(error instanceof Error && error.message) {
                 dispatch(errorAlert(error.message))
             } else dispatch(errorAlert('Não foi possível obter atendentes!'))
         } finally {

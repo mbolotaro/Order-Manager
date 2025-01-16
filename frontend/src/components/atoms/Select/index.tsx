@@ -1,5 +1,5 @@
 import ArrowIcon from "@/assets/icons/ArrowIcon";
-import { ClearIconStyle, OptionStyle, SelectContainerStyle, SelectIconStyle, SelectStyle } from "./style";
+import { ArrowIconStyle, ClearIconStyle, OptionStyle, SelectContainerStyle, SelectIconStyle, SelectStyle } from "./style";
 import { ChangeEvent, useState } from "react";
 import { SelectProps, SelectPropTypes } from "./helpers/select-props";
 import LoadingIcon from "@/assets/icons/LoadingIcon";
@@ -76,9 +76,9 @@ export default function Select<T extends SelectPropTypes>(props: SelectProps<T>)
                     <CloseIcon size={40} styleType="background"/>
                 </ClearIconStyle>
             }
-            <div>
-                <ArrowIcon direction={opened ? 'top' : 'bottom'} size={20} styleType="text"/>
-            </div>
         </SelectIconStyle>
+        <ArrowIconStyle>
+            <ArrowIcon direction={opened ? 'top' : 'bottom'} size={20} styleType="text"/>
+        </ArrowIconStyle>
     </SelectContainerStyle>
 }
