@@ -8,6 +8,7 @@ export default function Row(props: RowProps) {
         $margin={props.$margin}
         $padding={props.$padding}
         $width={props.$width}
+        $minWidth={props.$minWidth}
         $wrap={props.$wrap}
     >
         {props.children}

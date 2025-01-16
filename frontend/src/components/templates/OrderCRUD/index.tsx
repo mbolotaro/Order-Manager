@@ -152,7 +152,7 @@ export default function OrderCRUD() {
         <CRUDHeadingStyle>Pedidos</CRUDHeadingStyle>
         <TableInfo infos={tableInfos}/>
         <Divider styleType="background" size="1px"/>
-        <Row $justify="space-between" $margin={{ y: '20px' }}>
+        <Row $justify="space-between" $margin={{ y: '20px' }} $wrap $gap="20px">
             { checkedItems.length > 0 ? 
                 <>
                     <Button 
@@ -168,9 +168,9 @@ export default function OrderCRUD() {
                 <>
                     <Row $gap="8px">
                         <Button 
-                            text="Adicionar Pedido" 
+                            text="Novo Pedido" 
                             $width="fit-content"
-                            icon={<PlusIcon size={24} styleType="light"/>} 
+                            icon={<PlusIcon size={20} styleType="light"/>} 
                             density="compact" 
                             onClick={() => handleOnCreateOrder()}
                             loading={!alreadyListLoaded || listLoading}
@@ -183,14 +183,15 @@ export default function OrderCRUD() {
                             </>
                         }
                     </Row>
-                    <Row $gap="4px" $justify="space-between" $width="40%">
+                    <Row $gap="4px" $justify="space-between" $width="40%" $minWidth="170px">
                         <SearchInput 
                             value={searchValue} 
                             onChange={setSearchValue} 
                             width="90%"
+                            
                         />
                         <IconButton onClick={() => setFilterModalOpened(true)}>
-                            <CogIcon size={27} styleType="text" />
+                            <CogIcon size={24} styleType="text" />
                         </IconButton>
                     </Row>
                 </>

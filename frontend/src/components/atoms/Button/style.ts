@@ -7,6 +7,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
   width: ${(props) => props.$width ?? "none"};
   padding: ${(props) => (props.$density === "default" ? "6px" : "2.5px")};
   padding-left: 10px;
+  text-wrap: nowrap;
   padding-right: 10px;
   border-radius: 6px;
   transition: all 0.2s ease;
