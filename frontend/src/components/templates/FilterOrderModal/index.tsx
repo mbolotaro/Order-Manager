@@ -3,16 +3,16 @@ import Modal from "@/components/molecules/Modal";
 import SelectField from "@/components/molecules/SelectField";
 import { useAttendant } from "@/hooks/use-attendant";
 import { FilterOrderModalProps } from "./helpers/filter-order-modal-props";
-import { FilterFieldsContainer, FilterOrderModalActionContainerStyle } from "./style";
+import { FilterFieldsContainer } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "@/store";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FilterByCreatedAtValues, FilterOrderModel } from "@/models/order";
 import { updateOrderQuery } from "@/store/table-queries";
-import { useEffect } from "react";
 import { filterOrderSchema } from "@/validations/orders/validate-filter-order";
 import { OrderQueries } from "@/store/helpers/table-queries-data";
+import Row from "@/components/atoms/Row";
 
 const statusValues = [
   {
@@ -41,7 +41,6 @@ export default function FilterOrderModal(props: FilterOrderModalProps) {
         handleSubmit,
         formState: { errors },
         setValue,
-        reset,
     } = useForm({ resolver: yupResolver(filterOrderSchema), defaultValues: {
         isOpened: undefined,
         attendantId: undefined,
@@ -58,7 +57,6 @@ export default function FilterOrderModal(props: FilterOrderModalProps) {
     function onSubmit(filter: FilterOrderModel) {
         props.close()
         dispatch(updateOrderQuery({ filter }))
-        setTimeout(reset, 200)
     }
 
     function revertChanges() {
@@ -80,7 +78,7 @@ export default function FilterOrderModal(props: FilterOrderModalProps) {
     }
 
 
-    return <Modal opened={props.opened} close={props.close} title="Filtrar Lista de Pedidos" width="600px">
+    return <Modal opened={props.opened} close={props.close} title="Filtrar Lista de Pedidos" $width="600px">
         <form onSubmit={handleSubmit(onSubmit)}>
             <FilterFieldsContainer>
                 <SelectField 
@@ -121,11 +119,11 @@ export default function FilterOrderModal(props: FilterOrderModalProps) {
                     onClear={() => setValue('createdAt', undefined)}
                 />
             </FilterFieldsContainer>
-            <FilterOrderModalActionContainerStyle>
-                <Button text="Limpar Campos" model="terciary" type="reset" onClick={resetFields}/>
+            <Row $justify="center" $padding={{ top: '24px' }} $gap="8px">
+                <Button text="Limpar Campos" model="terciary" onClick={resetFields}/>
                 <Button text="Descartar Alterações" onClick={revertChanges} model="secondary"/>
                 <Button text="Confirmar" model="primary" type="submit"/>
-            </FilterOrderModalActionContainerStyle>
+            </Row>
         </form>
     </Modal>
 }

@@ -10,6 +10,8 @@ export default function Row(props: RowProps) {
         $width={props.$width}
         $minWidth={props.$minWidth}
         $wrap={props.$wrap}
+        $wrapAt={props.$wrapAt}
+        $justifyWrapped={props.$justifyWrapped}
     >
         {props.children}
     </RowStyle>

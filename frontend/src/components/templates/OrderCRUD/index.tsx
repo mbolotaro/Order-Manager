@@ -1,12 +1,11 @@
 import TableInfo from "@/components/molecules/TableInfo";
-import { CRUDHeadingStyle, CRUDTemplateStyle } from "./style";
+import { CRUDHeadingStyle } from "./style";
 import OrderTable from "@/components/organisms/OrderTable";
 import Button from "@/components/atoms/Button";
 import SearchInput from "@/components/molecules/SearchInput";
 import Divider from "@/components/atoms/Divider";
 import PlusIcon from "@/assets/icons/PlusIcon";
 import { useEffect, useMemo, useState } from "react";
-import Head from "next/head";
 import OrderModal from "@/components/templates/OrderModal";
 import ConfirmDeleteModal from "@/components/organisms/ConfirmDeleteModal";
 import { ViewOrderModel } from "@/models/order";
@@ -135,6 +134,10 @@ export default function OrderCRUD() {
         setDeleteModalOpened(false)
     }
 
+    function handleSetAction(newAction: CRUDOrderModalTypes) {
+        setCurrentAction(newAction)
+    }
+
     async function handleConfirmDelete() {
         if(isDeleteMany) {
             await removeMany(checkedItems)
@@ -143,84 +146,82 @@ export default function OrderCRUD() {
         setDeleteModalOpened(false)
         setCheckboxes([])
     }
+    
 
     return <>
-    <Head>
-        <title>Gerenciador de Pedidos</title>
-    </Head>
-    <CRUDTemplateStyle>
-        <CRUDHeadingStyle>Pedidos</CRUDHeadingStyle>
-        <TableInfo infos={tableInfos}/>
-        <Divider styleType="background" size="1px"/>
-        <Row $justify="space-between" $margin={{ y: '20px' }} $wrap $gap="20px">
-            { checkedItems.length > 0 ? 
-                <>
+    <CRUDHeadingStyle>Pedidos</CRUDHeadingStyle>
+    <TableInfo infos={tableInfos}/>
+    <Divider styleType="background" size="1px" $margin={{ y: '8px'}}/>
+    <Row $justify="space-between" $margin={{ y: '20px' }} $wrap $gap="20px" $wrapAt="400px" $justifyWrapped="center">
+        { checkedItems.length > 0 ? 
+            <>
+                <Button 
+                    text={`Excluir ${checkedItems.length} ${checkedItems.length > 1 ? 'pedidos' : 'pedido'}`} 
+                    styleType="danger" 
+                    icon={<TrashIcon size={24} styleType="light"/>} 
+                    density="compact"
+                    onClick={handleOnDeleteManyOrders}
+                    $width="fit-content"
+                    $maxWidth="10%"
+                />
+            </> :
+            <>
+                <Row $gap="8px">
                     <Button 
-                        text={`Excluir ${checkedItems.length} ${checkedItems.length > 1 ? 'pedidos' : 'pedido'}`} 
-                        styleType="danger" 
-                        icon={<TrashIcon size={24} styleType="light"/>} 
-                        density="compact"
-                        onClick={handleOnDeleteManyOrders}
+                        text="Novo Pedido" 
                         $width="fit-content"
-                        $maxWidth="10%"
+                        icon={<PlusIcon size={20} styleType="light"/>} 
+                        density="compact" 
+                        onClick={() => handleOnCreateOrder()}
+                        loading={!alreadyListLoaded || listLoading}
                     />
-                </> :
-                <>
-                    <Row $gap="8px">
-                        <Button 
-                            text="Novo Pedido" 
-                            $width="fit-content"
-                            icon={<PlusIcon size={20} styleType="light"/>} 
-                            density="compact" 
-                            onClick={() => handleOnCreateOrder()}
-                            loading={!alreadyListLoaded || listLoading}
-                        />
-                        {
-                            (listLoading || !alreadyListLoaded) &&
-                            <>
-                                <LoadingIcon size={20}/>
-                                <div>Carregando...</div>
-                            </>
-                        }
-                    </Row>
-                    <Row $gap="4px" $justify="space-between" $width="40%" $minWidth="170px">
-                        <SearchInput 
-                            value={searchValue} 
-                            onChange={setSearchValue} 
-                            width="90%"
-                            
-                        />
-                        <IconButton onClick={() => setFilterModalOpened(true)}>
-                            <CogIcon size={24} styleType="text" />
-                        </IconButton>
-                    </Row>
-                </>
-            }
-        </Row>
-        <OrderTable
-            loading={!alreadyListLoaded}
-            orders={paginatedFilteredOrders}
-            onView={handleOnViewOrder} 
-            onUpdate={handleOnUpdateOrder} 
-            onDelete={handleOnDeleteOrder}
-            checkedItems={checkboxes}
-            onCheckChange={handleOnCheckChange}
-            allSelected={allSelected}
-            onSelectAll={(value) => setAllSelected(value)}
-        />
-        <TablePagination
-            listLength={filteredOrders.length}
-            limit={orderTableQuery.limit}
-            currentPage={currentPage}
-            onChangePage={(value) => setCurrentPage(value ?? 1)}
-            onChangeLimit={(newLimit) => dispatch(updateOrderQuery({ limit: newLimit}))}
-        />
-    </CRUDTemplateStyle>
+                    {
+                        (listLoading || !alreadyListLoaded) &&
+                        <>
+                            <LoadingIcon size={20}/>
+                            <div>Carregando...</div>
+                        </>
+                    }
+                </Row>
+                <Row $gap="4px" $justify="space-between" $width="40%" $minWidth="170px" $wrapAt="380px" $justifyWrapped="center">
+                    <SearchInput 
+                        value={searchValue} 
+                        onChange={setSearchValue} 
+                        width="90%"
+                        
+                    />
+                    <IconButton onClick={() => setFilterModalOpened(true)}>
+                        <CogIcon size={24} styleType="text" />
+                    </IconButton>
+                </Row>
+            </>
+        }
+    </Row>
+    <OrderTable
+        loading={!alreadyListLoaded}
+        orders={paginatedFilteredOrders}
+        onView={handleOnViewOrder} 
+        onUpdate={handleOnUpdateOrder} 
+        onDelete={handleOnDeleteOrder}
+        checkedItems={checkboxes}
+        onCheckChange={handleOnCheckChange}
+        allSelected={allSelected}
+        onSelectAll={(value) => setAllSelected(value)}
+    />
+    <TablePagination
+        listLength={filteredOrders.length}
+        limit={orderTableQuery.limit}
+        currentPage={currentPage}
+        onChangePage={(value) => setCurrentPage(value ?? 1)}
+        onChangeLimit={(newLimit) => dispatch(updateOrderQuery({ limit: newLimit}))}
+    />
     <OrderModal 
         opened={modalOpened} 
         close={handleOnClose} 
         action={currentAction} 
         order={currentOrder as ViewOrderModel}
+        setAction={handleSetAction}
+        openDeleteModal={() => setDeleteModalOpened(true)}
     />
     <ConfirmDeleteModal 
         title="Excluir Pedido"

@@ -29,6 +29,10 @@ export const TableStyle = styled.table`
     padding-right: 4px;
     user-select: none;
   }
+
+  thead {
+
+  }
 `;
 
 export const TableHeaderColumnStyle = styled.th<ColumnStyleProps>`

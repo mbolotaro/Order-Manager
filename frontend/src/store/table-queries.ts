@@ -29,7 +29,6 @@ const tableQueriesSlice = createSlice({
 
         updateOrderQuery: (state, changes) => {
             if(typeof window !== undefined) {
-                console.log(changes.payload)
                 state.orders = {...state.orders, ...changes.payload}
                 localStorage.setItem('table-queries', JSON.stringify(state))
             }

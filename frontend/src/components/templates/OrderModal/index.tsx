@@ -14,6 +14,9 @@ import { orderSchema } from "@/validations/orders/validate-order";
 import Row from "@/components/atoms/Row";
 import { ViewOrderModalInfo, ViewOrderModalKey, ViewOrderModalValue } from "./style";
 import StatusCard from "@/components/atoms/StatusCard";
+import IconButton from "@/components/atoms/IconButton";
+import PenIcon from "@/assets/icons/PenIcon";
+import TrashIcon from "@/assets/icons/TrashIcon";
 
 export const statusValues = [
   {
@@ -113,7 +116,37 @@ export default function OrderModal(props: CRUDOrderModalProps) {
         }
     }
 
-    return <Modal opened={props.opened} title={props.action !== 'view' ? titles[props.action] : props.order?.name ?? ''} width="40%" close={props.close}>
+    function setToEditMode() {
+        if(props.action === 'view' && props.setAction) {
+            props.setAction("update")
+        }
+    }
+
+    function openDeleteModal() {
+        if(props.action === 'view' && props.openDeleteModal) {
+            props.openDeleteModal()
+        }
+    }
+
+    return <Modal 
+        opened={props.opened} 
+        title={props.action !== 'view' ? titles[props.action] : props.order?.name ?? ''} 
+        $width="40%" 
+        close={props.close}
+        $minWidth="fit-content"
+        headerActions={
+            (props.action === 'view' && props?.order?.isOpened === true) &&
+            <>
+                <IconButton onClick={setToEditMode}>
+                    <PenIcon size={23}/>
+                </IconButton>
+                <IconButton onClick={openDeleteModal}>
+                    <TrashIcon size={23}/>
+                </IconButton>
+            </>
+                
+        }
+        >
         {props.action === 'view' ?
         <>
             <ViewOrderModalInfo>

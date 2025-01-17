@@ -17,4 +17,9 @@ export const FooterStyle = styled.footer`
     width: 100%;
     color: ${props => props.theme.name === 'dark' ? props.theme.colors.grey : props.theme.colors.text};
   }
+
+  @media (max-width: 500px) {
+    left: 0;
+    position: absolute;
+  }
 `;

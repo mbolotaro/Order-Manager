@@ -45,13 +45,20 @@ export default function Modal(props: ModalProps) {
                 <ModalStyle
                     onClick={(event) => event.stopPropagation()}
                     open={opened}
+                    $width={props.$width ?? '50%'} 
+                    $height={props.$height ?? 'fit-content'}
                     $duration={duration}
-                    width={props.width ?? '50%'} 
-                    height={props.height ?? 'fit-content'}
                     $animateEnd={animateEnd}
+                    $margin={props.$margin}
+                    $padding={props.$padding}
+                    $minWidth={props.$minWidth}
+                    $maxWidth={props.$maxWidth}
+                    $minHeight={props.$minHeight}
+                    $maxHeight={props.$maxHeight}
                     >
                     <ModalHeaderStyle>
                         <span>{props.title}</span>
+                        {props.headerActions}
                         <CloseIconStyle>
                             <CloseIcon
                                 styleType="text" 

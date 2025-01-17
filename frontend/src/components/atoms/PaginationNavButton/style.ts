@@ -33,7 +33,8 @@ export const PaginationNavButtonStyle = styled.button<PaginationNavButtonStylePr
   ${(props) => 
     props.$current &&
       css`
-        background-color: ${props.theme.colors.primary}
+        background-color: ${props.theme.colors.primary};
+        color: ${props => props.theme.colors.light}
       `
   }
 `;

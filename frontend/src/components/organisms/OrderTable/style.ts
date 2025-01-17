@@ -48,7 +48,7 @@ export const OnLeftHeaderStyle = styled.div`
 
 `;
 
-export const SwapIconContainer = styled.div`
+export const SwapIconContainerStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

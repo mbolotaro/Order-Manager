@@ -3,14 +3,20 @@ import { DefaultLayoutProps } from "./helpers/default-layout-props";
 import Footer from "@/components/organisms/Footer";
 import LateralMenu from "@/components/organisms/LateralMenu";
 import { DefaultLayoutMainStyle } from "./style";
+import Main from "@/components/organisms/Main";
+import { useState } from "react";
 
 export default function DefaultLayout(props: DefaultLayoutProps) {
+    const [railMenu, setRailMenu] = useState(false)
+
     return <>
-        <Header/>
+        <Header onRailLateralMenu={() => setRailMenu(prev => !prev)}/>
         <div>
-            <LateralMenu/>
+            <LateralMenu rail={railMenu} />
             <DefaultLayoutMainStyle>
-                {props.children}
+                <Main>
+                    {props.children}
+                </Main>
             </DefaultLayoutMainStyle>
         </div>
         <Footer/>

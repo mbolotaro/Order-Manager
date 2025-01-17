@@ -13,7 +13,7 @@ export default function ConfirmDeleteModal(props: ConfirmDeleteProps) {
         }
     }
 
-    return <Modal title={props.title} opened={props.opened} width="500px" close={props.close}>
+    return <Modal title={props.title} opened={props.opened} $width="500px" close={props.close}>
         <Row $justify="center">
             <AlertIcon size={200} styleType="danger"/>
         </Row>

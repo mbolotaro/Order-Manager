@@ -11,6 +11,8 @@ export type CRUDOrderModalProps =
       opened: boolean;
       close: () => void;
       order: ViewOrderModel;
+      setAction?: (action: CRUDOrderModalTypes) => void;
+      openDeleteModal?: () => void;
     };
 
 export type CRUDOrderModalTypes = 'create' | 'update' | 'view'

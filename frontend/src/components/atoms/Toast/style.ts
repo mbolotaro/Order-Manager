@@ -12,7 +12,7 @@ export const ToastStyle = styled.div<ToastStyleProps>`
   border-radius: 3px;
   color: ${(props) => props.theme.colors.text};
   background-color: ${(props) => props.theme.colors.background};
-  animation: ${slideAnimation(true)} ${props => `${props.$duration}s`} ease-in-out;
+  animation: ${slideAnimation(true) } ${props => `${props.$duration}s`} ease-in-out;
   display: flex;
   align-items: center;
   justify-content: space-between;

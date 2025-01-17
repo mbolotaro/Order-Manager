@@ -3,7 +3,7 @@ import { CreateOrderModel, UpdateOrderModel, ViewOrderModel } from "@/models/ord
 import { createOrder, deleteOrders, getOrders, updateOrder } from "@/services/orders";
 import { StoreTypeHelper } from "@/store";
 import { OrderQueries } from "@/store/helpers/table-queries-data";
-import { errorAlert } from "@/store/toast";
+import { errorAlert, successAlert } from "@/store/toast";
 import { useLiveQuery } from "dexie-react-hooks";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -139,6 +139,7 @@ export function useOrder() {
 
     try {
       await createOrder(createOrderModel)
+      dispatch(successAlert('Pedido criado!'))
       await getAll()
     } catch (error) {
       if(error instanceof Error && error.message) {
@@ -172,6 +173,7 @@ export function useOrder() {
 
     try {
       await updateOrder(id, updateOrderModel)
+      dispatch(successAlert("Pedido atualizado!"));
       await getAll()
     } catch (error) {
       if(error instanceof Error) {
@@ -187,11 +189,14 @@ export function useOrder() {
 
     try {
       await deleteOrders(ordersId)
+      dispatch(successAlert(ordersId.length > 1 ? "Pedidos removidos!" : "Pedido removido!"));
       await getAll()
     } catch (error) {
       if(error instanceof Error) {
         dispatch(errorAlert(error.message))
-      } else dispatch(errorAlert("Não foi possível remover pedido!"));
+      } else dispatch(errorAlert(ordersId.length > 1 ? 
+        "Não foi possível remover pedidos!" : 
+        "Não foi possível remover pedido!"));
     } finally {
       setLoading(false)
     }

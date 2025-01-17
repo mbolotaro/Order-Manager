@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { TablePaginationProps } from "./helpers/table-pagination-props";
-import { OrderQuantCounter, PaginationNavStyle, QuantByPageContainer, QuantByPageLabel, SelectStyle } from "./style";
+import { OrderQuantCounter, QuantByPageLabel, SelectStyle } from "./style";
 import PaginationNavButton from "@/components/atoms/PaginationNavButton";
 import Row from "@/components/atoms/Row";
 
@@ -49,8 +49,8 @@ export default function TablePagination(props: TablePaginationProps) {
         }
     }
 
-    return <Row $justify="space-between" $wrap $gap="24px">
-        <QuantByPageContainer>
+    return <Row $justify="space-between" $wrap $gap="24px" $wrapAt="560px" $justifyWrapped="center">
+        <Row $gap="6px" $width="180px">
             <QuantByPageLabel htmlFor="quant-order-by-page">Pedidos por página</QuantByPageLabel>
             <SelectStyle 
                 id="quant-order-by-page" 
@@ -58,14 +58,14 @@ export default function TablePagination(props: TablePaginationProps) {
                 value={props.limit} 
                 onChange={(value) => props.onChangeLimit(Number(value))}
             />
-        </QuantByPageContainer>
+        </Row>
         <OrderQuantCounter>{startRowIndex}-{endRowIndex} de {props.listLength}</OrderQuantCounter>
-        <PaginationNavStyle>
+        <Row>
             <PaginationNavButton action="previous" onClick={handlePrevious}/>
             {
                 numberButtons.map((numberButton) => <PaginationNavButton pageNumber={numberButton} onClick={(value) => props.onChangePage(Number(value))} key={numberButton} currentPage={props.currentPage}/>)
             }
             <PaginationNavButton action="next" onClick={handleNext}/>
-        </PaginationNavStyle>
+        </Row>
     </Row>
 }

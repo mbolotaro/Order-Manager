@@ -1,4 +1,5 @@
 import AlertIcon from "@/assets/icons/AlertIcon";
+import CheckmarkIcon from "@/assets/icons/CheckmarkIcon";
 import { StyleColorTypes } from "@/styles/helpers/style-color-types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ReactNode } from "react";
@@ -10,8 +11,8 @@ const toastSlice = createSlice({
         successAlert(state, message: PayloadAction<string>) {
             state.push({
               message: message.payload,
-              styleType: "primary",
-              icon: <AlertIcon size={25} styleType="light"/>,
+              styleType: "opened",
+              icon: <CheckmarkIcon size={25} styleType="light"/>,
             });
         },
 

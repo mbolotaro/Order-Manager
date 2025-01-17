@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const InfoKeyStyle = styled.span`
-    color: ${props => props.theme.colors.grey}
+    color: ${props => props.theme.colors.grey};
 `
 
 export const InfoValueStyle = styled.span`

@@ -3,6 +3,7 @@ import { ModalStyleProps } from "./helpers/modal-style-props";
 import { expandAnimation } from "@/styles/animations/expand-animation";
 import { shrinkAnimation } from "@/styles/animations/shrink-animation";
 import { ModalContainerStyleProps } from "./helpers/modal-container-style-props";
+import { baseStyle } from "@/styles/base-style";
 
 export const ModalContainerStyle = styled.div<ModalContainerStyleProps>`
   width: 100vw;
@@ -23,8 +24,8 @@ export const ModalStyle = styled.dialog<ModalStyleProps>`
   -webkit-box-shadow: 6px 9px 32px -8px rgba(15, 19, 25, 1);
   -moz-box-shadow: 6px 9px 32px -8px rgba(15, 19, 25, 1);
   box-shadow: 6px 9px 32px -8px rgba(15, 19, 25, 1);
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
+  width: ${(props) => props.$width};
+  height: ${(props) => props.$height};
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text};
   border-radius: 6px;
@@ -33,6 +34,8 @@ export const ModalStyle = styled.dialog<ModalStyleProps>`
   overflow: hidden;
   pointer-events: all;
   font-weight: 600;
+
+  ${baseStyle}
 `;
 
 export const ModalHeaderStyle = styled.div`

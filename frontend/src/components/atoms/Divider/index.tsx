@@ -13,5 +13,10 @@ export default function Divider(props: DividerProps) {
         color = theme.colors[props.styleType ?? 'primary']
     }
 
-    return <DividerStyle color={color} size={props.size}/>
+    return <DividerStyle 
+        color={color} 
+        size={props.size}
+        $margin={props.$margin}
+        $padding={props.$padding}
+    />
 }

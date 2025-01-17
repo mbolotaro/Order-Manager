@@ -5,7 +5,7 @@ import Checkbox from "@/components/atoms/Checkbox"
 import { ViewOrderModel } from "@/models/order"
 import { useMemo } from "react"
 import { Column, Row, useTable } from "react-table"
-import { ActionRow, CheckColumnStyle, IDCellStyle, OnLeftCellStyle, OnLeftHeaderStyle, EmptyInfoCellStyle, SwapIconContainer, HeaderStyle, TableContainerStyle } from "./style"
+import { ActionRow, CheckColumnStyle, IDCellStyle, OnLeftCellStyle, OnLeftHeaderStyle, EmptyInfoCellStyle, SwapIconContainerStyle, HeaderStyle, TableContainerStyle } from "./style"
 import Table from "@/components/molecules/Table"
 import { OrderTableProps } from "./helpers/order-table-props"
 import SwapIcon from "@/assets/icons/SwapIcon"
@@ -42,7 +42,8 @@ export default function OrderTable(props: OrderTableProps) {
     }
 
 
-    const columns = useMemo(() => [
+    const columns = useMemo(() => {
+        const allColumns = [
         {
             Header: <CheckColumnStyle>
                 <Checkbox value={props.allSelected} onChange={(value) => handleOnSelectAll(value)}/>
@@ -67,9 +68,9 @@ export default function OrderTable(props: OrderTableProps) {
         {
             Header: <OnLeftHeaderStyle onClick={() => handleSetTableOrder('name')}>
                 Nome
-                <SwapIconContainer>
+                <SwapIconContainerStyle>
                     <SwapIcon size={20}/>
-                </SwapIconContainer>
+                </SwapIconContainerStyle>
             </OnLeftHeaderStyle>,
             accessor: 'name',
             width: '14.28%'
@@ -77,9 +78,9 @@ export default function OrderTable(props: OrderTableProps) {
         {
             Header: <OnLeftHeaderStyle onClick={() => handleSetTableOrder('isOpened')}>
                 Status
-                <SwapIconContainer>
+                <SwapIconContainerStyle>
                     <SwapIcon size={20}/>
-                </SwapIconContainer>
+                </SwapIconContainerStyle>
             </OnLeftHeaderStyle>,
             accessor: 'isOpened',
             width: '14.28%'
@@ -87,9 +88,9 @@ export default function OrderTable(props: OrderTableProps) {
         {
             Header: <OnLeftHeaderStyle onClick={() => handleSetTableOrder('attendantId')}>
                 Atendente
-                <SwapIconContainer>
+                <SwapIconContainerStyle>
                     <SwapIcon size={20}/>
-                </SwapIconContainer>
+                </SwapIconContainerStyle>
             </OnLeftHeaderStyle>,
             accessor: 'attendant',
             width: '14.28%',
@@ -98,17 +99,18 @@ export default function OrderTable(props: OrderTableProps) {
         {
             Header: <HeaderStyle onClick={() => handleSetTableOrder('createdAt')}>
                 Data de Criação
-                <SwapIconContainer>
+                <SwapIconContainerStyle>
                     <SwapIcon size={20}/>
-                </SwapIconContainer>
+                </SwapIconContainerStyle>
             </HeaderStyle>,
             accessor: 'createdAt',
-            width: '14.28%',
+            width: '18.28%',
             
         },
-
         {
+
             Header: 'Ações',
+            accessor: 'actions',
             width: '7%',
             Cell: ({row}: {row: Row<ViewOrderModel & {_order: ViewOrderModel}>}) => (
                 <ActionRow >
@@ -136,7 +138,20 @@ export default function OrderTable(props: OrderTableProps) {
                 
             )
         }
-    ] as Column[], [ props, dispatch ])
+    
+        
+        ] as Column[]
+
+
+        // Prevenir outras ações quando se está checado!
+        if(
+            Object.keys(props.checkedItems).filter(checkKey => props.checkedItems[Number(checkKey)]).length > 0 || 
+            props.allSelected
+        ) {
+            return allColumns.filter(column => column.accessor !== 'actions')
+        } else return allColumns
+
+    }, [ props, dispatch ])
 
     const data = useMemo(() => {
         if(Array.isArray(props.orders)) {
