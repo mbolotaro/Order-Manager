@@ -46,3 +46,9 @@ export const TableCellStyle = styled.td<ColumnStyleProps>`
   max-width: ${(props) => props.$maxWidth};
   min-width: ${(props) => props.$minWidth};
 `;
+
+export const SkeletonContainer = styled.div`
+  display: flex;
+  gap: 16px;
+  flex-direction: column
+`
