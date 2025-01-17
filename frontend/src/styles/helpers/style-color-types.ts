@@ -1,0 +1,11 @@
+export type StyleColorTypes = 
+    | 'primary' 
+    | 'secondary' 
+    | 'danger' 
+    | 'text' 
+    | 'background' 
+    | 'card'
+    | 'grey'
+    | 'dark'
+    | 'light'
+    | 'opened'
