@@ -19,7 +19,6 @@ const tableQueriesSlice = createSlice({
         loadStorage: () => {
             if(typeof window !== undefined) {
                 const savedTableQuery = localStorage.getItem('table-queries')
-                console.log(savedTableQuery)
                 if(!savedTableQuery) {
                     localStorage.setItem('table-queries', JSON.stringify(initialTableQueries))
                 }
